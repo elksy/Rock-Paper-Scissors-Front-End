@@ -1,14 +1,25 @@
 import React from "react";
+import Players from "./Players.js";
+import Options from "./Options.js";
 import "./lobby.css";
 
 class Lobby extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { players: ["Rob", "Harry", "Mariam", "Kishor"] };
+  }
   render() {
     return (
       <div className="lobby">
-        <div>Hello Lobby</div>
-        <div>Player List</div>
-        <div>Chat</div>
-        <div>Buttons</div>
+        <h1>Lobby</h1>
+        <div className="lobby-components">
+          <Players players={this.state.players} />
+          {/* Chat will be imported from another component */}
+          <div className="rhs">
+            <div className="chat">Chat Box</div>
+            <Options />
+          </div>
+        </div>
       </div>
     );
   }
