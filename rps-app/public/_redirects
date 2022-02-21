@@ -1,1 +1,6 @@
-/* /index.html 200
+/lobby /lobby 200
+/create-tournament /create-tournament 200
+/landing-page /https://rock-paper-scissors-tournament.netlify.app 200
+/winner-page /winner-page 200
+
+# original path followed by new path/url
