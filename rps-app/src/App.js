@@ -1,10 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
+import Lobby from "./Components//Lobby/Lobby.js";
 import "./App.css";
 
 class App extends React.Component {
   render() {
-    return <div className="App">Hello World</div>;
+    return (
+      <div className="App">
+        <Lobby />
+      </div>
+    );
   }
 }
 
