@@ -16,7 +16,7 @@ class App extends React.Component {
         <Route path="/create-tournament">
           <CreateTournament />
         </Route>
-        <Route path="/landing-page">
+        <Route path="/">
           <LandingPage />
         </Route>
         <Route path="/winner-page">
