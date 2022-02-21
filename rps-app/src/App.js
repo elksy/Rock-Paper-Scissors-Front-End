@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Lobby from "./Components//Lobby/Lobby.js";
 import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
   render() {
