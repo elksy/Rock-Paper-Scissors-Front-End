@@ -43,7 +43,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby />
+          <Lobby tournamentId={5} />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament />
