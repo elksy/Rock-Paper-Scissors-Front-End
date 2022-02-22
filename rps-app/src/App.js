@@ -17,10 +17,15 @@ class App extends React.Component {
 
     ws.onopen = () => {
       console.log("connected");
-      ws.send(JSON.stringify({ playername: "rob" }));
+      ws.send(JSON.stringify({ name: "rob" }));
     };
 
-    ws.onmessage = (e) => {};
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (typeof data === "object") {
+        this.setState({ players: data });
+      }
+    };
 
     ws.onclose = () => {
       console.log("disconnected");
@@ -41,7 +46,7 @@ class App extends React.Component {
             ws={this.state.ws}
             createWebsocket={this.createWebsocket}
             tournamentId={5}
-            playerName="Rob"
+            players={this.state.players}
           />
         </Route>
         <Route path="/create-tournament">

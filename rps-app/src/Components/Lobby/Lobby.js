@@ -21,11 +21,11 @@ class Lobby extends React.Component {
     const data = { host: 1234, rounds: 3 };
     this.setState({ tournamentInfo: data });
 
-    this.props.ws.onmessage = (e) => {
-      if (e.data === "Start the game") {
-        this.setState({ startTournament: true });
-      }
-    };
+    // this.props.ws.onmessage = (e) => {
+    //   if (e.data === "Start the game") {
+    //     this.setState({ startTournament: true });
+    //   }
+    // };
   }
 
   displayLobby = () => {
@@ -34,7 +34,7 @@ class Lobby extends React.Component {
       <div className="lobby">
         <h1>Lobby</h1>
         <div className="lobby-components">
-          <Players players={this.state.players} />
+          <Players players={this.props.players} />
           {/* Chat will be imported from another component */}
           <div className="rhs">
             <div className="chat">
