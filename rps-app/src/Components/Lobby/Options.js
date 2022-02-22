@@ -2,11 +2,15 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 class Options extends React.Component {
+  handleClick = () => {
+    this.props.ws.send("Start the game");
+  };
+
   render() {
     return (
       <div className="options">
         <div className="buttons">
-          <Button variant="primary" size="lg">
+          <Button onClick={this.handleClick} variant="primary" size="lg">
             Start Game
           </Button>
           <Button variant="danger" size="lg">
