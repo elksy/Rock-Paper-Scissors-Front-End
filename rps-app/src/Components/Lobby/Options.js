@@ -2,10 +2,9 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 class Options extends React.Component {
-  handleClick = () => {
-    this.props.ws.send("Start the game");
+  handleClick = (event) => {
+    this.props.ws.send(JSON.stringify({ message: "Start Game" }));
   };
-
   render() {
     return (
       <div className="options">

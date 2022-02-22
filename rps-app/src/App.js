@@ -7,47 +7,11 @@ import LandingPage from "./Components/LandingPage/LandingPage";
 import Winner from "./Components/WinnerPage/Winner";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ws: "", players: [] };
-  }
-
-  createWebsocket = () => {
-    const ws = new WebSocket("ws://localhost:8080/ws");
-
-    ws.onopen = () => {
-      console.log("connected");
-      ws.send(JSON.stringify({ name: "rob" }));
-    };
-
-    ws.onmessage = (e) => {
-      const data = JSON.parse(e.data);
-      if (typeof data === "object") {
-        this.setState({ players: data });
-      }
-    };
-
-    ws.onclose = () => {
-      console.log("disconnected");
-    };
-
-    this.setState({ ws: ws });
-  };
-
-  componentDidMount() {
-    // this.createWebsocket();
-  }
-
   render() {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby
-            ws={this.state.ws}
-            createWebsocket={this.createWebsocket}
-            tournamentId={5}
-            players={this.state.players}
-          />
+          <Lobby tournamentId={5} />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament />

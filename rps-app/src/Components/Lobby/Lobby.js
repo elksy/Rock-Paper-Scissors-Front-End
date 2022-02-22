@@ -7,26 +7,45 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      ws: "",
       tournamentInfo: {},
+      players: [],
       startTournament: false,
     };
   }
 
-  async componentDidMount() {
-    await this.props.createWebsocket();
-    // const response = await fetch(
-    //   `http://localhost:8080/tournament/${this.props.tournamentId}`
-    // ); // who host is, tournament settings, id
-    // const data = response.json();
+  componentDidMount() {
+    this.createWebsocket();
+    // Get this data using a fetch request
     const data = { host: 1234, rounds: 3 };
     this.setState({ tournamentInfo: data });
-
-    // this.props.ws.onmessage = (e) => {
-    //   if (e.data === "Start the game") {
-    //     this.setState({ startTournament: true });
-    //   }
-    // };
   }
+
+  createWebsocket = () => {
+    const ws = new WebSocket("ws://localhost:8080/wslobby");
+
+    ws.onopen = () => {
+      console.log("connected");
+      ws.send(JSON.stringify({ name: "rob" }));
+    };
+
+    ws.onmessage = (e) => {
+      console.log(e);
+      const data = JSON.parse(e.data);
+      if ("players" in data) {
+        console.log(data);
+        this.setState({ players: data });
+      } else if ("message" in data) {
+        console.log("starting");
+      }
+    };
+
+    ws.onclose = () => {
+      ws.send(CloseEvent());
+    };
+
+    this.setState({ ws: ws });
+  };
 
   displayLobby = () => {
     this.state.startTournament && console.log("Started");
@@ -34,7 +53,10 @@ class Lobby extends React.Component {
       <div className="lobby">
         <h1>Lobby</h1>
         <div className="lobby-components">
-          <Players players={this.props.players} />
+          {this.state.players.players && (
+            <Players players={this.state.players} />
+          )}
+
           {/* Chat will be imported from another component */}
           <div className="rhs">
             <div className="chat">
@@ -42,7 +64,7 @@ class Lobby extends React.Component {
               <br />
               tournament id: {this.props.tournamentId}
             </div>
-            <Options ws={this.props.ws} />
+            <Options ws={this.state.ws} />
           </div>
         </div>
       </div>
@@ -55,7 +77,7 @@ class Lobby extends React.Component {
 
   render() {
     // if tournament has started redirect to the bracket page
-    return <div>{this.props.ws ? this.displayLobby() : this.loading()}</div>;
+    return <div>{this.state.ws ? this.displayLobby() : this.loading()}</div>;
   }
 }
 export default Lobby;
