@@ -1,44 +1,99 @@
 import React from "react";
 import "./createtournament.css";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
+import TournamentOptions from "./TournamentOptions.js";
+import { Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 class CreateTournament extends React.Component {
-  render() {
+  constructor() {
+    super();
+    this.state = {
+      rounds: "1",
+      timeLimit: "10",
+      addBots: false,
+      type: "knockout",
+      redirect: false,
+    };
+  }
+
+  handleRoundsClick = (event) => {
+    event.preventDefault();
+    this.setState({ rounds: event.target.value });
+  };
+
+  handleTimeClick = (event) => {
+    event.preventDefault();
+    this.setState({ timeLimit: event.target.value });
+  };
+
+  handleAddBots = (event) => {
+    event.preventDefault();
+    this.setState({ addBots: !this.state.addBots });
+  };
+
+  handleTournamentType = (event) => {
+    event.preventDefault();
+    this.setState({ type: event.target.value });
+  };
+
+  startTournament = async (event) => {
+    event.preventDefault();
+    const response = await fetch("http://localhost:8080/createTournament", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rounds: this.state.rounds,
+        timeLimit: this.state.timeLimit,
+        addBots: this.state.addBots,
+        type: this.state.type,
+      }),
+    });
+    if (response.status === 200) {
+      this.setState({ redirect: true });
+    }
+  };
+
+  displayCreateTournament = () => {
     return (
       <div className="create-tournament-page">
         <header>
           <h1>Create Tournament</h1>
         </header>
-        <div className="num-rounds">
-          <h3>Number of Rounds</h3>
-          <div className="rounds-btns">
-            <button type="submit">1</button>
-            <button type="submit">3</button>
-            <button type="submit">5</button>
-          </div>
-          <div className="time-limit-rounds">
-            <h5>Time limit for each round</h5>
-            <div className="time-btns">
-              <button type="submit">5 sec</button>
-              <button type="submit">10 sec</button>
-              <button type="submit">15 sec</button>
-            </div>
-          </div>
-          <div className="bot-inc">
-            <h5>Fill blank players with bots</h5>
-            <div className="box-btns">
-              <Form.Check type="checkbox" />
-            </div>
-          </div>
-          <div className="tourn-types">
-            <h5>Tournament Type</h5>
-            <div className="tourn-btns">
-              <button type="submit">Knockout</button>
-              <button type="submit">Points</button>
-            </div>
-          </div>
+        <TournamentOptions
+          rounds={this.state.rounds}
+          timeLimit={this.state.timeLimit}
+          addBots={this.state.addBots}
+          type={this.state.type}
+          handleRoundsClick={this.handleRoundsClick}
+          handleTimeClick={this.handleTimeClick}
+          handleAddBots={this.handleAddBots}
+          handleTournamentType={this.handleTournamentType}
+        />
+        <div className="start-btn">
+          <Button
+            onClick={this.startTournament}
+            size="lg"
+            variant="outline-dark"
+            type="submit"
+          >
+            Start Tournament
+          </Button>
         </div>
+      </div>
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.redirect ? (
+          <Redirect to="/lobby" />
+        ) : (
+          this.displayCreateTournament()
+        )}
       </div>
     );
   }
