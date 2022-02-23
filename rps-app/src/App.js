@@ -7,12 +7,12 @@ import Winner from "./Components/WinnerPage/Winner";
 import { Switch, Route } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
+import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 
 class App extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
   };
-
   constructor(props) {
     super(props);
     const { cookies } = props;
@@ -21,7 +21,6 @@ class App extends React.Component {
       isLoggedIn: cookies.get("sessionId") ? true : false,
     };
   }
-
   logIn = (username) => {
     const { cookies } = this.props;
     console.log("logged");
@@ -38,7 +37,6 @@ class App extends React.Component {
     }
     console.log(cookies.getAll());
   };
-
   render() {
     return (
       <Switch>
@@ -47,6 +45,9 @@ class App extends React.Component {
         </Route>
         <Route path="/create-tournament">
           <CreateTournament />
+        </Route>
+        <Route path="/tournament">
+          <TournamentBracket />
         </Route>
         <Route path="/winner-page">
           <Winner />

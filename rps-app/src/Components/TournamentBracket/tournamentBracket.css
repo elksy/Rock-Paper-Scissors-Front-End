@@ -1,0 +1,17 @@
+.title {
+  text-align: center;
+  font-size: 30pt;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.bracket {
+  height: 800px;
+  width: 600px;
+}
+
+.seed-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

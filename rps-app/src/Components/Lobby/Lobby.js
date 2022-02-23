@@ -25,15 +25,12 @@ class Lobby extends React.Component {
     const ws = new WebSocket("ws://localhost:8080/wslobby");
 
     ws.onopen = () => {
-      console.log("connected");
       ws.send(JSON.stringify({ name: "rob" }));
     };
 
     ws.onmessage = (e) => {
-      console.log(e);
       const data = JSON.parse(e.data);
       if ("players" in data) {
-        console.log(data);
         this.setState({ players: data });
       } else if ("message" in data) {
         console.log("starting");
