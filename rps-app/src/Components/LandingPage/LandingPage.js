@@ -1,6 +1,5 @@
 import React from "react";
 import "./LandingPage.css";
-import Button from "react-bootstrap/Button";
 import PGButton from "./PGButton";
 import JTButton from "./JTButton";
 import CTButton from "./CTButton";
