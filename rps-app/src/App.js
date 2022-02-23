@@ -49,7 +49,6 @@ class App extends React.Component {
         <Route path="/tournament">
           <TournamentBracket />
         </Route>
-
         <Route path="/winner-page">
           <Winner />
         </Route>
