@@ -1,0 +1,56 @@
+.winners-div,
+.winner-header {
+  background-color: cornflowerblue;
+  margin: 1rem auto;
+  box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px;
+  color: black;
+  font-family: arial;
+  font-weight: bold;
+}
+
+.winner-comps {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.btn-primary {
+  background-color: black;
+  border: black;
+  padding: 3px;
+}
+
+.chat-comp {
+  border: 1px solid black;
+  width: 40%;
+  height: 30rem;
+  margin: 1rem auto;
+}
+
+.winners-div {
+  border: 1px solid black;
+  width: 40%;
+  height: 30rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.winners-area,
+.losers-area {
+  background-color: white;
+  border: 1px solid black;
+  width: 90%;
+  height: 30rem;
+  margin: 1rem auto;
+}
+
+.winners-area {
+  height: 150%;
+}
+.winner-page-btns {
+  padding-left: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}

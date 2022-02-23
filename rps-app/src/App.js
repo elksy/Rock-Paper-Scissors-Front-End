@@ -52,11 +52,12 @@ class App extends React.Component {
         <Route path="/tournament">
           <TournamentBracket />
         </Route>
-        <Route path="/">
-          <LandingPage />
-        </Route>
+
         <Route path="/winner-page">
           <Winner />
+        </Route>
+        <Route path="/">
+          <LandingPage />
         </Route>
       </Switch>
     );
