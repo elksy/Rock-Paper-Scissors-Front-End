@@ -6,6 +6,7 @@ class Winner extends React.Component {
   render() {
     return (
       <div className="winner-page">
+
         <header className="header">
           <h1>Tournament Complete!</h1>
         </header>
