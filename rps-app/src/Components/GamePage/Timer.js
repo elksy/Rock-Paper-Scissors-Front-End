@@ -1,30 +1,32 @@
 import React from "react";
 
 class Timer extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			seconds: 0,
-		};
+	constructor(props) {
+		super(props);
+		this.state = { countdown: undefined };
 	}
-	componentDidMount() {
-		this.setState({ seconds: this.props.timer });
-		const sec = this.state.seconds - 1;
-		setTimeout(() => this.setState({ seconds: sec }), 1000);
-	}
-	componentDidUpdate() {
-		if (this.state.seconds > 0) {
-			const sec = this.state.seconds - 1;
-			setTimeout(() => this.setState({ seconds: sec }), 1000);
-		} else if (this.state.seconds !== "Time up!") {
-			this.setState({ seconds: "Time up!" });
+
+	tick() {
+		const current = this.state.countdown;
+		if (current === 1) {
+			clearInterval(this.timer);
+			this.setState({ countdown: "Time up!" });
+			this.props.timeUp();
+		} else {
+			this.setState({ countdown: current - 1 });
 		}
 	}
+
+	componentDidMount() {
+		this.setState({ countdown: this.props.timer });
+		this.timer = setInterval(() => this.tick(), 1000);
+	}
+
 	render() {
 		return (
 			<div className="timer">
 				{/* Need to finds a way to display the timer */}
-				<h1>{`Time Left: ${this.state.seconds}`}</h1>
+				<h1>{`Time Left: ${this.state.countdown}`}</h1>
 			</div>
 		);
 	}

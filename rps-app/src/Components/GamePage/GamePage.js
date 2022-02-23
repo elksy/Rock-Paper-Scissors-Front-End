@@ -7,14 +7,14 @@ import "./gamepage.css";
 class GamePage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { ws: "", opponentChoice: "", opponentName: "" };
+		this.state = { ws: "", opponentChoice: "", opponentName: "", choice: "" };
 	}
 
 	componentDidMount() {
 		this.createWebsocket();
-		// Get this data using a fetch request
-		const data = { host: 1234, rounds: 3 };
-		this.setState({ tournamentInfo: data });
+		const choices = ["rock", "paper", "scissors"];
+		const randChoice = Math.floor(Math.random() * choices.length);
+		this.setState({ choice: choices[randChoice] });
 	}
 
 	createWebsocket = () => {
@@ -30,6 +30,8 @@ class GamePage extends React.Component {
 			if ("opponentName" in data) {
 				console.log(data);
 				this.setState({ opponentName: data.opponentName });
+			} else if ("opponentChoice" in data) {
+				this.setState({ opponentChoice: data.opponentChoice });
 			}
 		};
 
@@ -40,16 +42,21 @@ class GamePage extends React.Component {
 		this.setState({ ws: ws });
 	};
 
-	sendAction = () => {
-		this.state.ws.send({ action: "test" });
+	sendChoice = () => {
+		this.state.ws.send({ choice: this.state.choice });
+		console.log(this.state.choice);
+	};
+
+	setSelectedChoice = (word) => {
+		this.setState({ choice: word });
 	};
 
 	render() {
 		return (
 			<div className="game-page">
-				<Timer timer={20} timeUp={this.sendAction} />
+				<Timer timer={5} timeUp={this.sendChoice} />
 				<div className="game-wrapper">
-					<Player />
+					<Player setSelectedChoice={(word) => this.setSelectedChoice(word)} />
 					<Opponent name={this.state.opponentName} choice={this.state.opponentChoice} />
 				</div>
 			</div>
