@@ -12,3 +12,11 @@
   font-family: monospace;
   font-weight: bold;
 }
+
+.rounds-btns,
+.torn-btns,
+.time-btns {
+  padding: 5px;
+  border-color: black;
+  justify-content: space-evenly;
+}
