@@ -7,6 +7,7 @@ import Winner from "./Components/WinnerPage/Winner";
 import { Switch, Route } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
+import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 
 class App extends React.Component {
   static propTypes = {
@@ -47,6 +48,9 @@ class App extends React.Component {
         </Route>
         <Route path="/create-tournament">
           <CreateTournament />
+        </Route>
+        <Route path="/tournament">
+          <TournamentBracket />
         </Route>
         <Route path="/">
           <LandingPage />
