@@ -45,6 +45,8 @@
 }
 
 .selected-div {
+	display: flex;
+	justify-content: center;
 	height: 60%;
 }
 
