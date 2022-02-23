@@ -13,7 +13,6 @@ class App extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
   };
-
   constructor(props) {
     super(props);
     const { cookies } = props;
@@ -22,7 +21,6 @@ class App extends React.Component {
       isLoggedIn: cookies.get("sessionId") ? true : false,
     };
   }
-
   logIn = (username) => {
     const { cookies } = this.props;
     console.log("logged");
@@ -39,7 +37,6 @@ class App extends React.Component {
     }
     console.log(cookies.getAll());
   };
-
   render() {
     return (
       <Switch>
@@ -52,11 +49,12 @@ class App extends React.Component {
         <Route path="/tournament">
           <TournamentBracket />
         </Route>
-        <Route path="/">
-          <LandingPage />
-        </Route>
+
         <Route path="/winner-page">
           <Winner />
+        </Route>
+        <Route path="/">
+          <LandingPage />
         </Route>
       </Switch>
     );
