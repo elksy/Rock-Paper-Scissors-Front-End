@@ -7,12 +7,33 @@ class PGButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      playerName: "",
+      playerColour: "",
       showModal: false,
       showJoinModal: false,
+      redirect: false,
+      disableButton: true,
     };
   }
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+    this.disableButton();
+  };
+
+  handleSubmit = () => {
+    this.setState({ redirect: true });
+  };
+
+  disableButton = () => {
+    if (this.state.playerName.length > 2) {
+      this.setState({ disableButton: false });
+    } else {
+      this.setState({ disableButton: true });
+    }
   };
 
   viewModal = () => {
@@ -22,13 +43,12 @@ class PGButton extends React.Component {
         onHide={() => {
           this.handleModal();
         }}
-        class="modal-dialog modal-dialog-centered"
       >
         <Modal.Header closeButton>
           <Modal.Title>Enter Nickname</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" /* onSubmit={(e) => this.handleSubmit(e)} */>
+          <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
             <Form.Group className="mb-3">
               <Form.Label className="username-label">Username</Form.Label>
               <Form.Control
@@ -37,7 +57,17 @@ class PGButton extends React.Component {
                 placeholder="Enter nickname"
                 // value={this.state.username}
                 id="email"
-                // onChange={(e) => this.handleChange(e)}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label className="colour-label">Choose a colour</Form.Label>
+              <Form.Control
+                className="colour-input"
+                type="color"
+                // value={this.state.playerColour}
+                id="colour"
+                onChange={(e) => this.handleChange(e)}
               />
             </Form.Group>
             <Button className="example" variant="primary" type="submit">

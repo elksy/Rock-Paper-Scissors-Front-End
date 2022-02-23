@@ -9,6 +9,7 @@ class CTButton extends React.Component {
     super(props);
     this.state = {
       playerName: "",
+      playerColour: "",
       showModal: false,
       showJoinModal: false,
       redirect: false,
@@ -26,9 +27,6 @@ class CTButton extends React.Component {
 
   handleSubmit = () => {
     this.setState({ redirect: true });
-    // if (this.state.redirect) {
-    //   return <Redirect to="/create-tournament" />;
-    // }
   };
 
   disableButton = () => {
@@ -46,7 +44,6 @@ class CTButton extends React.Component {
         onHide={() => {
           this.handleModal();
         }}
-        class="modal-dialog modal-dialog-centered"
       >
         <Modal.Header closeButton>
           <Modal.Title>Enter Nickname</Modal.Title>
@@ -59,8 +56,18 @@ class CTButton extends React.Component {
                 className="username-input"
                 type="text"
                 placeholder="Enter nickname"
-                // value={this.state.username}
+                //   value={this.state.playerName}
                 id="email"
+                onChange={(e) => this.handleChange(e)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label className="colour-label">Choose a colour</Form.Label>
+              <Form.Control
+                className="colour-input"
+                type="color"
+                // value={this.state.playerColour}
+                id="colour"
                 onChange={(e) => this.handleChange(e)}
               />
             </Form.Group>
