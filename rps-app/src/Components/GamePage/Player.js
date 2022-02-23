@@ -18,7 +18,7 @@ class Player extends React.Component {
 	render() {
 		return (
 			<div className="game">
-				<h2>username</h2>
+				<h2>{this.props.playerName}</h2>
 				{/* Display the players choice once they have made a selection */}
 				<ChoiceMade selection={this.state.selection} />
 				<div className="selection-wrapper">

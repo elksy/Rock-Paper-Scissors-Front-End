@@ -1,60 +1,83 @@
 .game-page {
 }
 
-.timer {
-  height: 4rem;
-}
-
 .game-wrapper {
-  width: 100%;
-  height: 50rem;
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 2rem;
-  padding: 2rem 0.5rem;
+	width: 100%;
+	height: 50rem;
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 2rem;
+	padding: 2rem 0.5rem;
 }
 
 .game {
-  border: 1px solid purple;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	border: 1px solid purple;
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .selection-wrapper {
-  display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
+	display: flex;
+	justify-content: space-evenly;
+	margin-bottom: 3rem;
 }
 
 .selection-div {
-  border: purple solid 2px;
-  border-radius: 20px;
-  padding: 0.5rem;
+	border: purple solid 2px;
+	border-radius: 20px;
+	padding: 0.5rem;
 }
 
 .selection-div:hover {
-  border: red solid 2px;
+	border: red solid 2px;
 }
 
 .selection-image {
-  width: 6rem;
-  height: 6rem;
+	width: 6rem;
+	height: 6rem;
 }
 
 .selected-image {
-  width: 20rem;
-  height: 20rem;
+	width: 20rem;
+	height: 20rem;
 }
 
 .selected-div {
-  height: 60%;
+	height: 60%;
 }
 
 #loading {
-  height: 15rem;
-  width: 15rem;
-  animation-duration: 2s;
-  margin: auto;
+	height: 15rem;
+	width: 15rem;
+	animation-duration: 2s;
+	margin: auto;
+}
+
+.vertical-line {
+	border-left: 6px solid green;
+}
+
+.dot {
+	height: 150px;
+	width: 150px;
+	background-color: green;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.timer-container {
+	display: flex;
+	justify-content: center;
+}
+.timer {
+	height: 4rem;
+}
+.timer-number {
+	height: 150px;
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

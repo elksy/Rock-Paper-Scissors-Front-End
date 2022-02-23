@@ -54,9 +54,19 @@ class GamePage extends React.Component {
 	render() {
 		return (
 			<div className="game-page">
-				<Timer timer={5} timeUp={this.sendChoice} />
+				<div className="timer-container">
+					<Timer timer={5} timeUp={this.sendChoice} />
+				</div>
+
+				{/* <span class="dot"></span> */}
 				<div className="game-wrapper">
-					<Player setSelectedChoice={(word) => this.setSelectedChoice(word)} />
+					<Player
+						playerName={this.props.playerName}
+						setSelectedChoice={(word) => this.setSelectedChoice(word)}
+					/>
+
+					<div className="vertical-line"></div>
+
 					<Opponent name={this.state.opponentName} choice={this.state.opponentChoice} />
 				</div>
 			</div>
