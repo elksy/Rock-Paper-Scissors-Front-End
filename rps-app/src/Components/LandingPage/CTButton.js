@@ -75,7 +75,7 @@ class CTButton extends React.Component {
             this.handleModal();
           }}
         >
-          Play Game
+          Create Tournament
         </Button>
       </div>
     );
