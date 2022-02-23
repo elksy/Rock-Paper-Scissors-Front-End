@@ -59,6 +59,25 @@
 	border-left: 6px solid green;
 }
 
+.opp-questionmark {
+	font-size: 15rem;
+	text-align: center;
+	transform: scale(1);
+	animation: pulse 1.5s infinite;
+	animation-direction: alternate;
+	animation-timing-function: ease-out;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(1.4);
+	}
+}
+
 .dot {
 	height: 150px;
 	width: 150px;
@@ -78,6 +97,11 @@
 	height: 150px;
 	width: 150px;
 	display: flex;
+	text-align: center;
 	justify-content: center;
 	align-items: center;
+}
+
+.make-text-red {
+	color: rgb(156, 27, 27);
 }
