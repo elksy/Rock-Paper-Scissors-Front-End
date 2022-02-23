@@ -36,7 +36,7 @@ div > button.btn {
   margin-left: 3rem;
 }
 
-#root > div > div:nth-child(5) > div > button {
+#root > div > div > div:nth-child(5) > div > button.btn {
   width: 9rem;
 }
 
