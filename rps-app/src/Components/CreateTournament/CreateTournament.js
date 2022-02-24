@@ -38,19 +38,22 @@ class CreateTournament extends React.Component {
 
   startTournament = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://localhost:8080/createTournament", {
-      method: "POST",
-      // credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        rounds: this.state.rounds,
-        timeLimit: this.state.timeLimit,
-        addBots: this.state.addBots,
-        type: this.state.type,
-      }),
-    });
+    const response = await fetch(
+      `http://${process.env.REACT_APP_WS_ENDPOINT}/createTournament`,
+      {
+        method: "POST",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rounds: this.state.rounds,
+          timeLimit: this.state.timeLimit,
+          addBots: this.state.addBots,
+          type: this.state.type,
+        }),
+      }
+    );
     if (response.status === 200) {
       const json = await response.json();
       this.setState({ link: json.tournamentId, displayTournamentLink: true });

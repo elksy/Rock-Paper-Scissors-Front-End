@@ -53,7 +53,7 @@ class Lobby extends React.Component {
 
   createWebsocket = () => {
     const ws = new WebSocket(
-      `ws://localhost:8080/wslobby/${this.state.tournamentInfo.id}`
+      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wslobby/${this.state.tournamentInfo.id}`
     );
 
     ws.onopen = () => {
