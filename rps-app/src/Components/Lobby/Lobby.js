@@ -3,6 +3,8 @@ import Players from "./Players.js";
 import Options from "./Options.js";
 import "./lobby.css";
 import { Redirect } from "react-router-dom";
+import TournamentInfo from "./TournamentInfo.js";
+// import { v4 } from "https://deno.land/std/uuid/mod.ts";
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -23,13 +25,12 @@ class Lobby extends React.Component {
     if (urlPath.length < 3 || urlPath[2] === "") {
       this.setState({ validLobby: false });
     } else {
-      const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
       // If it is a valid tournament in the server return the tournament data and start the websocket connection.
+      const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
+      // Need to also check if the user has a cookies set with a sessionId
       if (tournamentInfo.valid) {
+        await this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket();
-        // Get this data using a fetch request
-        const data = { host: 1234, rounds: 3 };
-        this.setState({ tournamentInfo: data });
       } else {
         this.setState({ validLobby: false });
       }
@@ -38,7 +39,7 @@ class Lobby extends React.Component {
 
   getTournamentInfo = async (id) => {
     const response = await fetch(
-      `http://localhost:8080/getTounamentInfo/${id}`,
+      `http://localhost:8080/getTournamentInfo/${id}`,
       {
         method: "GET",
         // credentials: "include",
@@ -51,11 +52,15 @@ class Lobby extends React.Component {
   };
 
   createWebsocket = () => {
-    const ws = new WebSocket("ws://localhost:8080/wslobby");
+    const ws = new WebSocket(
+      `ws://localhost:8080/wslobby/${this.state.tournamentInfo.id}`
+    );
 
     ws.onopen = () => {
-      ws.send(JSON.stringify({ name: "rob" }));
-      // ws.send(JSON.stringify({ name: this.props.name}))
+      const playerData = {
+        name: "Rob",
+      };
+      ws.send(JSON.stringify({ newPlayer: playerData }));
     };
 
     ws.onmessage = (e) => {
@@ -63,7 +68,7 @@ class Lobby extends React.Component {
       if ("players" in data) {
         this.setState({ players: data });
       } else if ("message" in data) {
-        console.log("starting");
+        this.setState({ startTournament: true });
       }
     };
 
@@ -86,10 +91,9 @@ class Lobby extends React.Component {
 
           {/* Chat will be imported from another component */}
           <div className="rhs">
-            <div className="chat">
-              Rounds: {this.state.tournamentInfo.rounds}
-              <br />
-              tournament id: {this.props.tournamentId}
+            <div className="info-and-chat">
+              <TournamentInfo info={this.state.tournamentInfo} />
+              <div className="chat">Chat</div>
             </div>
             <Options ws={this.state.ws} />
           </div>
@@ -106,7 +110,7 @@ class Lobby extends React.Component {
     // if tournament has started redirect to the bracket page
     return (
       <div>
-        {/* {!this.state.validLobby && <Redirect to="/" />} */}
+        {!this.state.validLobby && <Redirect to="/" />}
         {this.state.ws ? this.displayLobby() : this.loading()}
       </div>
     );
