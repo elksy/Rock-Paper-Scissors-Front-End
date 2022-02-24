@@ -1,8 +1,8 @@
 import React from "react";
 import "./createtournament.css";
 import TournamentOptions from "./TournamentOptions.js";
+import TournamentLink from "./TournamentLink.js";
 import { Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
 class CreateTournament extends React.Component {
   constructor() {
     super();
@@ -11,7 +11,8 @@ class CreateTournament extends React.Component {
       timeLimit: "10",
       addBots: false,
       type: "knockout",
-      redirect: false,
+      displayTournamentLink: false,
+      link: "",
     };
   }
 
@@ -39,7 +40,7 @@ class CreateTournament extends React.Component {
     event.preventDefault();
     const response = await fetch("http://localhost:8080/createTournament", {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -51,11 +52,12 @@ class CreateTournament extends React.Component {
       }),
     });
     if (response.status === 200) {
-      this.setState({ redirect: true });
+      const json = await response.json();
+      this.setState({ link: json.tournamentId, displayTournamentLink: true });
     }
   };
 
-  displayCreateTournament = () => {
+  render() {
     return (
       <div className="create-tournament-page">
         <header>
@@ -71,6 +73,7 @@ class CreateTournament extends React.Component {
           handleAddBots={this.handleAddBots}
           handleTournamentType={this.handleTournamentType}
         />
+
         <div className="start-btn">
           <Button
             onClick={this.startTournament}
@@ -80,19 +83,13 @@ class CreateTournament extends React.Component {
           >
             Start Tournament
           </Button>
+          {this.state.displayTournamentLink && (
+            <TournamentLink
+              show={this.state.displayTournamentLink}
+              link={this.state.link}
+            />
+          )}
         </div>
-      </div>
-    );
-  };
-
-  render() {
-    return (
-      <div>
-        {this.state.redirect ? (
-          <Redirect to="/lobby" />
-        ) : (
-          this.displayCreateTournament()
-        )}
       </div>
     );
   }
