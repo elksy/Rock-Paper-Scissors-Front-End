@@ -4,11 +4,11 @@ import Lobby from "./Components//Lobby/Lobby.js";
 import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
 import LandingPage from "./Components/LandingPage/LandingPage";
 import Winner from "./Components/WinnerPage/Winner";
+import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
+import GamePage from "./Components/GamePage/GamePage";
 import { Switch, Route } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
-import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
-import GamePage from "./Components/GamePage/GamePage";
 
 class App extends React.Component {
   static propTypes = {
@@ -23,30 +23,30 @@ class App extends React.Component {
     };
   }
 
-  render() {
-    return (
-      <Switch>
-        <Route path="/lobby">
-          <Lobby tournamentId={5} />
-        </Route>
-        <Route path="/create-tournament">
-          <CreateTournament />
-        </Route>
-        <Route path="/tournament">
-          <TournamentBracket />
-        </Route>
-        <Route path="/winner-page">
-          <Winner />
-        </Route>
-        <Route path="/game">
-          <GamePage />
-        </Route>
-        <Route path="/">
-          <LandingPage />
-        </Route>
-      </Switch>
-    );
-  }
+   render() {
+      return (
+         <Switch>
+            <Route path="/lobby">
+               <Lobby tournamentId={5} />
+            </Route>
+            <Route path="/create-tournament">
+               <CreateTournament />
+            </Route>
+            <Route path="/tournament">
+               <TournamentBracket />
+            </Route>
+            {/* <Route path="/winner-page">
+               <Winner />
+            </Route> */}
+            <Route path="/game">
+               <GamePage />
+            </Route>
+            <Route path="/">
+               <LandingPage />
+            </Route>
+         </Switch>
+      );
+   }
 }
 
 export default withCookies(App);
