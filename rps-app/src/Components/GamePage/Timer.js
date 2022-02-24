@@ -27,7 +27,7 @@ class Timer extends React.Component {
          <div className="timer">
             {/* Need to finds a way to display the timer */}
             {/* <h1>{`${this.state.countdown}`}</h1> */}
-            <span class="dot">
+            <span className="dot">
                <h1 className={`timer-number ${this.state.countdown < 4 ? "make-text-red" : null}`}>
                   {this.state.countdown}
                </h1>
