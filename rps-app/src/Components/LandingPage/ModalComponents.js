@@ -39,26 +39,16 @@ class ModalComponents extends React.Component {
     }
   }
 
-  setData = (data, compareData) => {
-    console.log("changed");
-    console.log(data, compareData);
-    this.setState({
-      results: data ? [...data] : [],
-      compareResults: compareData ? [...compareData] : [],
-    });
-  };
-
-  newPlayer = (user_name) => {
+  newPlayer = (playerName) => {
     const { cookies } = this.props;
     console.log("logged");
     const currentState = this.state.playerJoined;
     if (this.state.playerJoined) {
       cookies.remove("sessionId");
-      cookies.remove("user_name");
-      this.setData();
-      this.setState({ playerJoined: !currentState, user_name: "" });
+      cookies.remove("playerName");
+      this.setState({ playerJoined: !currentState, playerName: "" });
     } else {
-      this.setState({ playerJoined: true, user: user_name });
+      this.setState({ playerJoined: true, user: playerName });
     }
     console.log(cookies.getAll());
   };
@@ -84,7 +74,7 @@ class ModalComponents extends React.Component {
           className="username-input"
           type="text"
           placeholder="Enter nickname"
-          value={this.state.username}
+          value={this.state.playerName}
           id="email"
           onChange={(e) => this.handleChange(e)}
         />

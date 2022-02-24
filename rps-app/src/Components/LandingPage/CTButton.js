@@ -24,8 +24,14 @@ class CTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
-    this.setState({ redirect: true });
+  handleSubmit = async (e) => {
+    this.setState({ redirect: true, playerJoined: true });
+
+    e.preventDefault();
+    const { playerName, playerColour } = this.state;
+    if (playerName && playerColour) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
   };
 
   viewModal = () => {

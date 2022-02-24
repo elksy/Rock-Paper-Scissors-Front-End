@@ -23,8 +23,12 @@ class PGButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
-    this.setState({ redirect: true });
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const { playerName, playerColour } = this.state;
+    if (playerName && playerColour) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
   };
 
   viewModal = () => {

@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalComponents from "./ModalComponents";
+import { Link } from "react-router-dom";
 
 class JTButton extends React.Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class JTButton extends React.Component {
 
   handleSubmit = async (e) => {
     this.setState({ redirect: true, playerJoined: true });
-
     e.preventDefault();
     const { playerName, playerColour } = this.state;
     if (playerName && playerColour) {
@@ -66,14 +66,16 @@ class JTButton extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="example"
-            variant="primary"
-            type="submit"
-            disabled={this.state.disableButton}
-          >
-            Start Game
-          </Button>
+          <Link to="/lobby">
+            <Button
+              className="example"
+              variant="primary"
+              type="submit"
+              disabled={this.state.disableButton}
+            >
+              Start Game
+            </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     );
