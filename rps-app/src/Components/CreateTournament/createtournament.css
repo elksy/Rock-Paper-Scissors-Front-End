@@ -36,7 +36,7 @@ div > button.btn {
   margin-left: 3rem;
 }
 
-#root > div > div:nth-child(5) > div > button {
+#type-btns {
   width: 9rem;
 }
 
@@ -50,4 +50,23 @@ div.start-btn > button {
   margin: auto;
   padding: auto;
   width: auto;
+}
+
+.copy-link {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+#link {
+  width: 80%;
+}
+
+#copy-btn {
+  width: 20%;
+}
+
+div.modal-footer {
+  display: flex;
+  justify-content: center;
 }

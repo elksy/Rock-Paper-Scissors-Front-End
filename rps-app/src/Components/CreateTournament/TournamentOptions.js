@@ -83,6 +83,7 @@ class TournamentOptions extends React.Component {
             <Button
               onClick={this.props.handleTournamentType}
               value="knockout"
+              id="type-btns"
               variant={this.props.type === "knockout" ? "dark" : "outline-dark"}
             >
               Knockout
@@ -90,6 +91,7 @@ class TournamentOptions extends React.Component {
             <Button
               onClick={this.props.handleTournamentType}
               value="round-robin"
+              id="type-btns"
               variant={
                 this.props.type === "round-robin" ? "dark" : "outline-dark"
               }
