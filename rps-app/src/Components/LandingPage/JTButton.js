@@ -3,10 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import ModalComponents from "./ModalComponents";
+import { Link } from "react-router-dom";
 
 class JTButton extends React.Component {
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -15,6 +17,7 @@ class JTButton extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
     };
     this.modalComponents = new ModalComponents();
   }
@@ -23,8 +26,25 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
-    this.setState({ redirect: true });
+  handleSubmit = async (e) => {
+    this.setState({ redirect: true, playerJoined: true });
+    e.preventDefault();
+    const { playerName, playerColour } = this.state;
+    if (playerName && playerColour) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
+  };
+
+  newPlayer = () => {
+    const { cookies } = this.props;
+    console.log("logged");
+    const currentState = this.state.playerJoined;
+    if (this.state.playerJoined) {
+      this.setState({ playerJoined: !currentState, playerName: "" });
+    } else {
+      this.setState({ playerJoined: true, playerName: this.state.playerName });
+    }
+    console.log(cookies.getAll());
   };
 
   viewModal = () => {
@@ -46,14 +66,16 @@ class JTButton extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="example"
-            variant="primary"
-            type="submit"
-            disabled={this.state.disableButton}
-          >
-            Start Game
-          </Button>
+          <Link to="/lobby">
+            <Button
+              className="example"
+              variant="primary"
+              type="submit"
+              disabled={this.state.disableButton}
+            >
+              Start Game
+            </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     );

@@ -1,11 +1,15 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 class ModalComponents extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -14,8 +18,40 @@ class ModalComponents extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
+
+  async getSession() {
+    try {
+      const response = await fetch("http://localhost:8080/sessions", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await response.json();
+      return await json.success;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  newPlayer = (playerName) => {
+    const { cookies } = this.props;
+    console.log("logged");
+    const currentState = this.state.playerJoined;
+    if (this.state.playerJoined) {
+      cookies.remove("sessionId");
+      cookies.remove("playerName");
+      this.setState({ playerJoined: !currentState, playerName: "" });
+    } else {
+      this.setState({ playerJoined: true, user: playerName });
+    }
+    console.log(cookies.getAll());
+  };
 
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
@@ -38,7 +74,7 @@ class ModalComponents extends React.Component {
           className="username-input"
           type="text"
           placeholder="Enter nickname"
-          value={this.state.username}
+          value={this.state.playerName}
           id="email"
           onChange={(e) => this.handleChange(e)}
         />
@@ -78,4 +114,4 @@ class ModalComponents extends React.Component {
   };
 }
 
-export default ModalComponents;
+export default withCookies(ModalComponents);
