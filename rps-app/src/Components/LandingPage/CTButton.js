@@ -2,8 +2,9 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import ModalComponents from "./ModalComponents";
 import { Link } from "react-router-dom";
+import NameForm from "./NameForm";
+import ColourForm from "./ColourForm";
 
 class CTButton extends React.Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class CTButton extends React.Component {
       disableButton: true,
       tournamentId: "",
     };
-    this.modalComponents = new ModalComponents();
   }
 
   handleModal = () => {
@@ -47,8 +47,8 @@ class CTButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            {this.modalComponents.formPlayerName()}
-            {this.modalComponents.formPickColour()}
+            <NameForm onChange={(e) => this.props.handleChange(e)} />
+            <ColourForm onChange={(e) => this.props.handleChange(e)} />
           </Form>
         </Modal.Body>
         <Modal.Footer>

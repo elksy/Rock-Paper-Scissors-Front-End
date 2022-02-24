@@ -2,13 +2,17 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import ModalComponents from "./ModalComponents";
 import { Link } from "react-router-dom";
+import NameForm from "./NameForm";
+import ColourForm from "./ColourForm";
+import TournamentIdForm from "./TournamentIdForm";
 
 class JTButton extends React.Component {
   constructor(props) {
     super(props);
     const { cookies } = props;
+    console.log(cookies);
+
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -19,7 +23,6 @@ class JTButton extends React.Component {
       tournamentId: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
-    this.modalComponents = new ModalComponents();
   }
 
   handleModal = () => {
@@ -60,9 +63,9 @@ class JTButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            {this.modalComponents.formPlayerName()}
-            {this.modalComponents.formPickColour()}
-            {this.modalComponents.formTournamentId()}
+            <NameForm onChange={(e) => this.props.handleChange(e)} />
+            <ColourForm onChange={(e) => this.props.handleChange(e)} />
+            <TournamentIdForm onChange={(e) => this.props.handleChange(e)} />
           </Form>
         </Modal.Body>
         <Modal.Footer>
