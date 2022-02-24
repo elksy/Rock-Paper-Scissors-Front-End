@@ -2,11 +2,13 @@ import React from "react";
 import Players from "./Players.js";
 import Options from "./Options.js";
 import "./lobby.css";
+import { Redirect } from "react-router-dom";
 
 class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      validLobby: true,
       ws: "",
       tournamentInfo: {},
       players: [],
@@ -14,18 +16,46 @@ class Lobby extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.createWebsocket();
-    // Get this data using a fetch request
-    const data = { host: 1234, rounds: 3 };
-    this.setState({ tournamentInfo: data });
+  async componentDidMount() {
+    // Gets the url path from the browser e.g /lobby/132c-13xfsd-123dasf
+    const urlPath = window.location.pathname.split("/");
+    // If the try and join /lobby without an id they will be redirected to the main page.
+    if (urlPath.length < 3 || urlPath[2] === "") {
+      this.setState({ validLobby: false });
+    } else {
+      const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
+      // If it is a valid tournament in the server return the tournament data and start the websocket connection.
+      if (tournamentInfo.valid) {
+        this.createWebsocket();
+        // Get this data using a fetch request
+        const data = { host: 1234, rounds: 3 };
+        this.setState({ tournamentInfo: data });
+      } else {
+        this.setState({ validLobby: false });
+      }
+    }
   }
+
+  getTournamentInfo = async (id) => {
+    const response = await fetch(
+      `http://localhost:8080/getTounamentInfo/${id}`,
+      {
+        method: "GET",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  };
 
   createWebsocket = () => {
     const ws = new WebSocket("ws://localhost:8080/wslobby");
 
     ws.onopen = () => {
       ws.send(JSON.stringify({ name: "rob" }));
+      // ws.send(JSON.stringify({ name: this.props.name}))
     };
 
     ws.onmessage = (e) => {
@@ -74,7 +104,12 @@ class Lobby extends React.Component {
 
   render() {
     // if tournament has started redirect to the bracket page
-    return <div>{this.state.ws ? this.displayLobby() : this.loading()}</div>;
+    return (
+      <div>
+        {/* {!this.state.validLobby && <Redirect to="/" />} */}
+        {this.state.ws ? this.displayLobby() : this.loading()}
+      </div>
+    );
   }
 }
 export default Lobby;
