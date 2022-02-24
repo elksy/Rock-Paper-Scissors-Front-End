@@ -11,57 +11,42 @@ import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.
 import GamePage from "./Components/GamePage/GamePage";
 
 class App extends React.Component {
-   static propTypes = {
-      cookies: instanceOf(Cookies).isRequired,
-   };
-   constructor(props) {
-      super(props);
-      const { cookies } = props;
-      this.state = {
-         username: "",
-         isLoggedIn: cookies.get("sessionId") ? true : false,
-      };
-   }
-   logIn = (username) => {
-      const { cookies } = this.props;
-      console.log("logged");
-      const currentState = this.state.isLoggedIn;
-      if (this.state.isLoggedIn) {
-         console.log("removed");
-         cookies.remove("sessionId");
-         cookies.remove("user_id");
-         cookies.remove("email");
-         this.setData();
-         this.setState({ isLoggedIn: !currentState, username: "" });
-      } else {
-         this.setState({ isLoggedIn: true, user: username });
-      }
-      console.log(cookies.getAll());
-   };
-   render() {
-      return (
-         <Switch>
-            <Route path="/lobby">
-               <Lobby tournamentId={5} />
-            </Route>
-            <Route path="/create-tournament">
-               <CreateTournament />
-            </Route>
-            <Route path="/tournament">
-               <TournamentBracket />
-            </Route>
-            <Route path="/winner-page">
-               <Winner />
-            </Route>
-            <Route path="/game">
-               <GamePage />
-            </Route>
-            <Route path="/">
-               <LandingPage />
-            </Route>
-         </Switch>
-      );
-   }
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
+  constructor(props) {
+    super(props);
+    const { cookies } = props;
+    this.state = {
+      user_name: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
+    };
+  }
+
+  render() {
+    return (
+      <Switch>
+        <Route path="/lobby">
+          <Lobby tournamentId={5} />
+        </Route>
+        <Route path="/create-tournament">
+          <CreateTournament />
+        </Route>
+        <Route path="/tournament">
+          <TournamentBracket />
+        </Route>
+        <Route path="/winner-page">
+          <Winner />
+        </Route>
+        <Route path="/game">
+          <GamePage />
+        </Route>
+        <Route path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
+    );
+  }
 }
 
 export default withCookies(App);

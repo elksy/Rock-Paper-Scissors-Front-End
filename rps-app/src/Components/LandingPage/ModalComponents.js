@@ -1,11 +1,15 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 class ModalComponents extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -14,8 +18,50 @@ class ModalComponents extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
+
+  async getSession() {
+    try {
+      const response = await fetch("http://localhost:8080/sessions", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await response.json();
+      return await json.success;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  setData = (data, compareData) => {
+    console.log("changed");
+    console.log(data, compareData);
+    this.setState({
+      results: data ? [...data] : [],
+      compareResults: compareData ? [...compareData] : [],
+    });
+  };
+
+  newPlayer = (user_name) => {
+    const { cookies } = this.props;
+    console.log("logged");
+    const currentState = this.state.playerJoined;
+    if (this.state.playerJoined) {
+      cookies.remove("sessionId");
+      cookies.remove("user_name");
+      this.setData();
+      this.setState({ playerJoined: !currentState, user_name: "" });
+    } else {
+      this.setState({ playerJoined: true, user: user_name });
+    }
+    console.log(cookies.getAll());
+  };
 
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
@@ -78,4 +124,4 @@ class ModalComponents extends React.Component {
   };
 }
 
-export default ModalComponents;
+export default withCookies(ModalComponents);

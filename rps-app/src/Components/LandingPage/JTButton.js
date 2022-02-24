@@ -7,6 +7,7 @@ import ModalComponents from "./ModalComponents";
 class JTButton extends React.Component {
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -15,6 +16,7 @@ class JTButton extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
     };
     this.modalComponents = new ModalComponents();
   }
@@ -23,8 +25,26 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
-    this.setState({ redirect: true });
+  handleSubmit = async (e) => {
+    this.setState({ redirect: true, playerJoined: true });
+
+    e.preventDefault();
+    const { playerName, playerColour } = this.state;
+    if (playerName && playerColour) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
+  };
+
+  newPlayer = () => {
+    const { cookies } = this.props;
+    console.log("logged");
+    const currentState = this.state.playerJoined;
+    if (this.state.playerJoined) {
+      this.setState({ playerJoined: !currentState, playerName: "" });
+    } else {
+      this.setState({ playerJoined: true, user: playerName });
+    }
+    console.log(cookies.getAll());
   };
 
   viewModal = () => {
