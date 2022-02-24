@@ -42,7 +42,7 @@ class JTButton extends React.Component {
     if (this.state.playerJoined) {
       this.setState({ playerJoined: !currentState, playerName: "" });
     } else {
-      this.setState({ playerJoined: true, user: playerName });
+      this.setState({ playerJoined: true, playerName: this.state.playerName });
     }
     console.log(cookies.getAll());
   };
