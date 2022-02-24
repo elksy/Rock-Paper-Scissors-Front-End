@@ -22,12 +22,27 @@
 .rhs {
   width: 50%;
 }
+.info-and-chat {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tournament-info {
+  border: 1px solid black;
+  width: 45%;
+  height: 30rem;
+  margin-bottom: 2rem;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
 .chat {
   border: 1px solid black;
-  width: 100%;
+  width: 45%;
   height: 30rem;
   margin-bottom: 2rem;
 }
+
 .options {
   border: 1px solid black;
   height: 8rem;
@@ -44,4 +59,14 @@
 
 #root > div > div > div > div.rhs > div.options > div > button.btn.btn-lg {
   width: 20rem;
+}
+
+.tournament-id {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#copy-btn {
+  width: 3rem;
 }
