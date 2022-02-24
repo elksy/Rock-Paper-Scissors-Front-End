@@ -50,7 +50,7 @@ class TournamentLink extends React.Component {
           {this.state.copied && this.displayCopiedMsg()}
         </Modal.Body>
         <Modal.Footer>
-          <Link to="/lobby">
+          <Link to={`/lobby/${this.props.link}`}>
             <Button size="lg" id="join-btn" variant="outline-dark">
               Join the Lobby!
             </Button>
