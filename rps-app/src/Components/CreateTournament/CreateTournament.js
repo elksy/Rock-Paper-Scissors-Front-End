@@ -53,7 +53,6 @@ class CreateTournament extends React.Component {
     });
     if (response.status === 200) {
       const json = await response.json();
-      console.log(json);
       this.setState({ link: json.tournamentId, displayTournamentLink: true });
     }
   };
