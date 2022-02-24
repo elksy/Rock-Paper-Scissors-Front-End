@@ -11,8 +11,8 @@ class CreateTournament extends React.Component {
       timeLimit: "10",
       addBots: false,
       type: "knockout",
-      displayTournamentLink: true,
-      link: "sdasdas-asdasd-asdasd213-as",
+      displayTournamentLink: false,
+      link: "",
     };
   }
 
@@ -40,7 +40,7 @@ class CreateTournament extends React.Component {
     event.preventDefault();
     const response = await fetch("http://localhost:8080/createTournament", {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -52,12 +52,14 @@ class CreateTournament extends React.Component {
       }),
     });
     if (response.status === 200) {
-      const json = response.json();
-      this.setState({ link: json.link, displayTournamentLink: true });
+      const json = await response.json();
+      console.log(json);
+      this.setState({ link: json.tournamentId, displayTournamentLink: true });
     }
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="create-tournament-page">
         <header>

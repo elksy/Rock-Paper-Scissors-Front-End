@@ -41,7 +41,7 @@ class TournamentLink extends React.Component {
             />
             <Button
               id="copy-btn"
-              variant="outline-primary"
+              variant="outline-dark"
               onClick={this.handleClick}
             >
               Copy Link
@@ -51,7 +51,7 @@ class TournamentLink extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Link to="/lobby">
-            <Button size="lg" id="join-btn" variant="outline-danger">
+            <Button size="lg" id="join-btn" variant="outline-dark">
               Join the Lobby!
             </Button>
           </Link>
