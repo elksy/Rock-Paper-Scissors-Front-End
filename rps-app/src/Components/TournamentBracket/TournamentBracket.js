@@ -16,7 +16,9 @@ class TournamentBracket extends React.Component {
   }
 
   createWebsocket = () => {
-    const ws = new WebSocket("ws://localhost:8080/wsTournament");
+    const ws = new WebSocket(
+      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsTournament`
+    );
 
     ws.onopen = () => {
       console.log("connected");
