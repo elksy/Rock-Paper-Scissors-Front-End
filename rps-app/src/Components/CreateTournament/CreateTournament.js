@@ -1,6 +1,5 @@
 import React from "react";
 import "./createtournament.css";
-import Form from "react-bootstrap/Form";
 import TournamentOptions from "./TournamentOptions.js";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
