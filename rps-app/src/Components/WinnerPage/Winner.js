@@ -12,7 +12,11 @@ class Winner extends React.Component {
         <main>
           <div className="winner-comps">
             <div className="winners-div">
-              <div className="winners-area">Winners Podium</div>
+              <div className="winners-area">
+                Winners Podium <br />
+                {this.props.winner}
+              </div>
+
               <div className="losers-area">Losers!</div>
             </div>
 
