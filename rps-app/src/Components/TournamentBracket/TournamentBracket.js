@@ -17,11 +17,15 @@ class TournamentBracket extends React.Component {
       winner: "",
       currentRound: 0,
       tournamentInfo: {},
+      uuid: "",
     };
   }
 
   componentDidMount() {
-    this.setState({ tournamentInfo: this.props.location.state.tournamentInfo });
+    this.setState({
+      tournamentInfo: this.props.location.state.tournamentInfo,
+      uuid: this.props.location.state.uuid,
+    });
 
     // this.setState({
     //   rounds: rounds,
@@ -84,28 +88,29 @@ class TournamentBracket extends React.Component {
 
   getMatch = () => {
     const roundData = this.state.rounds[this.state.currentRound].seeds;
+
     const playerMatch = roundData.filter((match) => {
       return (
-        match.teams[0].uuid === this.props.uuid ||
-        match.teams[1].uuid === this.props.uuid
+        match.teams[0].uuid === this.state.uuid ||
+        match.teams[1].uuid === this.state.uuid
       );
     });
-    const player = this.getPlayer(playerMatch.teams);
-    const opponent = this.getOpponent(playerMatch.teams);
+    const player = this.getPlayer(playerMatch[0].teams);
+    const opponent = this.getOpponent(playerMatch[0].teams);
     const result = [playerMatch.id, player, opponent];
     return result;
   };
 
   getPlayer = (teams) => {
     const [player] = teams.filter((team) => {
-      return team.uuid === this.props.uuid;
+      return team.uuid === this.state.uuid;
     });
     return player;
   };
 
   getOpponent = (teams) => {
     const [opponent] = teams.filter((team) => {
-      return team.uuid !== this.props.uuid;
+      return team.uuid !== this.state.uuid;
     });
     return opponent;
   };

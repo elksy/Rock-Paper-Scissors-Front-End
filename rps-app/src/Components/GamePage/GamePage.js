@@ -32,12 +32,9 @@ class GamePage extends React.Component {
       `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame`
     );
 
-    ws.onopen = () => {
-      // console.log("connected");
-    };
+    ws.onopen = () => {};
 
     ws.onmessage = (e) => {
-      // console.log(e);
       const data = JSON.parse(e.data);
       if ("opponentChoice" in data) {
         this.setState({ opponentChoice: data.opponentChoice });

@@ -107,7 +107,14 @@ class Lobby extends React.Component {
               <TournamentInfo info={this.state.tournamentInfo} />
               <div className="chat">Chat</div>
             </div>
-            <Options ws={this.state.ws} />
+            <Options
+              ws={this.state.ws}
+              numberOfPlayers={
+                "players" in this.state.players
+                  ? this.state.players.players.length
+                  : 1
+              }
+            />
           </div>
         </div>
       </div>
