@@ -2,17 +2,25 @@ import React from "react";
 import Winner from "../WinnerPage/Winner.js";
 import DisplayBracket from "./DisplayBracket.js";
 import rounds from "./roundData.js";
+import GamePage from "../GamePage/GamePage.js";
 
 import "./tournamentBracket.css";
 
 class TournamentBracket extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ws: "", rounds: [], winner: "" };
+    this.state = {
+      ws: "",
+      tournamentId: "",
+      startRound: false,
+      hasLost: false,
+      rounds: [],
+      winner: "",
+    };
   }
 
   componentDidMount() {
-    this.setState({ rounds: rounds });
+    this.setState({ rounds: rounds, tournamentId: this.props.tournamentId });
     this.createWebsocket();
   }
 
@@ -28,8 +36,12 @@ class TournamentBracket extends React.Component {
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if ("rounds" in data) {
-        this.setState({ rounds: data.bracket });
-        this.checkForWin(data.bracket);
+        this.setState({ rounds: rounds });
+        // this.setState({ rounds: data.bracket });
+        //this.checkForWin(data.bracket);
+      } else if ("command" in data && data.command === "Start Round") {
+        this.setState({ startRound: true });
+        console.log("starting round");
       }
     };
 
@@ -41,13 +53,30 @@ class TournamentBracket extends React.Component {
     this.setState({ ws: ws });
   };
 
+  startRound = () => {
+    //this.checkForWin(this.state.rounds);
+    if (this.state.winner) {
+      return <Winner winner={this.state.winner} />;
+    }
+    if (!this.state.hasLost) {
+      const opponentId = this.getOpponent();
+      const { sessionId } = 1; /*document.cookie */
+      return <GamePage opponent={opponentId} id={sessionId} />;
+    }
+  };
+
+  getOpponent = () => {
+    return "MyOpp";
+  };
+
   checkForWin(rounds) {
     //this would need to change if there are more than one rounds in each bracket
     const finals = rounds[rounds.length - 1].seeds[0];
-    if (finals.score[0] === 1 || finals.score[1] === 1) {
-      const winner = finals.teams[finals.score[0] ? 0 : 1].name;
-      this.setState({ winner });
-    }
+    const winner =
+      finals.score[0] > finals.score[1]
+        ? finals.teams[0].name
+        : finals.teams[1].name;
+    this.setState({ winner });
   }
 
   render() {
@@ -55,14 +84,17 @@ class TournamentBracket extends React.Component {
       <div>
         <div className="title">Tournament</div>
         <div className="page-wrapper">
-          {this.state.winner ? (
-            <Winner winner={this.state.winner} />
+          {this.state.startRound ? (
+            this.startRound()
           ) : (
             <DisplayBracket rounds={this.state.rounds} />
           )}
-
-          {/* <div>Chat</div> */}
         </div>
+        <button
+          onClick={(e) => this.setState({ startRound: !this.state.startRound })}
+        >
+          Click Me
+        </button>
       </div>
     );
   }
