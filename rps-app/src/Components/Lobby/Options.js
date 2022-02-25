@@ -6,10 +6,16 @@ class Options extends React.Component {
     this.props.ws.send(JSON.stringify({ message: "Start Game" }));
   };
   render() {
+    console.log(this.props.numberOfPlayers);
     return (
       <div className="options">
         <div className="buttons">
-          <Button onClick={this.handleClick} variant="primary" size="lg">
+          <Button
+            onClick={this.handleClick}
+            variant="primary"
+            size="lg"
+            disabled={this.props.numberOfPlayers === 1}
+          >
             Start Game
           </Button>
           <Button variant="danger" size="lg">
@@ -20,7 +26,7 @@ class Options extends React.Component {
           <Button variant="warning" size="lg">
             Assign New Host
           </Button>
-          <Button variant="danger" size="lg">
+          <Button variant="danger" size="lg" disabled={true}>
             Close Lobby
           </Button>
         </div>

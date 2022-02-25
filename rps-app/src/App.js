@@ -42,15 +42,10 @@ class App extends React.Component {
         <Route path="/create-tournament">
           <CreateTournament playerName={this.state.playerName} />
         </Route>
-        <Route path="/tournament">
-          <TournamentBracket />
-        </Route>
-        {/* <Route path="/winner-page">
-               <Winner />
-            </Route> */}
-        <Route path="/game">
-          <GamePage />
-        </Route>
+        <Route
+          path="/tournament"
+          render={(props) => <TournamentBracket {...props} />}
+        />
         <Route path="/">
           <LandingPage
             updatePlayerName={this.updatePlayerName}

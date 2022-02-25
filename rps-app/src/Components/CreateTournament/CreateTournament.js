@@ -40,8 +40,11 @@ class CreateTournament extends React.Component {
 
   startTournament = async (event) => {
     event.preventDefault();
+
     const response = await fetch(
-      `http://${process.env.REACT_APP_WS_ENDPOINT}/createTournament`,
+      `http${
+        process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/createTournament`,
       {
         method: "POST",
         // credentials: "include",

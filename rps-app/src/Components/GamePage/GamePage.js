@@ -32,12 +32,9 @@ class GamePage extends React.Component {
       `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame`
     );
 
-    ws.onopen = () => {
-      // console.log("connected");
-    };
+    ws.onopen = () => {};
 
     ws.onmessage = (e) => {
-      // console.log(e);
       const data = JSON.parse(e.data);
       if ("opponentChoice" in data) {
         this.setState({ opponentChoice: data.opponentChoice });
@@ -109,6 +106,7 @@ class GamePage extends React.Component {
       //needs round data
       //rounds should be obj in tournamentData
       this.props.tournamentWs.send("result"); //{winner: id, score: [2, 1], seed: 'final'}
+      //  { winner: uuid, round: index, roundMatch: index, score: [score,score]}
       this.props.endCurrentRound();
     } else if (this.state.opponentScore >= Math.ceil(5 / 2)) {
       //needs round data
