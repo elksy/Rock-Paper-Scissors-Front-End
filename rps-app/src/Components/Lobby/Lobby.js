@@ -19,6 +19,12 @@ class Lobby extends React.Component {
   }
 
   async componentDidMount() {
+    const uuid = this.getUuidFromCookies(); // From cookies
+    if (uuid) {
+      this.setState({ uuid: uuid });
+    } else {
+      this.setState({ validLobby: false });
+    }
     // Gets the url path from the browser e.g /lobby/132c-13xfsd-123dasf
     const urlPath = window.location.pathname.split("/");
     // If the try and join /lobby without an id they will be redirected to the main page.
@@ -36,6 +42,10 @@ class Lobby extends React.Component {
       }
     }
   }
+
+  getUuidFromCookies = () => {
+    return Math.floor(Math.random() * 10000 + 1); //change to get from cookies instead
+  };
 
   getTournamentInfo = async (id) => {
     const response = await fetch(
@@ -60,7 +70,10 @@ class Lobby extends React.Component {
 
     ws.onopen = () => {
       const playerData = {
-        name: "Rob",
+        name: this.props.name || "Harry",
+        uuid: this.state.uuid,
+        bgColor: this.props.colour || "blue",
+        color: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
     };
@@ -82,7 +95,6 @@ class Lobby extends React.Component {
   };
 
   displayLobby = () => {
-    this.state.startTournament && console.log("Started");
     return (
       <div className="lobby">
         <h1>Lobby</h1>
@@ -97,7 +109,14 @@ class Lobby extends React.Component {
               <TournamentInfo info={this.state.tournamentInfo} />
               <div className="chat">Chat</div>
             </div>
-            <Options ws={this.state.ws} />
+            <Options
+              ws={this.state.ws}
+              numberOfPlayers={
+                "players" in this.state.players
+                  ? this.state.players.players.length
+                  : 1
+              }
+            />
           </div>
         </div>
       </div>
@@ -112,6 +131,19 @@ class Lobby extends React.Component {
     // if tournament has started redirect to the bracket page
     return (
       <div>
+        {this.state.startTournament && (
+          <Redirect
+            to={{
+              pathname: `/tournament`,
+              state: {
+                uuid: this.state.uuid,
+                tournamentInfo: this.state.tournamentInfo,
+              },
+            }}
+            uuid={this.state.uuid}
+            tournamentInfo={this.state.tournamentInfo}
+          />
+        )}
         {!this.state.validLobby && <Redirect to="/" />}
         {this.state.ws ? this.displayLobby() : this.loading()}
       </div>

@@ -23,30 +23,27 @@ class App extends React.Component {
     };
   }
 
-   render() {
-      return (
-         <Switch>
-            <Route path="/lobby">
-               <Lobby tournamentId={5} />
-            </Route>
-            <Route path="/create-tournament">
-               <CreateTournament />
-            </Route>
-            <Route path="/tournament">
-               <TournamentBracket />
-            </Route>
-            {/* <Route path="/winner-page">
-               <Winner />
-            </Route> */}
-            <Route path="/game">
-               <GamePage />
-            </Route>
-            <Route path="/">
-               <LandingPage />
-            </Route>
-         </Switch>
-      );
-   }
+  render() {
+    return (
+      <Switch>
+        <Route path="/lobby">
+          <Lobby tournamentId={5} />
+        </Route>
+        <Route path="/create-tournament">
+          <CreateTournament />
+        </Route>
+
+        <Route
+          path="/tournament"
+          render={(props) => <TournamentBracket {...props} />}
+        />
+
+        <Route path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
+    );
+  }
 }
 
 export default withCookies(App);
