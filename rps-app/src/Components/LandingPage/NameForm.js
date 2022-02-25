@@ -1,24 +1,11 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class NameForm extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
   constructor(props) {
-    const { cookies } = props;
     super(props);
     this.state = {
       playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
-      disableButton: true,
-      tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
@@ -29,9 +16,9 @@ class NameForm extends React.Component {
 
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: !this.state.disableButton });
+      this.props.updateDisabledButton(false);
     } else {
-      this.setState({ disableButton: true });
+      this.props.updateDisabledButton(true);
     }
   };
 
@@ -52,4 +39,4 @@ class NameForm extends React.Component {
   }
 }
 
-export default withCookies(NameForm);
+export default NameForm;

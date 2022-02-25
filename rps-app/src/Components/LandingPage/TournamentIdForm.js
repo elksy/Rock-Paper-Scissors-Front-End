@@ -26,12 +26,11 @@ class TournamentIdForm extends React.Component {
     this.setState({ playerJoined: e.target.value });
     this.disableButton();
   };
-
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: !this.disableButton });
+      this.props.updateDisabledButton(false);
     } else {
-      this.setState({ disableButton: true });
+      this.props.updateDisabledButton(true);
     }
   };
 

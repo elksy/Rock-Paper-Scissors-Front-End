@@ -29,9 +29,9 @@ class ColourForm extends React.Component {
 
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: !this.disableButton });
+      this.props.updateDisabledButton(false);
     } else {
-      this.setState({ disableButton: true });
+      this.props.updateDisabledButton(true);
     }
   };
 

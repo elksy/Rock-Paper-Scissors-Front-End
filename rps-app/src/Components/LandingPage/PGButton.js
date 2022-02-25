@@ -46,7 +46,11 @@ class PGButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            <NameForm />
+            <NameForm
+              updateDisabledButton={(bool) =>
+                this.setState({ disableButton: bool })
+              }
+            />
             <ColourForm />
           </Form>
         </Modal.Body>
