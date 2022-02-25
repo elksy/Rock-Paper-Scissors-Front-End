@@ -21,7 +21,7 @@ class JTButton extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
+      // playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
