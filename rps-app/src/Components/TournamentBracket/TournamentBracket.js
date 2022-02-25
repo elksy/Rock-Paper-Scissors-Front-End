@@ -60,13 +60,32 @@ class TournamentBracket extends React.Component {
     }
     if (!this.state.hasLost) {
       const opponentId = this.getOpponent();
-      const { sessionId } = 1; /*document.cookie */
-      return <GamePage opponent={opponentId} id={sessionId} />;
+      const sessionId = "Me"; /*document.cookie */
+      return (
+        <GamePage
+          opponent={opponentId}
+          playerName={sessionId}
+          tournamentWs={this.state.ws}
+          updatePlayerLost={this.updatePlayerLost} //call if player has lost
+          endCurrentRound={this.endCurrentRound}
+          //tournament data
+        />
+      );
+    } else {
+      <DisplayBracket rounds={this.state.rounds} />;
     }
   };
 
   getOpponent = () => {
-    return "MyOpp";
+    return "MyOpp"; //get opponent from brackets
+  };
+
+  updatePlayerLost = () => {
+    this.setState({ hasLost: true });
+  };
+
+  endCurrentRound = () => {
+    this.setState({ startRound: false });
   };
 
   checkForWin(rounds) {
