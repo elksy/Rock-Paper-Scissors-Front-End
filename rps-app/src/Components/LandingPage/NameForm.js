@@ -22,17 +22,17 @@ class NameForm extends React.Component {
     };
   }
 
-  handleChange = (e) => {
-    this.setState({ playerName: e.target.value });
-    this.disableButton();
-  };
-
   disableButton = () => {
     if (this.state.playerName.length > 2) {
       this.setState({ disableButton: false });
     } else {
       this.setState({ disableButton: true });
     }
+  };
+
+  handleChange = (e) => {
+    this.setState({ playerName: e.target.value });
+    this.disableButton();
   };
 
   render() {
@@ -45,7 +45,7 @@ class NameForm extends React.Component {
           placeholder="Enter nickname"
           value={this.state.playerName}
           id="email"
-          onChange={(e) => this.props.handleChange(e)}
+          onChange={(e) => this.handleChange(e)}
         />
       </Form.Group>
     );

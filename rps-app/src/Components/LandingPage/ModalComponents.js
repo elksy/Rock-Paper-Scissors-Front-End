@@ -10,6 +10,7 @@ class ModalComponents {
   constructor(props) {
     const { cookies } = props;
     this.state = {
+      playerJoined: cookies.get("sessionId") ? true : false,
       playerName: "",
       playerColour: undefined,
       showModal: false,

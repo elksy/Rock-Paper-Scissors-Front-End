@@ -23,8 +23,14 @@ class PGButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
-    this.setState({ redirect: true });
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ redirect: true, playerJoined: true });
+    const { playerName, playerColour } = this.state;
+    if (playerName && playerColour) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
+    this.props.addPlayer(this.state.playerName, this.state.playerColour);
   };
 
   viewModal = () => {
@@ -40,8 +46,8 @@ class PGButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            <NameForm onChange={(e) => this.props.handleChange(e)} />
-            <ColourForm onChange={(e) => this.props.handleChange(e)} />
+            <NameForm />
+            <ColourForm />
           </Form>
         </Modal.Body>
         <Modal.Footer>
