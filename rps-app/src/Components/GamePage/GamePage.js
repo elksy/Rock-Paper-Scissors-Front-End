@@ -109,6 +109,7 @@ class GamePage extends React.Component {
       //needs round data
       //rounds should be obj in tournamentData
       this.props.tournamentWs.send("result"); //{winner: id, score: [2, 1], seed: 'final'}
+      //  { winner: uuid, round: index, roundMatch: index, score: [score,score]}
       this.props.endCurrentRound();
     } else if (this.state.opponentScore >= Math.ceil(5 / 2)) {
       //needs round data
