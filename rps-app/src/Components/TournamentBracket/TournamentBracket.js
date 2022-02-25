@@ -16,6 +16,7 @@ class TournamentBracket extends React.Component {
       hasLost: false,
       rounds: [],
       winner: "",
+      currentRound: 0,
     };
   }
 
@@ -59,12 +60,13 @@ class TournamentBracket extends React.Component {
       return <Winner winner={this.state.winner} />;
     }
     if (!this.state.hasLost) {
-      const opponentId = this.getOpponent();
-      const sessionId = "Me"; /*document.cookie */
+      const [seed, player, opponent] = this.getMatch();
+
       return (
         <GamePage
-          opponent={opponentId}
-          playerName={sessionId}
+          seed={seed}
+          opponent={opponent}
+          playerName={player}
           tournamentWs={this.state.ws}
           updatePlayerLost={this.updatePlayerLost} //call if player has lost
           endCurrentRound={this.endCurrentRound}
@@ -76,8 +78,32 @@ class TournamentBracket extends React.Component {
     }
   };
 
-  getOpponent = () => {
-    return "MyOpp"; //get opponent from brackets
+  getMatch = () => {
+    const roundData = this.state.rounds[this.state.currentRound].seeds;
+    const playerMatch = roundData.filter((match) => {
+      return (
+        match.teams[0].uuid === this.props.uuid ||
+        match.teams[1].uuid === this.props.uuid
+      );
+    });
+    const player = this.getPlayer(playerMatch.teams);
+    const opponent = this.getOpponent(playerMatch.teams);
+    const result = [playerMatch.id, player, opponent];
+    return result;
+  };
+
+  getPlayer = (teams) => {
+    const [player] = teams.filter((team) => {
+      return team.uuid === this.props.uuid;
+    });
+    return player;
+  };
+
+  getOpponent = (teams) => {
+    const [opponent] = teams.filter((team) => {
+      return team.uuid !== this.props.uuid;
+    });
+    return opponent;
   };
 
   updatePlayerLost = () => {
