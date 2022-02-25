@@ -19,7 +19,7 @@ class App extends React.Component {
     const { cookies } = props;
     this.state = {
       playerName: "",
-      //  playerColor: "",
+      playerColour: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
@@ -27,6 +27,10 @@ class App extends React.Component {
   updatePlayerName = (playerName) => {
     this.setState({ playerName: playerName });
     console.log(this.state.playerName);
+  };
+
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
   };
 
   render() {
@@ -51,6 +55,8 @@ class App extends React.Component {
           <LandingPage
             updatePlayerName={this.updatePlayerName}
             playerName={this.state.playerName}
+            updatePlayerColour={this.updatePlayerColour}
+            playerColour={this.state.playerColour}
           />
         </Route>
       </Switch>

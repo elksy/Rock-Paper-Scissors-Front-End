@@ -67,16 +67,22 @@ class LandingPage extends React.Component {
                 playerSession={() => this.playerSession()}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
               <JTButton
                 playerSession={() => this.playerSession()}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
               <CTButton
                 playerSession={() => this.playerSession()}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
             </div>
           </div>
