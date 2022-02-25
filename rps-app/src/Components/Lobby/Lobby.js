@@ -39,7 +39,9 @@ class Lobby extends React.Component {
 
   getTournamentInfo = async (id) => {
     const response = await fetch(
-      `http://localhost:8080/getTournamentInfo/${id}`,
+      `http${
+        process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/getTournamentInfo/${id}`,
       {
         method: "GET",
         // credentials: "include",
