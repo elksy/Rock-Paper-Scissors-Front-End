@@ -23,7 +23,9 @@ class LandingPage extends React.Component {
   }
 
   async addPlayer(playerName, playerColour) {
-    const endpoint = "https://localhost:8080/sessions";
+    const endpoint = `http${
+      process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+    }://${process.env.REACT_APP_WS_ENDPOINT}/sessions`;
     const response = await fetch(endpoint, {
       method: "POST",
       credentials: "include",
