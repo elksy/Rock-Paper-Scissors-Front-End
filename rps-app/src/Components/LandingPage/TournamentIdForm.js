@@ -29,7 +29,7 @@ class TournamentIdForm extends React.Component {
 
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: false });
+      this.setState({ disableButton: !this.disableButton });
     } else {
       this.setState({ disableButton: true });
     }

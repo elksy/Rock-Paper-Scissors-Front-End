@@ -22,14 +22,14 @@ class ColourForm extends React.Component {
     };
   }
 
-  handleChange = (e) => {
+  handleColourChange = (e) => {
     this.setState({ playerColour: e.target.value });
     this.disableButton();
   };
 
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: false });
+      this.setState({ disableButton: !this.disableButton });
     } else {
       this.setState({ disableButton: true });
     }
@@ -44,7 +44,7 @@ class ColourForm extends React.Component {
           type="color"
           value={this.state.playerColour}
           id="colour"
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => this.handleColourChange(e)}
         />
       </Form.Group>
     );
