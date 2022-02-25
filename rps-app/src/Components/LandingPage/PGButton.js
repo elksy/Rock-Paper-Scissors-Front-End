@@ -2,7 +2,8 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import ModalComponents from "./ModalComponents";
+import NameForm from "./NameForm";
+import ColourForm from "./ColourForm";
 
 class PGButton extends React.Component {
   constructor(props) {
@@ -16,19 +17,20 @@ class PGButton extends React.Component {
       disableButton: true,
       tournamentId: "",
     };
-    this.modalComponents = new ModalComponents();
   }
 
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ redirect: true, playerJoined: true });
     const { playerName, playerColour } = this.state;
     if (playerName && playerColour) {
       this.setState({ [e.target.id]: e.target.value });
     }
+    this.props.addPlayer(this.state.playerName, this.state.playerColour);
   };
 
   viewModal = () => {
@@ -44,8 +46,8 @@ class PGButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            {this.modalComponents.formPlayerName()}
-            {this.modalComponents.formPickColour()}
+            <NameForm />
+            <ColourForm />
           </Form>
         </Modal.Body>
         <Modal.Footer>

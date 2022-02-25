@@ -2,10 +2,18 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import ModalComponents from "./ModalComponents";
+import NameForm from "./NameForm";
+import ColourForm from "./ColourForm";
+import TournamentIdForm from "./TournamentIdForm";
 import { Link } from "react-router-dom";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 class JTButton extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
+
   constructor(props) {
     super(props);
     const { cookies } = props;
@@ -19,32 +27,20 @@ class JTButton extends React.Component {
       tournamentId: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
-    this.modalComponents = new ModalComponents();
   }
 
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = async (e) => {
-    this.setState({ redirect: true, playerJoined: true });
+  handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ redirect: true, playerJoined: true });
     const { playerName, playerColour } = this.state;
     if (playerName && playerColour) {
       this.setState({ [e.target.id]: e.target.value });
     }
-  };
-
-  newPlayer = () => {
-    const { cookies } = this.props;
-    console.log("logged");
-    const currentState = this.state.playerJoined;
-    if (this.state.playerJoined) {
-      this.setState({ playerJoined: !currentState, playerName: "" });
-    } else {
-      this.setState({ playerJoined: true, playerName: this.state.playerName });
-    }
-    console.log(cookies.getAll());
+    this.props.addPlayer(this.state.playerName, this.state.playerColour);
   };
 
   viewModal = () => {
@@ -60,9 +56,9 @@ class JTButton extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
-            {this.modalComponents.formPlayerName()}
-            {this.modalComponents.formPickColour()}
-            {this.modalComponents.formTournamentId()}
+            <NameForm />
+            <ColourForm />
+            <TournamentIdForm />
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -99,4 +95,4 @@ class JTButton extends React.Component {
   }
 }
 
-export default JTButton;
+export default withCookies(JTButton);
