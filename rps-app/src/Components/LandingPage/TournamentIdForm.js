@@ -1,24 +1,11 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class TournamentIdForm extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
   constructor(props) {
-    const { cookies } = props;
     super(props);
     this.state = {
-      playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
-      disableButton: true,
       tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
@@ -26,12 +13,11 @@ class TournamentIdForm extends React.Component {
     this.setState({ playerJoined: e.target.value });
     this.disableButton();
   };
-
   disableButton = () => {
     if (this.state.playerName.length > 2) {
-      this.setState({ disableButton: false });
+      this.props.updateDisabledButton(false);
     } else {
-      this.setState({ disableButton: true });
+      this.props.updateDisabledButton(true);
     }
   };
 
@@ -52,4 +38,4 @@ class TournamentIdForm extends React.Component {
   }
 }
 
-export default withCookies(TournamentIdForm);
+export default TournamentIdForm;
