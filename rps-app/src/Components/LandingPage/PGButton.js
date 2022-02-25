@@ -50,6 +50,8 @@ class PGButton extends React.Component {
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
               }
+              updatePlayerName={this.props.updatePlayerName}
+              playerName={this.props.playerName}
             />
             <ColourForm />
           </Form>

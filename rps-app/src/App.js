@@ -19,6 +19,7 @@ class App extends React.Component {
     const { cookies } = props;
     this.state = {
       playerName: "",
+      //  playerColor: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
