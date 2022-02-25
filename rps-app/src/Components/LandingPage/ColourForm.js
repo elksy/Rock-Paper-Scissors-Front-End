@@ -11,7 +11,7 @@ class ColourForm extends React.Component {
   }
 
   handleColourChange = (colour) => {
-    this.setState({ playerColour: colour.hex });
+    this.props.updatePlayerColour(colour.target.value);
   };
 
   render() {

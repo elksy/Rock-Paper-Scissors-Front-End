@@ -2,7 +2,9 @@ import React from "react";
 import "./createtournament.css";
 import TournamentOptions from "./TournamentOptions.js";
 import TournamentLink from "./TournamentLink.js";
+import Header from "../LandingPage/Header";
 import { Button } from "react-bootstrap";
+
 class CreateTournament extends React.Component {
   constructor() {
     super();
@@ -68,6 +70,7 @@ class CreateTournament extends React.Component {
       <div className="create-tournament-page">
         <header>
           <h1>Create Tournament</h1>
+          <Header showPlayerName={this.props.playerName} />
         </header>
         <TournamentOptions
           rounds={this.state.rounds}

@@ -18,10 +18,20 @@ class App extends React.Component {
     super(props);
     const { cookies } = props;
     this.state = {
-      user_name: "",
+      playerName: "",
+      playerColour: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
+
+  updatePlayerName = (playerName) => {
+    this.setState({ playerName: playerName });
+    console.log(this.state.playerName);
+  };
+
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
+  };
 
   render() {
     return (
@@ -30,16 +40,19 @@ class App extends React.Component {
           <Lobby tournamentId={5} />
         </Route>
         <Route path="/create-tournament">
-          <CreateTournament />
+          <CreateTournament playerName={this.state.playerName} />
         </Route>
-
         <Route
           path="/tournament"
           render={(props) => <TournamentBracket {...props} />}
         />
-
         <Route path="/">
-          <LandingPage />
+          <LandingPage
+            updatePlayerName={this.updatePlayerName}
+            playerName={this.state.playerName}
+            updatePlayerColour={this.updatePlayerColour}
+            playerColour={this.state.playerColour}
+          />
         </Route>
       </Switch>
     );
