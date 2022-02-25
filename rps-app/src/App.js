@@ -18,35 +18,43 @@ class App extends React.Component {
     super(props);
     const { cookies } = props;
     this.state = {
-      user_name: "",
+      playerName: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
-   render() {
-      return (
-         <Switch>
-            <Route path="/lobby">
-               <Lobby tournamentId={5} />
-            </Route>
-            <Route path="/create-tournament">
-               <CreateTournament />
-            </Route>
-            <Route path="/tournament">
-               <TournamentBracket />
-            </Route>
-            {/* <Route path="/winner-page">
+  updatePlayerName = (playerName) => {
+    this.setState({ playerName: playerName });
+    console.log(this.state.playerName);
+  };
+
+  render() {
+    return (
+      <Switch>
+        <Route path="/lobby">
+          <Lobby tournamentId={5} />
+        </Route>
+        <Route path="/create-tournament">
+          <CreateTournament playerName={this.state.playerName} />
+        </Route>
+        <Route path="/tournament">
+          <TournamentBracket />
+        </Route>
+        {/* <Route path="/winner-page">
                <Winner />
             </Route> */}
-            <Route path="/game">
-               <GamePage />
-            </Route>
-            <Route path="/">
-               <LandingPage />
-            </Route>
-         </Switch>
-      );
-   }
+        <Route path="/game">
+          <GamePage />
+        </Route>
+        <Route path="/">
+          <LandingPage
+            updatePlayerName={this.updatePlayerName}
+            playerName={this.state.playerName}
+          />
+        </Route>
+      </Switch>
+    );
+  }
 }
 
 export default withCookies(App);

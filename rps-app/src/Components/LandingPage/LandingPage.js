@@ -3,6 +3,7 @@ import "./LandingPage.css";
 import PGButton from "./PGButton";
 import JTButton from "./JTButton";
 import CTButton from "./CTButton";
+import Header from "./Header";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 
@@ -14,8 +15,6 @@ class LandingPage extends React.Component {
     const { cookies } = props;
     super(props);
     this.state = {
-      playerName: "",
-      playerColour: undefined,
       showModal: false,
       showJoinModal: false,
       playerJoined: cookies.get("sessionId") ? true : false,
@@ -64,9 +63,21 @@ class LandingPage extends React.Component {
             <h1>Rock, Paper, Scissors</h1>
 
             <div className="menu-button-container">
-              <PGButton playerSession={() => this.playerSession()} />
-              <JTButton playerSession={() => this.playerSession()} />
-              <CTButton playerSession={() => this.playerSession()} />
+              <PGButton
+                playerSession={() => this.playerSession()}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
+              />
+              <JTButton
+                playerSession={() => this.playerSession()}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
+              />
+              <CTButton
+                playerSession={() => this.playerSession()}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
+              />
             </div>
           </div>
         </div>

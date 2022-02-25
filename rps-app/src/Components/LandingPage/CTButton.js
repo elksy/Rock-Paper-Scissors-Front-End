@@ -11,12 +11,6 @@ class CTButton extends React.Component {
     super(props);
     this.state = {
       playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
-      disableButton: true,
-      tournamentId: "",
     };
   }
 
@@ -32,7 +26,8 @@ class CTButton extends React.Component {
     if (playerName && playerColour) {
       this.setState({ [e.target.id]: e.target.value });
     }
-    this.props.addPlayer(this.state.playerName, this.state.playerColour);
+    this.props.updatePlayerName(this.state.playerName);
+    console.log(this.state.playerName);
   };
 
   viewModal = () => {
@@ -52,6 +47,8 @@ class CTButton extends React.Component {
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
               }
+              updatePlayerName={this.props.updatePlayerName}
+              playerName={this.props.playerName}
             />
             <ColourForm />
           </Form>

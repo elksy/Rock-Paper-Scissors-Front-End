@@ -10,8 +10,8 @@ class NameForm extends React.Component {
   }
 
   handleNameChange = (e) => {
-    this.setState({ playerName: e.target.value });
     this.disableButton();
+    this.props.updatePlayerName(e.target.value);
   };
 
   disableButton = () => {
@@ -30,7 +30,7 @@ class NameForm extends React.Component {
           className="username-input"
           type="text"
           placeholder="Enter nickname"
-          value={this.state.playerName}
+          value={this.props.playerName}
           id="email"
           onChange={(e) => this.handleNameChange(e)}
         />
