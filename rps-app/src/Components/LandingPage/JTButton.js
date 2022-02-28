@@ -12,6 +12,8 @@ class JTButton extends React.Component {
     super(props);
     this.state = {
       disableButton: true,
+      tournamentId: "",
+
     };
   }
 
@@ -19,7 +21,8 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async (e) => {
+    e.preventDefault();
     this.props.addPlayer();
   };
 
@@ -48,19 +51,15 @@ class JTButton extends React.Component {
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}
             />
-            <Link
-              to={`/lobby/${this.props.tournamentId}`}
-              onClick={this.handleSubmit}
+            <Button
+              className="example"
+              variant="primary"
+              type="submit"
+              // disabled={this.state.disableButton}
             >
-              <Button
-                className="example"
-                variant="primary"
-                type="submit"
-                disabled={this.state.disableButton}
-              >
-                Start Game
-              </Button>
-            </Link>
+              Start Game
+            </Button>
+
           </Form>
         </Modal.Body>
       </Modal>

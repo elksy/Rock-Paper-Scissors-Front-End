@@ -63,8 +63,8 @@ const rounds = [
       {
         id: 7,
         teams: [
-          { name: "Team D", bgColor: "orange", textColor: "white" },
-          { name: "Team E", bgColor: "purple", textColor: "red" },
+          { name: "", bgColor: "white", textColor: "black" },
+          { name: "", bgColor: "purple", textColor: "red" },
         ],
         score: [0, 0],
       },

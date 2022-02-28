@@ -4,27 +4,21 @@ import PGButton from "./PGButton";
 import JTButton from "./JTButton";
 import CTButton from "./CTButton";
 import Header from "./Header";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
-import { CirclePicker } from "react-color";
+import { Redirect } from "react-router-dom";
+
 
 class LandingPage extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
   constructor(props) {
-    const { cookies } = props;
     super(props);
     this.state = {
       showModal: false,
       showJoinModal: false,
-      playerJoined: cookies.get("sessionId") ? true : false,
+      redirectToLobby: false,
     };
   }
 
   addPlayer = async (playerName, playerColour) => {
     console.log("Add Player");
-    console.log(this.props.playerName, this.props.playerColour);
     const endpoint = `http${
       process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
     }://${process.env.REACT_APP_WS_ENDPOINT}/sessions`;
@@ -39,20 +33,9 @@ class LandingPage extends React.Component {
         playerColour: playerColour,
       }),
     });
-    return response;
-  };
-
-  playerSession = () => {
-    const { cookies } = this.props;
-    if (this.state.playerJoined) {
-      cookies.remove("sessionId");
-      cookies.remove("playerName");
-      this.setState({
-        playerName: this.state.playerName,
-        playerColour: this.state.playerColour,
-      });
+    if (response.status === 200) {
+      this.setState({ redirectToLobby: true });
     }
-    console.log(cookies.getAll());
   };
 
   handleModal = () => {
@@ -72,8 +55,12 @@ class LandingPage extends React.Component {
   };
 
   render() {
+
     return (
       <div>
+        {this.state.redirectToLobby && (
+          <Redirect to={`/lobby/${this.props.tournamentId}`} />
+        )}
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors</h1>
@@ -104,4 +91,4 @@ class LandingPage extends React.Component {
   }
 }
 
-export default withCookies(LandingPage);
+export default LandingPage;

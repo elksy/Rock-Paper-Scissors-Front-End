@@ -4,13 +4,13 @@ import Options from "./Options.js";
 import "./lobby.css";
 import { Redirect } from "react-router-dom";
 import TournamentInfo from "./TournamentInfo.js";
-// import { v4 } from "https://deno.land/std/uuid/mod.ts";
 
 class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       validLobby: true,
+      uuid: "",
       ws: "",
       tournamentInfo: {},
       players: [],
@@ -19,8 +19,10 @@ class Lobby extends React.Component {
   }
 
   async componentDidMount() {
-    const uuid = this.getUuidFromCookies(); // From cookies
-    if (uuid) {
+    const cookies = document.cookie;
+    const re = /sessionId=(.*);?/;
+    if (re.test(cookies)) {
+      const uuid = cookies.match(re)[1];
       this.setState({ uuid: uuid });
     } else {
       this.setState({ validLobby: false });
@@ -42,10 +44,6 @@ class Lobby extends React.Component {
       }
     }
   }
-
-  getUuidFromCookies = () => {
-    return Math.floor(Math.random() * 10000 + 1); //change to get from cookies instead
-  };
 
   getTournamentInfo = async (id) => {
     const response = await fetch(
@@ -70,10 +68,10 @@ class Lobby extends React.Component {
 
     ws.onopen = () => {
       const playerData = {
-        name: this.props.name || "Harry",
+        name: this.props.name || this.state.uuid.substring(0, 4),
         uuid: this.state.uuid,
         bgColor: this.props.colour || "blue",
-        color: this.props.colour || "black",
+        textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
     };
@@ -128,7 +126,6 @@ class Lobby extends React.Component {
   };
 
   render() {
-
     // if tournament has started redirect to the bracket page
     return (
       <div>

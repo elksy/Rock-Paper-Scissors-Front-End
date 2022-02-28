@@ -18,7 +18,7 @@ class CTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
     this.props.addPlayer();
   };
 

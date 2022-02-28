@@ -13,7 +13,7 @@ class GamePage extends React.Component {
     this.state = {
       ws: "",
       playerChoice: "",
-      opponentChoice: "rock",
+      opponentChoice: "",
       playerScore: 0,
       opponentScore: 0,
       roundOutcome: "",
@@ -22,9 +22,6 @@ class GamePage extends React.Component {
 
   componentDidMount() {
     this.createWebsocket();
-    // const choices = ["rock", "paper", "scissors"];
-    // const randChoice = Math.floor(Math.random() * choices.length);
-    // this.setState({ choice: choices[randChoice] });
   }
 
   createWebsocket = () => {
@@ -55,12 +52,21 @@ class GamePage extends React.Component {
       !this.state.roundOutcome
     ) {
       this.calculateScore();
-      console.log("calculate");
     }
   }
   sendPlayerChoice = () => {
-    this.state.ws.send({ choice: this.state.playerChoice });
-    // console.log(this.state.playerChoice);
+    let randChoice = "";
+    if (!this.state.playerChoice) {
+      const choices = ["rock", "paper", "scissors"];
+      randChoice = Math.floor(Math.random() * choices.length);
+    }
+
+    this.state.ws.send(
+      JSON.stringify({
+        choice: this.state.playerChoice ? this.state.playerChoice : randChoice,
+        opponent: this.props.opponent.uuid,
+      })
+    );
   };
 
   setSelectedChoice = (word) => {
@@ -102,13 +108,29 @@ class GamePage extends React.Component {
   restartGame = () => {
     // check for win
     // reset state
-    if (this.state.playerScore >= Math.ceil(5 / 2)) {
+    if (
+      this.state.playerScore >= Math.ceil(this.props.tournamentInfo.rounds / 2)
+    ) {
       //needs round data
       //rounds should be obj in tournamentData
-      this.props.tournamentWs.send("result"); //{winner: id, score: [2, 1], seed: 'final'}
+
+      this.props.tournamentWs.send(
+        JSON.stringify({
+          result: {
+            winner: this.props.player.uuid,
+            seedId: this.props.seedId,
+            round: this.props.round,
+            playerScore: this.state.playerScore,
+            opponentScore: this.state.opponentScore,
+          },
+        })
+      ); //{winner: id, score: [2, 1], seed: 'final'}
       //  { winner: uuid, round: index, roundMatch: index, score: [score,score]}
       this.props.endCurrentRound();
-    } else if (this.state.opponentScore >= Math.ceil(5 / 2)) {
+    } else if (
+      this.state.opponentScore >=
+      Math.ceil(this.props.tournamentInfo.rounds / 2)
+    ) {
       //needs round data
       //
       this.props.updatePlayerLost();
@@ -122,7 +144,10 @@ class GamePage extends React.Component {
     return (
       <div>
         <div className="timer-container">
-          <Timer timer={10} timeUp={this.sendPlayerChoice} />{" "}
+          <Timer
+            timer={this.props.tournamentInfo.timeLimit}
+            timeUp={this.sendPlayerChoice}
+          />{" "}
           {/* Need timer data */}
         </div>
         <div className="game-wrapper">
@@ -137,6 +162,12 @@ class GamePage extends React.Component {
             name={this.props.opponent.name}
             choice={this.state.opponentChoice}
           />
+        </div>
+        <div>
+          <p>
+            Score: {this.state.playerScore} - {this.state.opponentScore}
+          </p>
+          <p>Best of {this.props.tournamentInfo.rounds}</p>
         </div>
       </div>
     );

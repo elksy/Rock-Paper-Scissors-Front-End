@@ -5,20 +5,13 @@ import CreateTournament from "./Components/CreateTournament/CreateTournament.js"
 import LandingPage from "./Components/LandingPage/LandingPage";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 import { Switch, Route } from "react-router-dom";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class App extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
   constructor(props) {
     super(props);
-    const { cookies } = props;
     this.state = {
       playerName: "",
       tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
@@ -38,7 +31,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby tournamentId={5} />
+          <Lobby />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament playerName={this.state.playerName} />
@@ -62,4 +55,4 @@ class App extends React.Component {
   }
 }
 
-export default withCookies(App);
+export default App;
