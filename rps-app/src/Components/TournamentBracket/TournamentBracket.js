@@ -26,10 +26,6 @@ class TournamentBracket extends React.Component {
       tournamentInfo: this.props.location.state.tournamentInfo,
       uuid: this.props.location.state.uuid,
     });
-
-    // this.setState({
-    //   rounds: rounds,
-    // }); //remove once ws bracket data works
     this.createWebsocket();
   }
 
@@ -42,11 +38,13 @@ class TournamentBracket extends React.Component {
       console.log("Tournament WS connected");
     };
 
-    ws.onmessage = (e) => {
+    ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if ("bracket" in data) {
+        console.log(data);
         // this.setState({ rounds: rounds });
-        this.setState({ rounds: data.bracket });
+        await this.setState({ rounds: data.bracket });
+        this.checkForWin(this.state.rounds);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
         console.log("starting round");
@@ -62,18 +60,18 @@ class TournamentBracket extends React.Component {
   };
 
   startRound = () => {
-    //this.checkForWin(this.state.rounds);
     if (this.state.winner) {
       return <Winner winner={this.state.winner} />;
     }
     if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
-
+      console.log(seed);
       return (
         <GamePage
-          seed={seed}
+          seedId={seed}
           opponent={opponent}
           player={player}
+          round={this.state.currentRound}
           tournamentInfo={this.state.tournamentInfo}
           tournamentWs={this.state.ws}
           updatePlayerLost={this.updatePlayerLost} //call if player has lost
@@ -97,7 +95,7 @@ class TournamentBracket extends React.Component {
     });
     const player = this.getPlayer(playerMatch[0].teams);
     const opponent = this.getOpponent(playerMatch[0].teams);
-    const result = [playerMatch.id, player, opponent];
+    const result = [playerMatch[0].id, player, opponent];
     return result;
   };
 
@@ -126,15 +124,18 @@ class TournamentBracket extends React.Component {
     });
   };
 
-  checkForWin(rounds) {
+  checkForWin = (rounds) => {
     //this would need to change if there are more than one rounds in each bracket
+
     const finals = rounds[rounds.length - 1].seeds[0];
-    const winner =
-      finals.score[0] > finals.score[1]
-        ? finals.teams[0].name
-        : finals.teams[1].name;
-    this.setState({ winner });
-  }
+    if (finals.score[0] !== 0 || finals.score[1] !== 0) {
+      const winner =
+        finals.score[0] > finals.score[1]
+          ? finals.teams[0].name
+          : finals.teams[1].name;
+      this.setState({ winner: winner });
+    }
+  };
 
   render() {
     return (

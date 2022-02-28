@@ -11,6 +11,7 @@ class CTButton extends React.Component {
     super(props);
     this.state = {
       playerName: "",
+      playerColour: "#fff",
     };
   }
 
@@ -44,10 +45,10 @@ class CTButton extends React.Component {
               playerName={this.props.playerName}
             />
             <ColourForm
-              updatePlayerColour={this.updatePlayerColour}
-              playerColour={this.state.playerColour}
+              updatePlayerColour={this.props.updatePlayerColour}
+              playerColour={this.props.playerColour}
             />
-            {/* <Modal.Footer> */}
+
             <Link to="/create-tournament" onClick={this.handleSubmit}>
               <Button
                 className="example"
@@ -59,7 +60,6 @@ class CTButton extends React.Component {
                 Start Game
               </Button>
             </Link>
-            {/* </Modal.Footer> */}
           </Form>
         </Modal.Body>
       </Modal>

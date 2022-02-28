@@ -7,21 +7,14 @@ import Winner from "./Components/WinnerPage/Winner";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 import GamePage from "./Components/GamePage/GamePage";
 import { Switch, Route } from "react-router-dom";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class App extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
   constructor(props) {
     super(props);
-    const { cookies } = props;
     this.state = {
       playerName: "",
-      playerColour: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
-      sessionId: cookies.get("sessionId") || "",
+      playerColour: "#fff",
+      tournamentId: "",
     };
   }
 
@@ -33,11 +26,15 @@ class App extends React.Component {
     this.setState({ playerColour: playerColour.hex });
   };
 
+  updateTournamentId = (tournamentId) => {
+    this.setState({ tournamentId: tournamentId });
+  };
+
   render() {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby uuid={this.state.sessionId} />
+          <Lobby />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament playerName={this.state.playerName} />
@@ -52,6 +49,8 @@ class App extends React.Component {
             playerName={this.state.playerName}
             updatePlayerColour={this.updatePlayerColour}
             playerColour={this.state.playerColour}
+            updateTournamentId={this.updateTournamentId}
+            tournamentId={this.state.tournamentId}
           />
         </Route>
       </Switch>
@@ -59,4 +58,4 @@ class App extends React.Component {
   }
 }
 
-export default withCookies(App);
+export default App;

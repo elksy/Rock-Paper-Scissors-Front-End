@@ -4,13 +4,13 @@ import Options from "./Options.js";
 import "./lobby.css";
 import { Redirect } from "react-router-dom";
 import TournamentInfo from "./TournamentInfo.js";
-// import { v4 } from "https://deno.land/std/uuid/mod.ts";
 
 class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       validLobby: true,
+      uuid: "",
       ws: "",
       tournamentInfo: {},
       players: [],
@@ -19,8 +19,12 @@ class Lobby extends React.Component {
   }
 
   async componentDidMount() {
-    if (this.props.uuid) {
-      this.setState({ uuid: this.props.uuid });
+    const cookies = document.cookie;
+    const re = /sessionId=(.*);?/;
+    if (re.test(cookies)) {
+      const uuid = cookies.match(re)[1];
+      console.log(uuid);
+      this.setState({ uuid: uuid });
     } else {
       this.setState({ validLobby: false });
     }

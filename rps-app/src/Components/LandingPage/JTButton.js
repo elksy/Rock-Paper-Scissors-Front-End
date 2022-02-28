@@ -6,17 +6,10 @@ import NameForm from "./NameForm";
 import ColourForm from "./ColourForm";
 import TournamentIdForm from "./TournamentIdForm";
 import { Link } from "react-router-dom";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class JTButton extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
-
   constructor(props) {
     super(props);
-    const { cookies } = props;
     this.state = {
       playerName: "",
       playerColour: undefined,
@@ -25,7 +18,6 @@ class JTButton extends React.Component {
       redirect: false,
       disableButton: true,
       tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
 
@@ -33,14 +25,10 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    this.setState({ redirect: true, playerJoined: true });
-    const { playerName, playerColour } = this.state;
-    if (playerName && playerColour) {
-      this.setState({ [e.target.id]: e.target.value });
-    }
-    this.props.addPlayer(this.state.playerName, this.state.playerColour);
+    console.log("submit");
+    this.props.addPlayer();
   };
 
   viewModal = () => {
@@ -55,7 +43,7 @@ class JTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+          <Form className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -64,24 +52,23 @@ class JTButton extends React.Component {
               playerName={this.props.playerName}
             />
             <ColourForm
-              updatePlayerColour={this.updatePlayerColour}
-              playerColour={this.state.playerColour}
+              updatePlayerColour={this.props.updatePlayerColour}
+              playerColour={this.props.playerColour}
             />
-            <TournamentIdForm />
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Link to="/lobby">
+            <TournamentIdForm
+              updateTournamentId={this.props.updateTournamentId}
+              tournamentId={this.props.tournamentId}
+            />
             <Button
               className="example"
               variant="primary"
               type="submit"
-              disabled={this.state.disableButton}
+              // disabled={this.state.disableButton}
             >
               Start Game
             </Button>
-          </Link>
-        </Modal.Footer>
+          </Form>
+        </Modal.Body>
       </Modal>
     );
   };
@@ -104,4 +91,4 @@ class JTButton extends React.Component {
   }
 }
 
-export default withCookies(JTButton);
+export default JTButton;
