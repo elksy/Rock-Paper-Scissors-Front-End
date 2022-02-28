@@ -42,7 +42,11 @@ class CTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+          <Form
+            aria-label="form"
+            className="form"
+            onSubmit={(e) => this.handleSubmit(e)}
+          >
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, queryByAttribute } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
@@ -24,7 +24,7 @@ test("Landing page has buttons to play game and, join and create a tournament", 
   screen.getByRole("button", { name: "Create Tournament" });
 });
 
-test("Clicking on 'Create Tournament' button opens up Modal", () => {
+test("Clicking on 'Create Tournament' button opens up create tournament Modal", () => {
   const app = render(
     <Router>
       <App />
@@ -32,4 +32,9 @@ test("Clicking on 'Create Tournament' button opens up Modal", () => {
   );
   userEvent.click(screen.getByRole("button", { name: "Create Tournament" }));
   screen.getByRole("form");
+  screen.getByText("Choose a name and a colour!");
+  screen.getByTestId("username-input-area");
+
+  const getByClass = queryByAttribute.bind(null, "class");
+  getByClass(app.container, "colour-input");
 });
