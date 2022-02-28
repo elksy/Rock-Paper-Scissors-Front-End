@@ -11,7 +11,7 @@ class JTButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      disableButton: true,
+      // disableButton: true,
     };
   }
 
