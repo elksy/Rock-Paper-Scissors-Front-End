@@ -2,7 +2,7 @@ import React from "react";
 import "./createtournament.css";
 import TournamentOptions from "./TournamentOptions.js";
 import TournamentLink from "./TournamentLink.js";
-import Header from "../LandingPage/Header";
+import Header from "../Header/Header";
 import { Button } from "react-bootstrap";
 
 class CreateTournament extends React.Component {

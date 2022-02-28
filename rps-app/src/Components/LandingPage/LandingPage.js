@@ -1,11 +1,10 @@
 import React from "react";
 import "./LandingPage.css";
-import PGButton from "./PGButton";
-import JTButton from "./JTButton";
-import CTButton from "./CTButton";
-import Header from "./Header";
+import PGButton from "./ModalButtons/PGButton";
+import JTButton from "./ModalButtons/JTButton";
+import CTButton from "./ModalButtons/CTButton";
+import Header from "../Header/Header";
 import { Redirect } from "react-router-dom";
-
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -55,7 +54,6 @@ class LandingPage extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         {this.state.redirectToLobby && (
