@@ -25,6 +25,7 @@ class NameForm extends React.Component {
       <Form.Group className="mb-3">
         <Form.Label className="username-label">Username</Form.Label>
         <Form.Control
+          data-testid="username-input-area"
           className="username-input"
           type="text"
           placeholder="Enter nickname"
