@@ -6,6 +6,7 @@ import CTButton from "./CTButton";
 import Header from "./Header";
 import { Redirect } from "react-router-dom";
 
+
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +42,18 @@ class LandingPage extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
+  updatePlayerName = (playerName) => {
+    this.setState({ playerName: playerName });
+  };
+
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
+  };
+
+  updateTournamentId = (tournamentId) => {
+    this.setState({ tournamentId: tournamentId });
+  };
+
   render() {
 
     return (
@@ -51,21 +64,17 @@ class LandingPage extends React.Component {
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors</h1>
-
+            <Header showPlayerName={this.props.playerName} />
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.updatePlayerColour}
-                playerColour={this.state.playerColour}
               />
               <JTButton
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.props.updatePlayerColour}
-                playerColour={this.props.playerColour}
                 updateTournamentId={this.props.updateTournamentId}
                 tournamentId={this.props.tournamentId}
               />
@@ -73,10 +82,6 @@ class LandingPage extends React.Component {
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.props.updatePlayerColour}
-                playerColour={this.props.playerColour}
-                updateTournamentId={this.props.updateTournamentId}
-                tournamentId={this.props.tournamentId}
               />
             </div>
           </div>

@@ -11,13 +11,9 @@ class JTButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
       disableButton: true,
       tournamentId: "",
+
     };
   }
 
@@ -50,10 +46,7 @@ class JTButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.props.updatePlayerColour}
-              playerColour={this.props.playerColour}
-            />
+            <ColourForm />
             <TournamentIdForm
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}
@@ -66,6 +59,7 @@ class JTButton extends React.Component {
             >
               Start Game
             </Button>
+
           </Form>
         </Modal.Body>
       </Modal>
