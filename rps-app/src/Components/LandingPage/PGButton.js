@@ -8,29 +8,15 @@ import ColourForm from "./ColourForm";
 class PGButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
-      disableButton: true,
-      tournamentId: "",
-    };
+    this.state = {};
   }
 
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ redirect: true, playerJoined: true });
-    const { playerName, playerColour } = this.state;
-    if (playerName && playerColour) {
-      this.setState({ [e.target.id]: e.target.value });
-    }
-    this.props.addPlayer(this.state.playerName, this.state.playerColour);
+  handleSubmit = () => {
+    this.props.addPlayer();
   };
 
   viewModal = () => {
@@ -45,7 +31,7 @@ class PGButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+          <Form className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -53,19 +39,11 @@ class PGButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.updatePlayerColour}
-              playerColour={this.state.playerColour}
-            />
+            <ColourForm />
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="example"
-            variant="primary"
-            type="submit"
-            disabled={this.state.disableButton}
-          >
+          <Button className="example" variant="primary" type="submit">
             Start Game
           </Button>
         </Modal.Footer>

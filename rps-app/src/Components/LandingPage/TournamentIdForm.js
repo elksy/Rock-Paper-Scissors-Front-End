@@ -4,13 +4,11 @@ import Form from "react-bootstrap/Form";
 class TournamentIdForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tournamentId: "",
-    };
+    this.state = {};
   }
 
-  handleChange = (e) => {
-    this.setState({ playerJoined: e.target.value });
+  handleTournIdChange = (e) => {
+    this.props.updateTournamentId(e.target.value);
   };
 
   render() {
@@ -21,9 +19,9 @@ class TournamentIdForm extends React.Component {
           className="tournament-id-input"
           type="text"
           placeholder="Enter Tournament ID"
-          value={this.state.tournamentId}
+          value={this.props.tournamentId}
           id="tournament-id"
-          onChange={(e) => this.handleChange(e)}
+          onChange={this.handleTournIdChange}
         />
       </Form.Group>
     );

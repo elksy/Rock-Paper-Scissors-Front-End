@@ -9,17 +9,14 @@ import ColourForm from "./ColourForm";
 class CTButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: "",
-    };
+    this.state = {};
   }
 
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = (e) => {
-    console.log("submit");
+  handleSubmit = () => {
     this.props.addPlayer();
   };
 
@@ -43,11 +40,7 @@ class CTButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.updatePlayerColour}
-              playerColour={this.state.playerColour}
-            />
-            {/* <Modal.Footer> */}
+            <ColourForm />
             <Link to="/create-tournament" onClick={this.handleSubmit}>
               <Button
                 className="example"
@@ -59,7 +52,6 @@ class CTButton extends React.Component {
                 Start Game
               </Button>
             </Link>
-            {/* </Modal.Footer> */}
           </Form>
         </Modal.Body>
       </Modal>

@@ -10,8 +10,8 @@ class ColourForm extends React.Component {
     };
   }
 
-  handleColourChange = (colour) => {
-    this.props.updatePlayerColour(colour.target.value);
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
   };
 
   render() {
@@ -22,7 +22,7 @@ class ColourForm extends React.Component {
           className="colour-input"
           id="colour"
           color={this.state.playerColour}
-          onChange={this.handleColourChange}
+          onChange={this.updatePlayerColour}
           value={this.state.playerColour}
         />
       </Form.Group>

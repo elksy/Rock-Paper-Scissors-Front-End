@@ -4,9 +4,7 @@ import Form from "react-bootstrap/Form";
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: "",
-    };
+    this.state = {};
   }
 
   handleNameChange = (e) => {
@@ -15,7 +13,7 @@ class NameForm extends React.Component {
   };
 
   disableButton = () => {
-    if (this.state.playerName.length > 2) {
+    if (this.props.playerName.length > 2) {
       this.props.updateDisabledButton(false);
     } else {
       this.props.updateDisabledButton(true);
@@ -33,7 +31,7 @@ class NameForm extends React.Component {
           placeholder="Enter nickname"
           value={this.props.playerName}
           id="email"
-          onChange={(e) => this.handleNameChange(e)}
+          onChange={this.handleNameChange}
         />
       </Form.Group>
     );
