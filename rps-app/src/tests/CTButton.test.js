@@ -16,12 +16,11 @@ test("Clicking on 'Create Tournament' button opens up create tournament Modal", 
     </Router>
   );
   userEvent.click(screen.getByRole("button", { name: "Create Tournament" }));
-  screen.getByRole("form");
   screen.getByText("Choose a name and a colour!");
   screen.getByTestId("username-input-area");
 
-  const getByClass = queryByAttribute.bind(null, "class");
-  getByClass(app.container, "colour-input");
+  const tournamentIDSection = screen.queryByText(/Tournament ID/i);
+  expect(tournamentIDSection).not.toBeInTheDocument();
 });
 
 test("You can't create a tournament without a name", () => {
@@ -62,7 +61,7 @@ test("Create Tournament Page will have your inputted name and correct options to
   screen.getByRole("heading", { name: "Tournament Type:" });
 });
 
-test("Start tournament sends you to tournament lobby", async () => {
+test("Start tournament sends fetch request to server", async () => {
   const name = "hkmr";
   const { container } = render(
     <Router>
@@ -80,7 +79,4 @@ test("Start tournament sends you to tournament lobby", async () => {
   await userEvent.click(
     screen.getByRole("button", { name: "Start Tournament" })
   );
-
-  const linkTitle = screen.getByText(/Here Is Your Tournament Link!/i);
-  // expect(linkTitle).toBeInTheDocument();
 });
