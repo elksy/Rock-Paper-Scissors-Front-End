@@ -9,18 +9,14 @@ import ColourForm from "./ColourForm";
 class CTButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: "",
-      playerColour: "#fff",
-    };
+    this.state = {};
   }
 
   handleModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = (e) => {
-    console.log("submit");
+  handleSubmit = () => {
     this.props.addPlayer();
   };
 

@@ -6,27 +6,11 @@ import NameForm from "./NameForm";
 import ColourForm from "./ColourForm";
 import TournamentIdForm from "./TournamentIdForm";
 import { Link } from "react-router-dom";
-import { withCookies, Cookies } from "react-cookie";
-import { instanceOf } from "prop-types";
 
 class JTButton extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
-  };
-
   constructor(props) {
     super(props);
-    const { cookies } = props;
-    this.state = {
-      playerName: "",
-      playerColour: undefined,
-      showModal: false,
-      showJoinModal: false,
-      redirect: false,
-      disableButton: true,
-      tournamentId: "",
-      playerJoined: cookies.get("sessionId") ? true : false,
-    };
+    this.state = {};
   }
 
   handleModal = () => {
@@ -34,7 +18,6 @@ class JTButton extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log("submit");
     this.props.addPlayer();
   };
 
@@ -71,12 +54,7 @@ class JTButton extends React.Component {
               to={`/lobby/${this.props.tournamentId}`}
               onClick={this.handleSubmit}
             >
-              <Button
-                className="example"
-                variant="primary"
-                type="submit"
-                // disabled={this.state.disableButton}
-              >
+              <Button className="example" variant="primary" type="submit">
                 Start Game
               </Button>
             </Link>
@@ -104,4 +82,4 @@ class JTButton extends React.Component {
   }
 }
 
-export default withCookies(JTButton);
+export default JTButton;
