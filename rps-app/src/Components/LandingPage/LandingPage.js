@@ -70,8 +70,8 @@ class LandingPage extends React.Component {
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.updatePlayerColour}
-                playerColour={this.state.playerColour}
+                updatePlayerColour={this.props.updatePlayerColour}
+                playerColour={this.props.playerColour}
               />
               <JTButton
                 addPlayer={this.addPlayer}

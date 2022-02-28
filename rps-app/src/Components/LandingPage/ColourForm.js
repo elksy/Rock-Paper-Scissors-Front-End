@@ -21,7 +21,7 @@ class ColourForm extends React.Component {
           id="colour"
           playerColour={this.props.playerColour}
           onChange={this.handleColourChange}
-          value={this.props.playerColour}
+          // value={this.props.playerColour}
         />
       </Form.Group>
     );
