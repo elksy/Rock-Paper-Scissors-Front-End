@@ -128,6 +128,7 @@ class Lobby extends React.Component {
   };
 
   render() {
+
     // if tournament has started redirect to the bracket page
     return (
       <div>

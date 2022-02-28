@@ -73,7 +73,7 @@ class TournamentBracket extends React.Component {
         <GamePage
           seed={seed}
           opponent={opponent}
-          playerName={player}
+          player={player}
           tournamentInfo={this.state.tournamentInfo}
           tournamentWs={this.state.ws}
           updatePlayerLost={this.updatePlayerLost} //call if player has lost

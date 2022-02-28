@@ -26,7 +26,6 @@ class App extends React.Component {
 
   updatePlayerName = (playerName) => {
     this.setState({ playerName: playerName });
-    console.log(this.state.playerName);
   };
 
   updatePlayerColour = (playerColour) => {
