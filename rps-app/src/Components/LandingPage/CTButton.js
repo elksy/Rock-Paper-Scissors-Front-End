@@ -40,11 +40,7 @@ class CTButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.props.updatePlayerColour}
-              playerColour={this.props.playerColour}
-            />
-
+            <ColourForm />
             <Link to="/create-tournament" onClick={this.handleSubmit}>
               <Button
                 className="example"
