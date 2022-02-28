@@ -13,7 +13,7 @@ class GamePage extends React.Component {
     this.state = {
       ws: "",
       playerChoice: "",
-      opponentChoice: "rock",
+      opponentChoice: "",
       playerScore: 0,
       opponentScore: 0,
       roundOutcome: "",
@@ -59,7 +59,12 @@ class GamePage extends React.Component {
     }
   }
   sendPlayerChoice = () => {
-    this.state.ws.send({ choice: this.state.playerChoice });
+    this.state.ws.send(
+      JSON.stringify({
+        choice: this.state.playerChoice,
+        opponent: this.props.opponent.uuid,
+      })
+    );
     // console.log(this.state.playerChoice);
   };
 

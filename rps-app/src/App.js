@@ -21,6 +21,7 @@ class App extends React.Component {
       playerName: "",
       playerColour: "",
       playerJoined: cookies.get("sessionId") ? true : false,
+      sessionId: cookies.get("sessionId") || "",
     };
   }
 
@@ -36,7 +37,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby tournamentId={5} />
+          <Lobby uuid={this.state.sessionId} />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament playerName={this.state.playerName} />

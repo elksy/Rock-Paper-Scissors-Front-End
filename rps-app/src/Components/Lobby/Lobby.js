@@ -19,9 +19,8 @@ class Lobby extends React.Component {
   }
 
   async componentDidMount() {
-    const uuid = this.getUuidFromCookies(); // From cookies
-    if (uuid) {
-      this.setState({ uuid: uuid });
+    if (this.props.uuid) {
+      this.setState({ uuid: this.props.uuid });
     } else {
       this.setState({ validLobby: false });
     }
@@ -42,10 +41,6 @@ class Lobby extends React.Component {
       }
     }
   }
-
-  getUuidFromCookies = () => {
-    return Math.floor(Math.random() * 10000 + 1); //change to get from cookies instead
-  };
 
   getTournamentInfo = async (id) => {
     const response = await fetch(
@@ -128,7 +123,6 @@ class Lobby extends React.Component {
   };
 
   render() {
-
     // if tournament has started redirect to the bracket page
     return (
       <div>

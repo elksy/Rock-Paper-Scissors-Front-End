@@ -6,7 +6,6 @@ class Options extends React.Component {
     this.props.ws.send(JSON.stringify({ message: "Start Game" }));
   };
   render() {
-    console.log(this.props.numberOfPlayers);
     return (
       <div className="options">
         <div className="buttons">
