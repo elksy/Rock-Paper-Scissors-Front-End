@@ -38,3 +38,15 @@ test("Clicking on 'Create Tournament' button opens up create tournament Modal", 
   const getByClass = queryByAttribute.bind(null, "class");
   getByClass(app.container, "colour-input");
 });
+
+test("You can input name and colour and go on to Create Tournament page", () => {
+  const { container } = render(
+    <Router>
+      <App />
+    </Router>
+  );
+  userEvent.click(screen.getByRole("button", { name: "Create Tournament" }));
+
+  userEvent.type(screen.getByTestId("username-input-area"), "hkmr");
+  console.log(container.querySelector(".colour-input"));
+});

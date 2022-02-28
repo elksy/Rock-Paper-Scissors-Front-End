@@ -19,15 +19,8 @@ class CTButton extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ redirect: true, playerJoined: true });
-
-    const { playerName, playerColour } = this.state;
-    if (playerName && playerColour) {
-      this.setState({ [e.target.id]: e.target.value });
-    }
-    this.props.updatePlayerName(this.state.playerName);
-    console.log(this.state.playerName);
+    console.log("submit");
+    this.props.addPlayer();
   };
 
   viewModal = () => {
@@ -42,11 +35,7 @@ class CTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form
-            aria-label="form"
-            className="form"
-            onSubmit={(e) => this.handleSubmit(e)}
-          >
+          <Form aria-label="form" className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -58,23 +47,21 @@ class CTButton extends React.Component {
               updatePlayerColour={this.updatePlayerColour}
               playerColour={this.state.playerColour}
             />
+            {/* <Modal.Footer> */}
+            <Link to="/create-tournament" onClick={this.handleSubmit}>
+              <Button
+                className="example"
+                variant="primary"
+                type="button"
+
+                // disabled={is.props.disableButton}
+              >
+                Start Game
+              </Button>
+            </Link>
+            {/* </Modal.Footer> */}
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Link to="/create-tournament">
-            <Button
-              className="example"
-              variant="primary"
-              type="submit"
-              onSubmit={(e) => {
-                this.handleSubmit(e);
-              }}
-              disabled={this.state.disableButton}
-            >
-              Start Game
-            </Button>
-          </Link>
-        </Modal.Footer>
       </Modal>
     );
   };
