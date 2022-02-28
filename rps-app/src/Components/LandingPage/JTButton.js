@@ -10,7 +10,9 @@ import { Link } from "react-router-dom";
 class JTButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disableButton: true,
+    };
   }
 
   handleModal = () => {
@@ -46,12 +48,16 @@ class JTButton extends React.Component {
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}
             />
-
             <Link
               to={`/lobby/${this.props.tournamentId}`}
               onClick={this.handleSubmit}
             >
-              <Button className="example" variant="primary" type="submit">
+              <Button
+                className="example"
+                variant="primary"
+                type="submit"
+                disabled={this.state.disableButton}
+              >
                 Start Game
               </Button>
             </Link>
