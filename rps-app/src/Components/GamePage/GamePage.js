@@ -127,14 +127,14 @@ class GamePage extends React.Component {
         </div>
         <div className="game-wrapper">
           <Player
-            playerName={this.props.playerName}
+            name={this.props.player.name}
             setSelectedChoice={(word) => this.setSelectedChoice(word)}
           />
 
           <div className="vertical-line"></div>
 
           <Opponent
-            name={this.props.opponent}
+            name={this.props.opponent.name}
             choice={this.state.opponentChoice}
           />
         </div>

@@ -21,7 +21,9 @@ class LandingPage extends React.Component {
     };
   }
 
-  async addPlayer(playerName, playerColour) {
+  addPlayer = async (playerName, playerColour) => {
+    console.log("Add Player");
+    console.log(this.props.playerName, this.props.playerColour);
     const endpoint = `http${
       process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
     }://${process.env.REACT_APP_WS_ENDPOINT}/sessions`;
@@ -37,11 +39,10 @@ class LandingPage extends React.Component {
       }),
     });
     return response;
-  }
+  };
 
   playerSession = () => {
     const { cookies } = this.props;
-    console.log("logged");
     if (this.state.playerJoined) {
       cookies.remove("sessionId");
       cookies.remove("playerName");
@@ -66,21 +67,21 @@ class LandingPage extends React.Component {
 
             <div className="menu-button-container">
               <PGButton
-                playerSession={() => this.playerSession()}
+                addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
                 updatePlayerColour={this.updatePlayerColour}
                 playerColour={this.state.playerColour}
               />
               <JTButton
-                playerSession={() => this.playerSession()}
+                addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
                 updatePlayerColour={this.updatePlayerColour}
                 playerColour={this.state.playerColour}
               />
               <CTButton
-                playerSession={() => this.playerSession()}
+                addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
                 updatePlayerColour={this.updatePlayerColour}
