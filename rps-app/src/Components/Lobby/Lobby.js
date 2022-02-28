@@ -23,7 +23,6 @@ class Lobby extends React.Component {
     const re = /sessionId=(.*);?/;
     if (re.test(cookies)) {
       const uuid = cookies.match(re)[1];
-      console.log(uuid);
       this.setState({ uuid: uuid });
     } else {
       this.setState({ validLobby: false });
@@ -69,10 +68,10 @@ class Lobby extends React.Component {
 
     ws.onopen = () => {
       const playerData = {
-        name: this.props.name || "Harry",
+        name: this.props.name || this.state.uuid.substring(0, 4),
         uuid: this.state.uuid,
         bgColor: this.props.colour || "blue",
-        color: this.props.colour || "black",
+        textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
     };

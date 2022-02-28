@@ -33,7 +33,6 @@ class LandingPage extends React.Component {
       }),
     });
     if (response.status === 200) {
-      console.log("its all okay");
       this.setState({ redirectToLobby: true });
     }
   };
@@ -43,7 +42,6 @@ class LandingPage extends React.Component {
   };
 
   render() {
-    console.log(`/lobby/${this.props.tournamentId}`);
 
     return (
       <div>

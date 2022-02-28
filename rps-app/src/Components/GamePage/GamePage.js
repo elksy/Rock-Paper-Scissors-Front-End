@@ -52,7 +52,6 @@ class GamePage extends React.Component {
       !this.state.roundOutcome
     ) {
       this.calculateScore();
-      console.log("calculate");
     }
   }
   sendPlayerChoice = () => {
@@ -68,7 +67,6 @@ class GamePage extends React.Component {
         opponent: this.props.opponent.uuid,
       })
     );
-    // console.log(this.state.playerChoice);
   };
 
   setSelectedChoice = (word) => {

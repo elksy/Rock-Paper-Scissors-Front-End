@@ -27,7 +27,6 @@ class JTButton extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit");
     this.props.addPlayer();
   };
 

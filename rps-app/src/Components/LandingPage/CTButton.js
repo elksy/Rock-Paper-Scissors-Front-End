@@ -20,7 +20,6 @@ class CTButton extends React.Component {
   };
 
   handleSubmit = (e) => {
-    console.log("submit");
     this.props.addPlayer();
   };
 

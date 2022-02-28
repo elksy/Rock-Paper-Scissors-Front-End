@@ -43,7 +43,7 @@ class TournamentBracket extends React.Component {
       if ("bracket" in data) {
         console.log(data);
         // this.setState({ rounds: rounds });
-        await this.setState({ rounds: data.bracket });
+        this.setState({ rounds: data.bracket });
         this.checkForWin(this.state.rounds);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
@@ -65,7 +65,6 @@ class TournamentBracket extends React.Component {
     }
     if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
-      console.log(seed);
       return (
         <GamePage
           seedId={seed}
@@ -80,7 +79,7 @@ class TournamentBracket extends React.Component {
         />
       );
     } else {
-      <DisplayBracket rounds={this.state.rounds} />;
+      this.setState({ startRound: false });
     }
   };
 
