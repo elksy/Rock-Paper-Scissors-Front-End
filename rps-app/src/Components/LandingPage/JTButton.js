@@ -33,14 +33,9 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ redirect: true, playerJoined: true });
-    const { playerName, playerColour } = this.state;
-    if (playerName && playerColour) {
-      this.setState({ [e.target.id]: e.target.value });
-    }
-    this.props.addPlayer(this.state.playerName, this.state.playerColour);
+  handleSubmit = () => {
+    console.log("submit");
+    this.props.addPlayer();
   };
 
   viewModal = () => {
@@ -55,7 +50,7 @@ class JTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+          <Form className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -64,24 +59,29 @@ class JTButton extends React.Component {
               playerName={this.props.playerName}
             />
             <ColourForm
-              updatePlayerColour={this.updatePlayerColour}
-              playerColour={this.state.playerColour}
+              updatePlayerColour={this.props.updatePlayerColour}
+              playerColour={this.props.playerColour}
             />
-            <TournamentIdForm />
+            <TournamentIdForm
+              updateTournamentId={this.props.updateTournamentId}
+              tournamentId={this.props.tournamentId}
+            />
+
+            <Link
+              to={`/lobby/${this.props.tournamentId}`}
+              onClick={this.handleSubmit}
+            >
+              <Button
+                className="example"
+                variant="primary"
+                type="submit"
+                // disabled={this.state.disableButton}
+              >
+                Start Game
+              </Button>
+            </Link>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Link to="/lobby">
-            <Button
-              className="example"
-              variant="primary"
-              type="submit"
-              disabled={this.state.disableButton}
-            >
-              Start Game
-            </Button>
-          </Link>
-        </Modal.Footer>
       </Modal>
     );
   };
