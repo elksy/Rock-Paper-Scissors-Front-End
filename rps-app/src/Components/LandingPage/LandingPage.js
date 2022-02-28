@@ -6,6 +6,7 @@ import CTButton from "./CTButton";
 import Header from "./Header";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
+import { CirclePicker } from "react-color";
 
 class LandingPage extends React.Component {
   static propTypes = {
@@ -15,9 +16,6 @@ class LandingPage extends React.Component {
     const { cookies } = props;
     super(props);
     this.state = {
-      playerName: "",
-      playerColour: "#fff",
-      tournamentId: "",
       showModal: false,
       showJoinModal: false,
       playerJoined: cookies.get("sessionId") ? true : false,
@@ -83,20 +81,20 @@ class LandingPage extends React.Component {
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.updatePlayerName}
-                playerName={this.state.playerName}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
               />
               <JTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.updatePlayerName}
-                playerName={this.state.playerName}
-                updateTournamentId={this.updateTournamentId}
-                tournamentId={this.state.tournamentId}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
+                updateTournamentId={this.props.updateTournamentId}
+                tournamentId={this.props.tournamentId}
               />
               <CTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.updatePlayerName}
-                playerName={this.state.playerName}
+                updatePlayerName={this.props.updatePlayerName}
+                playerName={this.props.playerName}
               />
             </div>
           </div>

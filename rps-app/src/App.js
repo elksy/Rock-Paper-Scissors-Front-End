@@ -5,12 +5,34 @@ import CreateTournament from "./Components/CreateTournament/CreateTournament.js"
 import LandingPage from "./Components/LandingPage/LandingPage";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 import { Switch, Route } from "react-router-dom";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 class App extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
   constructor(props) {
     super(props);
-    this.state = {};
+    const { cookies } = props;
+    this.state = {
+      playerName: "",
+      tournamentId: "",
+      playerJoined: cookies.get("sessionId") ? true : false,
+    };
   }
+
+  updatePlayerName = (playerName) => {
+    this.setState({ playerName: playerName });
+  };
+
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
+  };
+
+  updateTournamentId = (tournamentId) => {
+    this.setState({ tournamentId: tournamentId });
+  };
 
   render() {
     return (
@@ -26,11 +48,18 @@ class App extends React.Component {
           render={(props) => <TournamentBracket {...props} />}
         />
         <Route path="/">
-          <LandingPage />
+          <LandingPage
+            updatePlayerName={this.updatePlayerName}
+            playerName={this.state.playerName}
+            updatePlayerColour={this.updatePlayerColour}
+            playerColour={this.state.playerColour}
+            updateTournamentId={this.updateTournamentId}
+            tournamentId={this.state.tournamentId}
+          />
         </Route>
       </Switch>
     );
   }
 }
 
-export default App;
+export default withCookies(App);
