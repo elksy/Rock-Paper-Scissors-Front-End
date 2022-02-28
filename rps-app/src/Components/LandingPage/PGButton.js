@@ -8,7 +8,9 @@ import ColourForm from "./ColourForm";
 class PGButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disableButton: true,
+    };
   }
 
   handleModal = () => {
@@ -43,7 +45,12 @@ class PGButton extends React.Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="example" variant="primary" type="submit">
+          <Button
+            className="example"
+            variant="primary"
+            type="submit"
+            disabled={this.state.disableButton}
+          >
             Start Game
           </Button>
         </Modal.Footer>
