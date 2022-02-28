@@ -41,10 +41,7 @@ class JTButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.props.updatePlayerColour}
-              playerColour={this.props.playerColour}
-            />
+            <ColourForm />
             <TournamentIdForm
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}

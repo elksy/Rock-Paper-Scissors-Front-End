@@ -39,10 +39,7 @@ class PGButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm
-              updatePlayerColour={this.props.updatePlayerColour}
-              playerColour={this.props.playerColour}
-            />
+            <ColourForm />
           </Form>
         </Modal.Body>
         <Modal.Footer>

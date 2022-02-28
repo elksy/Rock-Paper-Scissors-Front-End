@@ -6,7 +6,6 @@ import CTButton from "./CTButton";
 import Header from "./Header";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
-import { CirclePicker } from "react-color";
 
 class LandingPage extends React.Component {
   static propTypes = {
@@ -66,14 +65,6 @@ class LandingPage extends React.Component {
     this.setState({ playerName: playerName });
   };
 
-  // updatePlayerColour = (playerColour) => {
-  //   this.setState({ playerColour: playerColour.hex });
-  // };
-
-  // handleChangeComplete = (color) => {
-  //   this.setState({ background: color.hex });
-  // };
-
   updatePlayerColour = (playerColour) => {
     this.setState({ playerColour: playerColour.hex });
   };
@@ -89,36 +80,23 @@ class LandingPage extends React.Component {
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors</h1>
             <Header showPlayerName={this.props.playerName} />
-            <CirclePicker
-              className="colour-input"
-              id="colour"
-              color={this.state.playerColour}
-              onChangeComplete={this.updatePlayerColour}
-            />
-
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
-                updatePlayerColour={this.handleChangeComplete}
-                playerColour={this.state.background}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
               />
               <JTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
-                updatePlayerColour={this.handleChangeComplete}
-                playerColour={this.state.background}
-                updateTournamentId={this.props.updateTournamentId}
-                tournamentId={this.props.tournamentId}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
+                updateTournamentId={this.updateTournamentId}
+                tournamentId={this.state.tournamentId}
               />
               <CTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
-                updatePlayerColour={this.handleChangeComplete}
-                playerColour={this.state.background}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
               />
             </div>
           </div>
