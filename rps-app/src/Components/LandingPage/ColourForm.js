@@ -21,9 +21,9 @@ class ColourForm extends React.Component {
         <CirclePicker
           className="colour-input"
           id="colour"
-          color={this.state.playerColour}
+          color={this.props.playerColour}
           onChange={this.handleColourChange}
-          value={this.state.playerColour}
+          value={this.props.playerColour}
         />
       </Form.Group>
     );
