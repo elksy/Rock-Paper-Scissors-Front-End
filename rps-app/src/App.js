@@ -16,24 +16,9 @@ class App extends React.Component {
     super(props);
     const { cookies } = props;
     this.state = {
-      playerName: "",
-      playerColour: "#fff",
-      tournamentId: "",
       playerJoined: cookies.get("sessionId") ? true : false,
     };
   }
-
-  updatePlayerName = (playerName) => {
-    this.setState({ playerName: playerName });
-  };
-
-  updatePlayerColour = (playerColour) => {
-    this.setState({ playerColour: playerColour.hex });
-  };
-
-  updateTournamentId = (tournamentId) => {
-    this.setState({ tournamentId: tournamentId });
-  };
 
   render() {
     return (

@@ -5,11 +5,13 @@ import { CirclePicker } from "react-color";
 class ColourForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      playerColour: "#fff",
+    };
   }
 
-  handleColourChange = (e) => {
-    this.props.updatePlayerColour(e.target.value);
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
   };
 
   render() {
@@ -19,9 +21,9 @@ class ColourForm extends React.Component {
         <CirclePicker
           className="colour-input"
           id="colour"
-          playerColour={this.props.playerColour}
-          onChange={this.handleColourChange}
-          // value={this.props.playerColour}
+          color={this.state.playerColour}
+          onChange={this.updatePlayerColour}
+          value={this.state.playerColour}
         />
       </Form.Group>
     );

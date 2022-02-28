@@ -6,6 +6,7 @@ import CTButton from "./CTButton";
 import Header from "./Header";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
+import { CirclePicker } from "react-color";
 
 class LandingPage extends React.Component {
   static propTypes = {
@@ -15,6 +16,9 @@ class LandingPage extends React.Component {
     const { cookies } = props;
     super(props);
     this.state = {
+      playerName: "",
+      playerColour: "#fff",
+      tournamentId: "",
       showModal: false,
       showJoinModal: false,
       playerJoined: cookies.get("sessionId") ? true : false,
@@ -58,6 +62,26 @@ class LandingPage extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
+  updatePlayerName = (playerName) => {
+    this.setState({ playerName: playerName });
+  };
+
+  // updatePlayerColour = (playerColour) => {
+  //   this.setState({ playerColour: playerColour.hex });
+  // };
+
+  // handleChangeComplete = (color) => {
+  //   this.setState({ background: color.hex });
+  // };
+
+  updatePlayerColour = (playerColour) => {
+    this.setState({ playerColour: playerColour.hex });
+  };
+
+  updateTournamentId = (tournamentId) => {
+    this.setState({ tournamentId: tournamentId });
+  };
+
   render() {
     return (
       <div>
@@ -65,20 +89,27 @@ class LandingPage extends React.Component {
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors</h1>
             <Header showPlayerName={this.props.playerName} />
+            <CirclePicker
+              className="colour-input"
+              id="colour"
+              color={this.state.playerColour}
+              onChangeComplete={this.updatePlayerColour}
+            />
+
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.props.updatePlayerColour}
-                playerColour={this.props.playerColour}
+                updatePlayerColour={this.handleChangeComplete}
+                playerColour={this.state.background}
               />
               <JTButton
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.props.updatePlayerColour}
-                playerColour={this.props.playerColour}
+                updatePlayerColour={this.handleChangeComplete}
+                playerColour={this.state.background}
                 updateTournamentId={this.props.updateTournamentId}
                 tournamentId={this.props.tournamentId}
               />
@@ -86,10 +117,8 @@ class LandingPage extends React.Component {
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
-                updatePlayerColour={this.props.updatePlayerColour}
-                playerColour={this.props.playerColour}
-                updateTournamentId={this.props.updateTournamentId}
-                tournamentId={this.props.tournamentId}
+                updatePlayerColour={this.handleChangeComplete}
+                playerColour={this.state.background}
               />
             </div>
           </div>
