@@ -8,12 +8,12 @@ class NameForm extends React.Component {
   }
 
   handleNameChange = (e) => {
-    this.disableButton();
     this.props.updatePlayerName(e.target.value);
+    this.disableButton(e.target.value);
   };
 
-  disableButton = () => {
-    if (this.props.playerName.length > 2) {
+  disableButton = (playerName) => {
+    if (playerName.length > 2) {
       this.props.updateDisabledButton(false);
     } else {
       this.props.updateDisabledButton(true);

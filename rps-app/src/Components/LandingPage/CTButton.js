@@ -9,7 +9,9 @@ import ColourForm from "./ColourForm";
 class CTButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      disableButton: true,
+    };
   }
 
   handleModal = () => {
@@ -46,8 +48,7 @@ class CTButton extends React.Component {
                 className="example"
                 variant="primary"
                 type="button"
-
-                // disabled={is.props.disableButton}
+                disabled={this.state.disableButton}
               >
                 Start Game
               </Button>
