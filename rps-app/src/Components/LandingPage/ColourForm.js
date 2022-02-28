@@ -8,8 +8,8 @@ class ColourForm extends React.Component {
     this.state = {};
   }
 
-  handleColourChange = (colour) => {
-    this.props.updatePlayerColour(colour.target.value);
+  handleColourChange = (e) => {
+    this.props.updatePlayerColour(e.target.value);
   };
 
   render() {
@@ -19,7 +19,7 @@ class ColourForm extends React.Component {
         <CirclePicker
           className="colour-input"
           id="colour"
-          color={this.props.playerColour}
+          playerColour={this.props.playerColour}
           onChange={this.handleColourChange}
           value={this.props.playerColour}
         />
