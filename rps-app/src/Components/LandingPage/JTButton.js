@@ -31,10 +31,10 @@ class JTButton extends React.Component {
           this.handleModal();
         }}
       >
-        <Modal.Header closeButton>
+        {/* <Modal.Header closeButton>
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body> */}
           <Form className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
