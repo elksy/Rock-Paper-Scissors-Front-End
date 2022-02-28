@@ -64,7 +64,7 @@ class LandingPage extends React.Component {
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors</h1>
-
+            <Header showPlayerName={this.props.playerName} />
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}

@@ -4,9 +4,7 @@ import Form from "react-bootstrap/Form";
 class TournamentIdForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tournamentId: "",
-    };
+    this.state = {};
   }
 
   handleTournIdChange = (e) => {
