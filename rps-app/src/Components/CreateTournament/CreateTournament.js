@@ -69,7 +69,7 @@ class CreateTournament extends React.Component {
     return (
       <div className="create-tournament-page">
         <header>
-          <h1>Create Tournament</h1>
+          <h1 className="create-tourn-title">Create Tournament</h1>
           <Header />
         </header>
         <TournamentOptions

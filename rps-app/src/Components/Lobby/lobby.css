@@ -4,21 +4,19 @@
   align-items: flex-start;
   margin-top: 1rem;
 }
-
 .players {
-  border: 1px solid black;
   width: 30%;
   height: 40rem;
+  background-color: white;
+  border-radius: 10px;
 }
-
 .player {
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   padding-left: 2rem;
   margin-bottom: 1rem;
+  border-radius: 5px;
 }
-
 .rhs {
   width: 50%;
 }
@@ -26,47 +24,56 @@
   display: flex;
   justify-content: space-between;
 }
-
 .tournament-info {
-  border: 1px solid black;
   width: 45%;
   height: 30rem;
   margin-bottom: 2rem;
   font-size: 12pt;
   font-weight: bold;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
 }
-
 .chat {
-  border: 1px solid black;
   width: 45%;
   height: 30rem;
   margin-bottom: 2rem;
+  background-color: white;
+  border-radius: 10px;
 }
-
 .options {
-  border: 1px solid black;
   height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color: white;
+  border-radius: 10px;
+  padding-right: 45px;
 }
-
 .buttons {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
-
 #root > div > div > div > div.rhs > div.options > div > button.btn.btn-lg {
   width: 20rem;
 }
-
 .tournament-id {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
-
+.players-div {
+  padding: 10px;
+  border-radius: 10px;
+}
+.lobby-title {
+  border-radius: 10px;
+}
+.lobby-div {
+  border-radius: 10px;
+  padding: 1rem 6rem 1rem;
+}
 #copy-btn {
   width: 3rem;
 }
