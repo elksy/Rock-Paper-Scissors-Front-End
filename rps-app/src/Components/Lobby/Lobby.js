@@ -38,8 +38,8 @@ class Lobby extends React.Component {
       // Need to also check if the user has a cookies set with a sessionId
       console.log(tournamentInfo);
       if (tournamentInfo.valid) {
-        await this.setState({ tournamentInfo: tournamentInfo.data });
-        this.createWebsocket();
+        this.setState({ tournamentInfo: tournamentInfo.data });
+        this.createWebsocket(tournamentInfo.data);
       } else {
         this.setState({ validLobby: false });
       }
@@ -62,14 +62,12 @@ class Lobby extends React.Component {
     return await response.json();
   };
 
-  createWebsocket = () => {
-    console.log(this.state.tournamentInfo);
+  createWebsocket = (tournamentInfo) => {
+    console.log(tournamentInfo);
     const ws = new WebSocket(
       `ws${
         process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
-      }://${process.env.REACT_APP_WS_ENDPOINT}/wslobby/${
-        this.state.tournamentInfo.id
-      }`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/wslobby/${tournamentInfo.id}`
     );
 
     ws.onopen = () => {
