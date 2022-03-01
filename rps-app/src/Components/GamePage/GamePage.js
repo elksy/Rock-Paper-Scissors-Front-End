@@ -60,7 +60,7 @@ class GamePage extends React.Component {
     let randChoice = "";
     if (!this.state.playerChoice) {
       const choices = ["rock", "paper", "scissors"];
-      randChoice = Math.floor(Math.random() * choices.length);
+      randChoice = choices[Math.floor(Math.random() * choices.length)];
     }
 
     this.state.ws.send(

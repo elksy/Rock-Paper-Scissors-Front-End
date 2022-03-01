@@ -83,14 +83,17 @@ class TournamentBracket extends React.Component {
       );
     } else {
       const [player, opponent] = this.getSpectateMatchInfo();
-      <SpectateGame
-        seed={this.state.spectateGame}
-        player={player}
-        opponent={opponent}
-        tournamentInfo={this.state.tournamentInfo}
-        endSpectating={this.endSpectating}
-        tournamentId={this.state.tournamentInfo.id}
-      />;
+      console.log(player, opponent);
+      return (
+        <SpectateGame
+          seed={this.state.spectateGame}
+          player={player}
+          opponent={opponent}
+          tournamentInfo={this.state.tournamentInfo}
+          endSpectating={this.endSpectating}
+          tournamentId={this.state.tournamentInfo.id}
+        />
+      );
     }
   };
 
@@ -125,10 +128,10 @@ class TournamentBracket extends React.Component {
   getSpectateMatchInfo = () => {
     const seeds = this.state.rounds[this.state.currentRound].seeds;
     const match = seeds.filter((seed) => {
-      return seed.id === this.state.gameSelected;
+      return seed.id === this.state.spectateGame;
     });
-    const player = match.teams[0];
-    const opponent = match.teams[1];
+    const player = match[0].teams[0];
+    const opponent = match[0].teams[1];
     return [player, opponent];
   };
 
@@ -197,7 +200,6 @@ class TournamentBracket extends React.Component {
   };
 
   render() {
-    console.log(this.state.spectateGame);
     return (
       <div>
         <div className="title">Tournament</div>

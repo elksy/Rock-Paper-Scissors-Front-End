@@ -104,7 +104,7 @@ class GamePage extends React.Component {
           <Timer timer={this.props.tournamentInfo.timeLimit} />
         </div>
         <div className="game-wrapper">
-          <Opponent name={this.props.opponent.name} />
+          <Opponent name={this.props.player.name} />
 
           <div className="vertical-line"></div>
 
