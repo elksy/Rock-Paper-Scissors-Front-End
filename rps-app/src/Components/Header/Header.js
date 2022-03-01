@@ -8,10 +8,8 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="header-buttons">
-        <div id="home-logout-btn">
-          <p>Welcome {this.props.showPlayerName}</p>
-        </div>
+      <div className="header-div">
+        <p>Welcome {this.props.showPlayerName}</p>
       </div>
     );
   }

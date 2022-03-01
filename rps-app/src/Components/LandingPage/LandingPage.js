@@ -1,5 +1,5 @@
 import React from "react";
-import "./LandingPage.css";
+import "./landingpage.css";
 import PGButton from "./ModalButtons/PGButton";
 import JTButton from "./ModalButtons/JTButton";
 import CTButton from "./ModalButtons/CTButton";
@@ -61,7 +61,7 @@ class LandingPage extends React.Component {
         )}
         <div>
           <div className="landing-page-container">
-            <h1>Rock, Paper, Scissors</h1>
+            <h1>Rock, Paper, Scissors Tournament 🪨📄✂️</h1>
             <Header showPlayerName={this.props.playerName} />
             <div className="menu-button-container">
               <PGButton

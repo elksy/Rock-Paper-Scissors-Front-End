@@ -82,7 +82,6 @@ class CreateTournament extends React.Component {
           handleAddBots={this.handleAddBots}
           handleTournamentType={this.handleTournamentType}
         />
-
         <div className="start-btn">
           <Button
             onClick={this.startTournament}
