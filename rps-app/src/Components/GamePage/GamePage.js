@@ -26,7 +26,7 @@ class GamePage extends React.Component {
 
   createWebsocket = () => {
     const ws = new WebSocket(
-      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${this.props./${this.props.seedId}`
+      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${this.props.tournamentInfo.id}/${this.props.seedId}`
     );
 
     ws.onopen = () => {};
@@ -109,14 +109,9 @@ class GamePage extends React.Component {
   };
 
   restartGame = () => {
-    // check for win
-    // reset state
     if (
       this.state.playerScore >= Math.ceil(this.props.tournamentInfo.rounds / 2)
     ) {
-      //needs round data
-      //rounds should be obj in tournamentData
-
       this.props.tournamentWs.send(
         JSON.stringify({
           result: {
@@ -134,10 +129,7 @@ class GamePage extends React.Component {
       this.state.opponentScore >=
       Math.ceil(this.props.tournamentInfo.rounds / 2)
     ) {
-      //needs round data
-      //
       this.props.updatePlayerLost();
-      this.props.endCurrentRound();
     } else {
       this.setState({ playerChoice: "", opponentChoice: "", roundOutcome: "" });
     }

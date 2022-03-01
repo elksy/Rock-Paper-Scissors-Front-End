@@ -134,7 +134,12 @@ class TournamentBracket extends React.Component {
 
   updatePlayerLost = () => {
     const seed = this.getSeedFromNextRound();
-    this.setState({ hasLost: true, spectateGame: seed });
+    this.setState({
+      hasLost: true,
+      spectateGame: seed,
+      startRound: false,
+      currentRound: this.state.currentRound + 1,
+    });
   };
 
   endCurrentRound = () => {
@@ -192,6 +197,7 @@ class TournamentBracket extends React.Component {
   };
 
   render() {
+    console.log(this.state.spectateGame);
     return (
       <div>
         <div className="title">Tournament</div>
