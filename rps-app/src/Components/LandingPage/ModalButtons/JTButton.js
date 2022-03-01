@@ -3,8 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NameForm from "./InputForms/NameForm";
-import ColourForm from "./InputForms/ColourForm";
-import TournamentIdForm from "./InputForms/TournamentIdForm";
+import ColourForm from "./InputForms/ColourForm.js";
+import TournamentIdForm from "./InputForms/TournamentIdForm.js";
 
 class JTButton extends React.Component {
   constructor(props) {

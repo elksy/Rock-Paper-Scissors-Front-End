@@ -1,9 +1,9 @@
 import React from "react";
-import "/LandingPage.css";
-import PGButton from "./ModalButtons/PGButton";
-import JTButton from "./ModalButtons/JTButton";
-import CTButton from "./ModalButtons/CTButton";
-import Header from "../Header/Header";
+import "./LandingPage.css";
+import PGButton from "./ModalButtons/PGButton.js";
+import JTButton from "./ModalButtons/JTButton.js";
+import CTButton from "./ModalButtons/CTButton.js";
+import Header from "../Header/Header.js";
 import { Redirect } from "react-router-dom";
 
 class LandingPage extends React.Component {

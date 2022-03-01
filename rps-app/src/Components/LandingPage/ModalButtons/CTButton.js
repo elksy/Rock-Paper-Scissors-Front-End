@@ -3,8 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-import NameForm from "./InputForms/NameForm";
-import ColourForm from "./InputForms/ColourForm";
+import NameForm from "./InputForms/NameForm.js";
+import ColourForm from "./InputForms/ColourForm.js";
 
 class CTButton extends React.Component {
   constructor(props) {
