@@ -111,7 +111,9 @@ class Lobby extends React.Component {
   displayLobby = () => {
     return (
       <div className="lobby">
-        <h1>Lobby</h1>
+        <div className="h1-div">
+          <h1 className="lobby-title">Lobby</h1>
+        </div>
         <div className="lobby-components">
           {this.state.players.players && (
             <Players players={this.state.players} />
