@@ -13,7 +13,10 @@ class Options extends React.Component {
             onClick={this.handleClick}
             variant="primary"
             size="lg"
-            disabled={this.props.numberOfPlayers === 1}
+            disabled={
+              this.props.numberOfPlayers === 1 ||
+              this.props.host !== this.props.userId
+            }
           >
             Start Game
           </Button>
@@ -22,10 +25,18 @@ class Options extends React.Component {
           </Button>
         </div>
         <div className="buttons">
-          <Button variant="warning" size="lg">
+          <Button
+            variant="warning"
+            size="lg"
+            disabled={this.props.host !== this.props.userId}
+          >
             Assign New Host
           </Button>
-          <Button variant="danger" size="lg" disabled={true}>
+          <Button
+            variant="danger"
+            size="lg"
+            disabled={this.props.host !== this.props.userId}
+          >
             Close Lobby
           </Button>
         </div>
