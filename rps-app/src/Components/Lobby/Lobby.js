@@ -36,6 +36,7 @@ class Lobby extends React.Component {
       // If it is a valid tournament in the server return the tournament data and start the websocket connection.
       const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
       // Need to also check if the user has a cookies set with a sessionId
+      console.log(tournamentInfo);
       if (tournamentInfo.valid) {
         await this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket();
@@ -62,6 +63,7 @@ class Lobby extends React.Component {
   };
 
   createWebsocket = () => {
+    console.log(this.state.tournamentInfo);
     const ws = new WebSocket(
       `ws${
         process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
