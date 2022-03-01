@@ -12,6 +12,7 @@ class Lobby extends React.Component {
       validLobby: true,
       sessionId: "",
       playerName: "",
+      playerColour: "",
       ws: "",
       tournamentInfo: {},
       players: [],
@@ -79,7 +80,7 @@ class Lobby extends React.Component {
       const playerData = {
         name: this.state.playerName || "Anon",
         sessionId: this.state.sessionId,
-        bgColor: this.state.colour || "blue",
+        bgColor: this.state.playerColour || "blue",
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));

@@ -44,14 +44,10 @@ class LandingPage extends React.Component {
   };
 
   updatePlayerName = (playerName) => {
-    console.log("updateName");
-    console.log(playerName);
     this.setState({ playerName: playerName });
   };
 
   updatePlayerColour = (playerColour) => {
-    console.log(playerColour);
-    console.log(playerColour.hex);
     this.setState({ playerColour: playerColour.hex });
   };
 
@@ -77,8 +73,10 @@ class LandingPage extends React.Component {
               />
               <JTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
                 updateTournamentId={this.props.updateTournamentId}
                 tournamentId={this.props.tournamentId}
               />

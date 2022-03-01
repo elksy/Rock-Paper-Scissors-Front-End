@@ -5,7 +5,11 @@ class Players extends React.Component {
   displayPlayers = () => {
     const players = this.props.players.players.map((player, i) => {
       return (
-        <div className="player" key={i}>
+        <div
+          className="player"
+          key={i}
+          style={{ backgroundColor: player.bgColor }}
+        >
           {player.name} <Button size="sm">Kick Player</Button>
         </div>
       );

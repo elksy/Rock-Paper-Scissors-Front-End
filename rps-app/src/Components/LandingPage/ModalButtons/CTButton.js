@@ -39,7 +39,7 @@ class CTButton extends React.Component {
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
               }
-              updatePlayerName={this.props.updatePlayerName} //this.props.updatePlayerName
+              updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
             <ColourForm
