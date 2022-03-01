@@ -13,11 +13,13 @@ class LandingPage extends React.Component {
       showModal: false,
       showJoinModal: false,
       redirectToLobby: false,
+      redirectToCreateTournament: false,
+      playerName: "",
+      playerColour: "",
     };
   }
 
-  addPlayer = async (playerName, playerColour) => {
-    console.log("Add Player");
+  addPlayer = async (location) => {
     const endpoint = `http${
       process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
     }://${process.env.REACT_APP_WS_ENDPOINT}/sessions`;
@@ -28,12 +30,14 @@ class LandingPage extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        playerName: playerName,
-        playerColour: playerColour,
+        playerName: this.state.playerName,
+        playerColour: this.state.playerColour,
       }),
     });
-    if (response.status === 200) {
+    if (response.status === 200 && location === "lobby") {
       this.setState({ redirectToLobby: true });
+    } else if (response.status === 200 && location === "createTournament") {
+      this.setState({ redirectToCreateTournament: true });
     }
   };
 
@@ -59,10 +63,14 @@ class LandingPage extends React.Component {
         {this.state.redirectToLobby && (
           <Redirect to={`/lobby/${this.props.tournamentId}`} />
         )}
+        {this.state.redirectToCreateTournament && (
+          <Redirect to={`/create-tournament/`} />
+        )}
+
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors Tournament 🪨📄✂️</h1>
-            <Header showPlayerName={this.props.playerName} />
+            {/* <Header />  */}
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
@@ -71,15 +79,19 @@ class LandingPage extends React.Component {
               />
               <JTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
                 updateTournamentId={this.props.updateTournamentId}
                 tournamentId={this.props.tournamentId}
               />
               <CTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
             </div>
           </div>

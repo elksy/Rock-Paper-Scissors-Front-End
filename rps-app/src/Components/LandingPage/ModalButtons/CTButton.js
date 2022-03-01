@@ -19,7 +19,8 @@ class CTButton extends React.Component {
   };
 
   handleSubmit = (e) => {
-    this.props.addPlayer();
+    e.preventDefault();
+    this.props.addPlayer("createTournament");
   };
 
   viewModal = () => {
@@ -42,17 +43,20 @@ class CTButton extends React.Component {
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
             />
-            <ColourForm />
-            <Link to="/create-tournament" onClick={this.handleSubmit}>
-              <Button
-                className="example"
-                variant="primary"
-                type="button"
-                disabled={this.state.disableButton}
-              >
-                Start Game
-              </Button>
-            </Link>
+            <ColourForm
+              updatePlayerColour={this.props.updatePlayerColour}
+              playerColour={this.props.playerColour}
+            />
+            {/* <Link to="/create-tournament" onClick={this.handleSubmit}> */}
+            <Button
+              className="example"
+              variant="primary"
+              type="submit"
+              disabled={this.state.disableButton}
+            >
+              Start Game
+            </Button>
+            {/* </Link> */}
           </Form>
         </Modal.Body>
       </Modal>

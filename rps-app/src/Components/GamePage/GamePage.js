@@ -26,7 +26,11 @@ class GamePage extends React.Component {
 
   createWebsocket = () => {
     const ws = new WebSocket(
-      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${this.props.tournamentInfo.id}/${this.props.seedId}`
+      `ws${
+        process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${
+        this.props.tournamentInfo.id
+      }/${this.props.seedId}`
     );
 
     ws.onopen = () => {};
