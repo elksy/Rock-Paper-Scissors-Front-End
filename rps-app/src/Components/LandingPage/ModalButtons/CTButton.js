@@ -2,18 +2,15 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import NameForm from "./NameForm";
-import ColourForm from "./ColourForm";
-import TournamentIdForm from "./TournamentIdForm";
 import { Link } from "react-router-dom";
+import NameForm from "./InputForms/NameForm.js";
+import ColourForm from "./InputForms/ColourForm.js";
 
-class JTButton extends React.Component {
+class CTButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       disableButton: true,
-      tournamentId: "",
-
     };
   }
 
@@ -21,8 +18,7 @@ class JTButton extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
+  handleSubmit = (e) => {
     this.props.addPlayer();
   };
 
@@ -38,7 +34,7 @@ class JTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="form" onSubmit={this.handleSubmit}>
+          <Form aria-label="form" className="form" onSubmit={this.handleSubmit}>
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -47,19 +43,16 @@ class JTButton extends React.Component {
               playerName={this.props.playerName}
             />
             <ColourForm />
-            <TournamentIdForm
-              updateTournamentId={this.props.updateTournamentId}
-              tournamentId={this.props.tournamentId}
-            />
-            <Button
-              className="example"
-              variant="primary"
-              type="submit"
-              // disabled={this.state.disableButton}
-            >
-              Start Game
-            </Button>
-
+            <Link to="/create-tournament" onClick={this.handleSubmit}>
+              <Button
+                className="example"
+                variant="primary"
+                type="button"
+                disabled={this.state.disableButton}
+              >
+                Start Game
+              </Button>
+            </Link>
           </Form>
         </Modal.Body>
       </Modal>
@@ -77,11 +70,11 @@ class JTButton extends React.Component {
             this.handleModal();
           }}
         >
-          Join Tournament
+          Create Tournament
         </Button>
       </div>
     );
   }
 }
 
-export default JTButton;
+export default CTButton;

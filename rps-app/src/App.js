@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Lobby from "./Components//Lobby/Lobby.js";
 import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
-import LandingPage from "./Components/LandingPage/LandingPage";
+import LandingPage from "./Components/LandingPage/LandingPage.js";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 import { Switch, Route } from "react-router-dom";
 

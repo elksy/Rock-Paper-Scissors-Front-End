@@ -1,11 +1,10 @@
 import React from "react";
 import "./LandingPage.css";
-import PGButton from "./PGButton";
-import JTButton from "./JTButton";
-import CTButton from "./CTButton";
-import Header from "./Header";
+import PGButton from "./ModalButtons/PGButton.js";
+import JTButton from "./ModalButtons/JTButton.js";
+import CTButton from "./ModalButtons/CTButton.js";
+import Header from "../Header/Header.js";
 import { Redirect } from "react-router-dom";
-
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -55,7 +54,6 @@ class LandingPage extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         {this.state.redirectToLobby && (
@@ -63,7 +61,7 @@ class LandingPage extends React.Component {
         )}
         <div>
           <div className="landing-page-container">
-            <h1>Rock, Paper, Scissors</h1>
+            <h1>Rock, Paper, Scissors Tournament 🪨📄✂️</h1>
             <Header showPlayerName={this.props.playerName} />
             <div className="menu-button-container">
               <PGButton
