@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       playerName: "",
+      playerColour: "#fff",
       tournamentId: "",
     };
   }
@@ -28,6 +29,7 @@ class App extends React.Component {
   };
 
   render() {
+    // const { playerColour } = this.state;
     return (
       <Switch>
         <Route path="/lobby">

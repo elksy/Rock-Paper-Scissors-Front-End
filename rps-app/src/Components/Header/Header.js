@@ -7,8 +7,18 @@ class Header extends React.Component {
   }
 
   render() {
+    const headerstyle = {
+      background: `${this.props.playerColour}`,
+      padding: "1rem 8rem 1rem",
+      width: "65vw",
+      margin: "2rem auto",
+      color: "black",
+      fontWeight: "bold",
+      borderRadius: "20px",
+    };
+
     return (
-      <div className="header-div">
+      <div className="header-div" style={headerstyle}>
         <p>Welcome {this.props.showPlayerName}</p>
       </div>
     );

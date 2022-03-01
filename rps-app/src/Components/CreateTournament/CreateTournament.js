@@ -70,7 +70,10 @@ class CreateTournament extends React.Component {
       <div className="create-tournament-page">
         <header>
           <h1>Create Tournament</h1>
-          <Header showPlayerName={this.props.playerName} />
+          <Header
+            showPlayerName={this.props.playerName}
+            showPlayerColour={this.props.playerColour}
+          />
         </header>
         <TournamentOptions
           rounds={this.state.rounds}

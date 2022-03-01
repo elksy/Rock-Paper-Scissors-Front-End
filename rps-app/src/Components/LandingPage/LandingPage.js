@@ -41,18 +41,6 @@ class LandingPage extends React.Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
-  updatePlayerName = (playerName) => {
-    this.setState({ playerName: playerName });
-  };
-
-  updatePlayerColour = (playerColour) => {
-    this.setState({ playerColour: playerColour.hex });
-  };
-
-  updateTournamentId = (tournamentId) => {
-    this.setState({ tournamentId: tournamentId });
-  };
-
   render() {
     return (
       <div>
@@ -62,7 +50,10 @@ class LandingPage extends React.Component {
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors Tournament 🪨📄✂️</h1>
-            <Header showPlayerName={this.props.playerName} />
+            <Header
+              showPlayerName={this.props.playerName}
+              showPlayerColour={this.props.playerColour}
+            />
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}
@@ -80,6 +71,8 @@ class LandingPage extends React.Component {
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.props.updatePlayerName}
                 playerName={this.props.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
             </div>
           </div>

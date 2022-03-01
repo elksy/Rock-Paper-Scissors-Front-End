@@ -10,6 +10,15 @@ class ColourForm extends React.Component {
     };
   }
 
+  handleColourChange = (e) => {
+    this.props.updatePlayerColour(e.target.value);
+  };
+
+  onTrigger = (event) => {
+    this.props.parentCallback(event.target.myname.value);
+    event.preventDefault();
+  };
+
   updatePlayerColour = (playerColour) => {
     this.setState({ playerColour: playerColour.hex });
   };
@@ -18,12 +27,20 @@ class ColourForm extends React.Component {
     return (
       <Form.Group className="mb-3">
         <Form.Label className="colour-label">Choose a colour</Form.Label>
-        <CirclePicker
+        {/* <CirclePicker
           className="colour-input"
           id="colour"
           color={this.state.playerColour}
           onChange={this.updatePlayerColour}
           value={this.state.playerColour}
+          onClick={this.onTrigger}
+        /> */}
+        <CirclePicker
+          className="colour-input"
+          id="colour"
+          // color={this.state.playerColour}
+          value={this.props.playerColour}
+          onChange={this.handleColourChange}
         />
       </Form.Group>
     );
