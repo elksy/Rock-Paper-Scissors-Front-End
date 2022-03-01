@@ -20,8 +20,10 @@ class Players extends React.Component {
   render() {
     return (
       <div className="players">
-        <h2>Players</h2>
-        {this.displayPlayers()}
+        <div className="players-div">
+          <h2>Players</h2>
+          {this.displayPlayers()}
+        </div>
       </div>
     );
   }

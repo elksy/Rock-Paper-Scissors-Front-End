@@ -66,3 +66,7 @@ div.modal-footer {
   display: flex;
   justify-content: center;
 }
+
+.create-tourn-title {
+  background-color: transparent;
+}
