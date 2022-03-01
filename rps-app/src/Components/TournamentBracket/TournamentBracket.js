@@ -1,9 +1,8 @@
 import React from "react";
 import Winner from "../WinnerPage/Winner.js";
 import DisplayBracket from "./DisplayBracket.js";
-import rounds from "./roundData.js";
 import GamePage from "../GamePage/GamePage.js";
-
+import SpectateGame from "./SpectateGame/SpectateGame.js";
 import "./tournamentBracket.css";
 
 class TournamentBracket extends React.Component {
@@ -18,6 +17,7 @@ class TournamentBracket extends React.Component {
       currentRound: 0,
       tournamentInfo: {},
       uuid: "",
+      spectateGame: "",
     };
   }
 
@@ -37,37 +37,40 @@ class TournamentBracket extends React.Component {
         this.props.location.state.tournamentInfo.id
       }`
     );
-
-    ws.onopen = () => {
-      console.log("Tournament WS connected");
-    };
-
+    ws.onopen = () => {};
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if ("bracket" in data) {
         console.log(data);
         // this.setState({ rounds: rounds });
         this.setState({ rounds: data.bracket });
-        this.checkForWin(this.state.rounds);
+        this.checkForWin(data.bracket);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
         console.log("starting round");
       }
     };
-
     ws.onclose = () => {
-      console.log("closing");
       ws.send(CloseEvent());
     };
-
     this.setState({ ws: ws });
+  };
+
+  checkForWin = (rounds) => {
+    const finals = rounds[rounds.length - 1].seeds[0];
+    if (finals.score[0] !== 0 || finals.score[1] !== 0) {
+      const winner =
+        finals.score[0] > finals.score[1]
+          ? finals.teams[0].name
+          : finals.teams[1].name;
+      this.setState({ winner: winner });
+    }
   };
 
   startRound = () => {
     if (this.state.winner) {
       return <Winner winner={this.state.winner} />;
-    }
-    if (!this.state.hasLost) {
+    } else if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
       return (
         <GamePage
@@ -83,13 +86,23 @@ class TournamentBracket extends React.Component {
         />
       );
     } else {
-      this.setState({ startRound: false });
+      const [player, opponent] = this.getSpectateMatchInfo();
+      console.log(player, opponent);
+      return (
+        <SpectateGame
+          seed={this.state.spectateGame}
+          player={player}
+          opponent={opponent}
+          tournamentInfo={this.state.tournamentInfo}
+          endSpectating={this.endSpectating}
+          tournamentId={this.state.tournamentInfo.id}
+        />
+      );
     }
   };
 
   getMatch = () => {
     const roundData = this.state.rounds[this.state.currentRound].seeds;
-
     const playerMatch = roundData.filter((match) => {
       return (
         match.teams[0].uuid === this.state.uuid ||
@@ -116,8 +129,24 @@ class TournamentBracket extends React.Component {
     return opponent;
   };
 
+  getSpectateMatchInfo = () => {
+    const seeds = this.state.rounds[this.state.currentRound].seeds;
+    const match = seeds.filter((seed) => {
+      return seed.id === this.state.spectateGame;
+    });
+    const player = match[0].teams[0];
+    const opponent = match[0].teams[1];
+    return [player, opponent];
+  };
+
   updatePlayerLost = () => {
-    this.setState({ hasLost: true });
+    const seed = this.getSeedFromNextRound();
+    this.setState({
+      hasLost: true,
+      spectateGame: seed,
+      startRound: false,
+      currentRound: this.state.currentRound + 1,
+    });
   };
 
   endCurrentRound = () => {
@@ -127,17 +156,51 @@ class TournamentBracket extends React.Component {
     });
   };
 
-  checkForWin = (rounds) => {
-    //this would need to change if there are more than one rounds in each bracket
+  endSpectating = () => {
+    const seed = this.getSeedFromNextRound();
+    this.setState({
+      startRound: false,
+      currentRound: this.state.currentRound + 1,
+      spectateGame: seed,
+    });
+  };
 
-    const finals = rounds[rounds.length - 1].seeds[0];
-    if (finals.score[0] !== 0 || finals.score[1] !== 0) {
-      const winner =
-        finals.score[0] > finals.score[1]
-          ? finals.teams[0].name
-          : finals.teams[1].name;
-      this.setState({ winner: winner });
-    }
+  getSeedFromNextRound = () => {
+    if (this.state.currentRound < this.state.rounds.length - 1) {
+      const seeds = this.state.rounds[this.state.currentRound + 1].seeds;
+      return seeds[0].id;
+    } else return "";
+  };
+
+  displayBracket = () => {
+    return (
+      <div>
+        {this.state.hasLost &&
+          `You have been knocked out the tournament! Please Click on a match in the next round that you wish to spectate!
+          Currently Selected: ${this.state.spectateGame}`}
+        <DisplayBracket
+          rounds={this.state.rounds}
+          hasLost={this.state.hasLost}
+          updateSpectateGame={this.updateSpectateGame}
+          gameSelected={this.state.spectateGame}
+          possibleSeeds={this.possibleSeeds()}
+        />
+      </div>
+    );
+  };
+
+  updateSpectateGame = (id) => {
+    this.setState({ spectateGame: id });
+  };
+
+  possibleSeeds = () => {
+    if (this.state.currentRound < this.state.rounds.length - 1) {
+      const seeds = this.state.rounds[this.state.currentRound].seeds;
+      const seedIds = seeds.map((seed) => {
+        return seed.id;
+      });
+      return seedIds;
+    } else return [""];
   };
 
   render() {
@@ -145,17 +208,8 @@ class TournamentBracket extends React.Component {
       <div>
         <div className="title">Tournament</div>
         <div className="page-wrapper">
-          {this.state.startRound ? (
-            this.startRound()
-          ) : (
-            <DisplayBracket rounds={this.state.rounds} />
-          )}
+          {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>
-        <button
-          onClick={(e) => this.setState({ startRound: !this.state.startRound })}
-        >
-          Click Me
-        </button>
       </div>
     );
   }

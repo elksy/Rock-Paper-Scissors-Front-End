@@ -1,15 +1,9 @@
 import React from "react";
-import ChoiceMade from "./ChoiceMade";
-import { Spinner } from "react-bootstrap";
 import rock from ".//images/rock.png";
 import paper from ".//images/paper.png";
 import scissors from ".//images/scissors.png";
 
 class Opponent extends React.Component {
-  displayLoading = () => {
-    return <Spinner id="loading" animation="border" variant="primary" />;
-  };
-
   render() {
     return (
       <div className="game">

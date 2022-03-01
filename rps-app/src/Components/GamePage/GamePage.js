@@ -28,15 +28,19 @@ class GamePage extends React.Component {
     const ws = new WebSocket(
       `ws${
         process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
-      }://${process.env.REACT_APP_WS_ENDPOINT}/wsgame`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${
+        this.props.tournamentInfo.id
+      }/${this.props.seedId}`
     );
 
     ws.onopen = () => {};
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      if ("opponentChoice" in data) {
-        this.setState({ opponentChoice: data.opponentChoice });
+      if ("move" in data) {
+        if (data.move.player === this.props.opponent.uuid) {
+          this.setState({ opponentChoice: data.move.choice });
+        }
       }
     };
 
@@ -57,16 +61,21 @@ class GamePage extends React.Component {
     }
   }
   sendPlayerChoice = () => {
-    let randChoice = "";
+    let randomChoice;
     if (!this.state.playerChoice) {
-      const choices = ["rock", "paper", "scissors"];
-      randChoice = Math.floor(Math.random() * choices.length);
+      randomChoice = ["rock", "paper", "scissors"][
+        Math.floor(Math.random() * 3)
+      ];
+      this.setState({ playerChoice: randomChoice });
     }
 
     this.state.ws.send(
       JSON.stringify({
-        choice: this.state.playerChoice ? this.state.playerChoice : randChoice,
+        player: this.props.player.uuid,
         opponent: this.props.opponent.uuid,
+        choice: this.state.playerChoice
+          ? this.state.playerChoice
+          : randomChoice,
       })
     );
   };
@@ -108,14 +117,9 @@ class GamePage extends React.Component {
   };
 
   restartGame = () => {
-    // check for win
-    // reset state
     if (
       this.state.playerScore >= Math.ceil(this.props.tournamentInfo.rounds / 2)
     ) {
-      //needs round data
-      //rounds should be obj in tournamentData
-
       this.props.tournamentWs.send(
         JSON.stringify({
           result: {
@@ -133,10 +137,7 @@ class GamePage extends React.Component {
       this.state.opponentScore >=
       Math.ceil(this.props.tournamentInfo.rounds / 2)
     ) {
-      //needs round data
-      //
       this.props.updatePlayerLost();
-      this.props.endCurrentRound();
     } else {
       this.setState({ playerChoice: "", opponentChoice: "", roundOutcome: "" });
     }
