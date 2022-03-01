@@ -111,7 +111,7 @@ class Lobby extends React.Component {
   displayLobby = () => {
     return (
       <div className="lobby">
-        <div className="h1-div">
+        <div className="lobby-div">
           <h1 className="lobby-title">Lobby</h1>
         </div>
         <div className="lobby-components">

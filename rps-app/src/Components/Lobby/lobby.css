@@ -32,6 +32,7 @@
   font-weight: bold;
   background-color: white;
   border-radius: 10px;
+  padding: 10px;
 }
 .chat {
   width: 45%;
@@ -47,6 +48,7 @@
   justify-content: space-evenly;
   background-color: white;
   border-radius: 10px;
+  padding-right: 45px;
 }
 .buttons {
   width: 100%;
@@ -67,6 +69,10 @@
 }
 .lobby-title {
   border-radius: 10px;
+}
+.lobby-div {
+  border-radius: 10px;
+  padding: 1rem 6rem 1rem;
 }
 #copy-btn {
   width: 3rem;

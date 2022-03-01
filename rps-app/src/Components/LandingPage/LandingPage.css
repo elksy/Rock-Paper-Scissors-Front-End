@@ -11,8 +11,10 @@
   height: 50px;
 }
 
-.header-div {
-  display: flex;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
+.landing-div {
+  padding: 1rem 20rem 1rem;
+}
+
+.landing-title {
+  border-radius: 10px;
 }
