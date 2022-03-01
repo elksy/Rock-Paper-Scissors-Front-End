@@ -26,15 +26,17 @@ class GamePage extends React.Component {
 
   createWebsocket = () => {
     const ws = new WebSocket(
-      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame`
+      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${this.props./${this.props.seedId}`
     );
 
     ws.onopen = () => {};
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      if ("opponentChoice" in data) {
-        this.setState({ opponentChoice: data.opponentChoice });
+      if ("move" in data) {
+        if (data.move.player === this.props.opponent.uuid) {
+          this.setState({ opponentChoice: data.move.choice });
+        }
       }
     };
 
@@ -63,8 +65,9 @@ class GamePage extends React.Component {
 
     this.state.ws.send(
       JSON.stringify({
-        choice: this.state.playerChoice ? this.state.playerChoice : randChoice,
+        player: this.props.player.uuid,
         opponent: this.props.opponent.uuid,
+        choice: this.state.playerChoice ? this.state.playerChoice : randChoice,
       })
     );
   };

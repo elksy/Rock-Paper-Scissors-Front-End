@@ -1,11 +1,26 @@
 import React from "react";
+
 import { Bracket, Seed, SeedItem, SeedTeam } from "react-brackets";
 
 class DisplayBracket extends React.Component {
+  handleClick = (id) => {
+    if (this.props.hasLost && this.props.possibleSeeds.includes(id)) {
+      this.props.updateSpectateGame(id);
+    }
+  };
+
   customSeed = ({ seed, breakpoint }) => {
     return (
       <Seed mobileBreakpoint={breakpoint} style={{ fontSize: 30 }}>
-        <SeedItem style={{ background: "white", width: "20rem" }}>
+        <SeedItem
+          style={{
+            background: "white",
+            width: "20rem",
+            border:
+              this.props.gameSelected === seed.id ? "green 5px solid" : "",
+          }}
+          onClick={() => this.handleClick(seed.id)}
+        >
           <div>
             <SeedTeam
               style={{
