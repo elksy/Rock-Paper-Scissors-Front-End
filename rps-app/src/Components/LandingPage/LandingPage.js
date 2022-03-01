@@ -1,5 +1,5 @@
 import React from "react";
-import "./landingpage.css";
+import "/LandingPage.css";
 import PGButton from "./ModalButtons/PGButton";
 import JTButton from "./ModalButtons/JTButton";
 import CTButton from "./ModalButtons/CTButton";
