@@ -13,13 +13,13 @@ class LandingPage extends React.Component {
       showModal: false,
       showJoinModal: false,
       redirectToLobby: false,
+      redirectToCreateTournament: false,
       playerName: "",
       playerColour: "",
     };
   }
 
-  addPlayer = async () => {
-    console.log("Add Player");
+  addPlayer = async (location) => {
     const endpoint = `http${
       process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
     }://${process.env.REACT_APP_WS_ENDPOINT}/sessions`;
@@ -34,8 +34,10 @@ class LandingPage extends React.Component {
         playerColour: this.state.playerColour,
       }),
     });
-    if (response.status === 200) {
+    if (response.status === 200 && location === "lobby") {
       this.setState({ redirectToLobby: true });
+    } else if (response.status === 200 && location === "createTournament") {
+      this.setState({ redirectToCreateTournament: true });
     }
   };
 
@@ -61,10 +63,14 @@ class LandingPage extends React.Component {
         {this.state.redirectToLobby && (
           <Redirect to={`/lobby/${this.props.tournamentId}`} />
         )}
+        {this.state.redirectToCreateTournament && (
+          <Redirect to={`/create-tournament/`} />
+        )}
+
         <div>
           <div className="landing-page-container">
             <h1>Rock, Paper, Scissors Tournament 🪨📄✂️</h1>
-            <Header showPlayerName={this.props.playerName} />
+            {/* <Header />  */}
             <div className="menu-button-container">
               <PGButton
                 addPlayer={this.addPlayer}

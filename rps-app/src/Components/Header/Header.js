@@ -6,10 +6,24 @@ class Header extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.getDataFromCookies();
+  }
+
+  getDataFromCookies() {
+    const cookies = document.cookie;
+    const regex = new RegExp("(^| )playerName=([^;]+)");
+    if (regex.test(cookies)) {
+      const result = cookies.match(regex)[2];
+      console.log(result);
+      this.setState({ playerName: result });
+    }
+  }
+
   render() {
     return (
       <div className="header-div">
-        <p>Welcome {this.props.showPlayerName}</p>
+        <p>Welcome {this.state.playerName}</p>
       </div>
     );
   }

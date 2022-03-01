@@ -21,7 +21,7 @@ class JTButton extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    this.props.addPlayer();
+    this.props.addPlayer("lobby");
   };
 
   viewModal = () => {
