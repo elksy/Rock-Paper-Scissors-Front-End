@@ -39,10 +39,13 @@ class CTButton extends React.Component {
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
               }
-              updatePlayerName={this.props.updatePlayerName}
+              updatePlayerName={this.props.updatePlayerName} //this.props.updatePlayerName
               playerName={this.props.playerName}
             />
-            <ColourForm />
+            <ColourForm
+              updatePlayerColour={this.props.updatePlayerColour}
+              playerColour={this.props.playerColour}
+            />
             <Link to="/create-tournament" onClick={this.handleSubmit}>
               <Button
                 className="example"

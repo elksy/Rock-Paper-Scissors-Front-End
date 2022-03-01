@@ -13,10 +13,12 @@ class LandingPage extends React.Component {
       showModal: false,
       showJoinModal: false,
       redirectToLobby: false,
+      playerName: "",
+      playerColour: "",
     };
   }
 
-  addPlayer = async (playerName, playerColour) => {
+  addPlayer = async () => {
     console.log("Add Player");
     const endpoint = `http${
       process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
@@ -28,8 +30,8 @@ class LandingPage extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        playerName: playerName,
-        playerColour: playerColour,
+        playerName: this.state.playerName,
+        playerColour: this.state.playerColour,
       }),
     });
     if (response.status === 200) {
@@ -42,10 +44,14 @@ class LandingPage extends React.Component {
   };
 
   updatePlayerName = (playerName) => {
+    console.log("updateName");
+    console.log(playerName);
     this.setState({ playerName: playerName });
   };
 
   updatePlayerColour = (playerColour) => {
+    console.log(playerColour);
+    console.log(playerColour.hex);
     this.setState({ playerColour: playerColour.hex });
   };
 
@@ -78,8 +84,10 @@ class LandingPage extends React.Component {
               />
               <CTButton
                 addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
+                updatePlayerName={this.updatePlayerName}
+                playerName={this.state.playerName}
+                updatePlayerColour={this.updatePlayerColour}
+                playerColour={this.state.playerColour}
               />
             </div>
           </div>
