@@ -61,17 +61,21 @@ class GamePage extends React.Component {
     }
   }
   sendPlayerChoice = () => {
-    let randChoice = "";
+    let randomChoice;
     if (!this.state.playerChoice) {
-      const choices = ["rock", "paper", "scissors"];
-      randChoice = choices[Math.floor(Math.random() * choices.length)];
+      randomChoice = ["rock", "paper", "scissors"][
+        Math.floor(Math.random() * 3)
+      ];
+      this.setState({ playerChoice: randomChoice });
     }
 
     this.state.ws.send(
       JSON.stringify({
         player: this.props.player.uuid,
         opponent: this.props.opponent.uuid,
-        choice: this.state.playerChoice ? this.state.playerChoice : randChoice,
+        choice: this.state.playerChoice
+          ? this.state.playerChoice
+          : randomChoice,
       })
     );
   };

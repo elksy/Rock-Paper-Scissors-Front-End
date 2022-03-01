@@ -48,6 +48,8 @@ class Lobby extends React.Component {
   getDataFromCookies(section) {
     const cookies = document.cookie;
     const regex = new RegExp("(^| )" + section + "=([^;]+)");
+    console.log("cookie test");
+    console.log(regex.test(cookies));
     if (regex.test(cookies)) {
       const result = cookies.match(regex)[2];
       this.setState({ [section]: result });
@@ -83,7 +85,7 @@ class Lobby extends React.Component {
     ws.onopen = () => {
       const playerData = {
         name: this.state.playerName || "Anon",
-        sessionId: this.state.sessionId,
+        uuid: this.state.sessionId,
         bgColor: this.state.playerColour || "blue",
         textColor: this.props.colour || "black",
       };
