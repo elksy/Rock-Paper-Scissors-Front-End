@@ -35,7 +35,7 @@ class Lobby extends React.Component {
       // If it is a valid tournament in the server return the tournament data and start the websocket connection.
       const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
       // Need to also check if the user has a cookies set with a sessionId
-      console.log(tournamentInfo);
+
       if (tournamentInfo.valid) {
         this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket(tournamentInfo.data);
@@ -43,6 +43,10 @@ class Lobby extends React.Component {
         this.setState({ validLobby: false });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.state.ws.close();
   }
 
   getDataFromCookies(section) {
@@ -73,7 +77,6 @@ class Lobby extends React.Component {
   };
 
   createWebsocket = (tournamentInfo) => {
-    console.log(tournamentInfo);
     const ws = new WebSocket(
       `ws${
         process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
@@ -92,18 +95,28 @@ class Lobby extends React.Component {
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
+      console.log(data);
       if ("players" in data) {
         this.setState({ players: data });
-      } else if ("message" in data) {
+      } else if ("message" in data && data.message === "Start Game") {
         this.setState({ startTournament: true });
+      } else if ("message" in data && data.message === "Leave Game") {
+        console.log("redirecting");
+
+        this.setState({ validLobby: false });
       }
     };
 
     ws.onclose = () => {
       ws.send(CloseEvent());
+      console.log("closing");
     };
 
     this.setState({ ws: ws });
+  };
+
+  leaveLobby = (player) => {
+    this.state.ws.send(JSON.stringify({ makeLeave: player }));
   };
 
   displayLobby = () => {
@@ -116,6 +129,7 @@ class Lobby extends React.Component {
               players={this.state.players}
               userId={this.state.sessionId}
               host={this.state.tournamentInfo.host}
+              leaveLobby={this.leaveLobby}
             />
           )}
 
