@@ -48,8 +48,6 @@ class Lobby extends React.Component {
   getDataFromCookies(section) {
     const cookies = document.cookie;
     const regex = new RegExp("(^| )" + section + "=([^;]+)");
-    console.log("cookie test");
-    console.log(regex.test(cookies));
     if (regex.test(cookies)) {
       const result = cookies.match(regex)[2];
       this.setState({ [section]: result });
@@ -114,7 +112,11 @@ class Lobby extends React.Component {
         <h1>Lobby</h1>
         <div className="lobby-components">
           {this.state.players.players && (
-            <Players players={this.state.players} />
+            <Players
+              players={this.state.players}
+              userId={this.state.sessionId}
+              host={this.state.tournamentInfo.host}
+            />
           )}
 
           {/* Chat will be imported from another component */}
@@ -130,6 +132,8 @@ class Lobby extends React.Component {
                   ? this.state.players.players.length
                   : 1
               }
+              host={this.state.tournamentInfo.host}
+              userId={this.state.sessionId}
             />
           </div>
         </div>

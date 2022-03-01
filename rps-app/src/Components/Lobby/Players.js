@@ -10,7 +10,10 @@ class Players extends React.Component {
           key={i}
           style={{ backgroundColor: player.bgColor }}
         >
-          {player.name} <Button size="sm">Kick Player</Button>
+          {player.name}{" "}
+          {this.props.host === this.props.userId ? (
+            <Button size="sm">Kick Player</Button>
+          ) : null}
         </div>
       );
     });

@@ -18,6 +18,15 @@ class CreateTournament extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const cookies = document.cookie;
+    const regex = new RegExp("(^| )sessionId=([^;]+)");
+    if (regex.test(cookies)) {
+      const result = cookies.match(regex)[2];
+      this.setState({ hostUuid: result });
+    }
+  }
+
   handleRoundsClick = (event) => {
     event.preventDefault();
     this.setState({ rounds: event.target.value });
@@ -52,6 +61,7 @@ class CreateTournament extends React.Component {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          host: this.state.hostUuid,
           rounds: this.state.rounds,
           timeLimit: this.state.timeLimit,
           addBots: this.state.addBots,
