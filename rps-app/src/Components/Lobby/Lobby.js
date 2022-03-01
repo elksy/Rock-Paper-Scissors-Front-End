@@ -35,9 +35,10 @@ class Lobby extends React.Component {
       // If it is a valid tournament in the server return the tournament data and start the websocket connection.
       const tournamentInfo = await this.getTournamentInfo(urlPath[2]);
       // Need to also check if the user has a cookies set with a sessionId
+      console.log(tournamentInfo);
       if (tournamentInfo.valid) {
         this.setState({ tournamentInfo: tournamentInfo.data });
-        this.createWebsocket();
+        this.createWebsocket(tournamentInfo.data);
       } else {
         this.setState({ validLobby: false });
       }
@@ -71,9 +72,12 @@ class Lobby extends React.Component {
     return await response.json();
   };
 
-  createWebsocket = () => {
+  createWebsocket = (tournamentInfo) => {
+    console.log(tournamentInfo);
     const ws = new WebSocket(
-      `ws://${process.env.REACT_APP_WS_ENDPOINT}/wslobby/${this.state.tournamentInfo.id}`
+      `ws${
+        process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/wslobby/${tournamentInfo.id}`
     );
 
     ws.onopen = () => {
