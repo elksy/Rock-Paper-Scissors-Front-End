@@ -10,7 +10,9 @@ class Lobby extends React.Component {
     super(props);
     this.state = {
       validLobby: true,
-      uuid: "",
+      sessionId: "",
+      playerName: "",
+      playerColour: "",
       ws: "",
       tournamentInfo: {},
       players: [],
@@ -19,14 +21,11 @@ class Lobby extends React.Component {
   }
 
   async componentDidMount() {
-    const cookies = document.cookie;
-    const re = /sessionId=(.*);?/;
-    if (re.test(cookies)) {
-      const uuid = cookies.match(re)[1];
-      this.setState({ uuid: uuid });
-    } else {
-      this.setState({ validLobby: false });
-    }
+    //const sessionIdReg = /sessionId=(.*);?/;
+    this.getDataFromCookies("sessionId");
+    this.getDataFromCookies("playerName");
+    this.getDataFromCookies("playerColour");
+
     // Gets the url path from the browser e.g /lobby/132c-13xfsd-123dasf
     const urlPath = window.location.pathname.split("/");
     // If the try and join /lobby without an id they will be redirected to the main page.
@@ -43,6 +42,17 @@ class Lobby extends React.Component {
       } else {
         this.setState({ validLobby: false });
       }
+    }
+  }
+
+  getDataFromCookies(section) {
+    const cookies = document.cookie;
+    const regex = new RegExp("(^| )" + section + "=([^;]+)");
+    if (regex.test(cookies)) {
+      const result = cookies.match(regex)[2];
+      this.setState({ [section]: result });
+    } else {
+      this.setState({ validLobby: false });
     }
   }
 
@@ -72,9 +82,9 @@ class Lobby extends React.Component {
 
     ws.onopen = () => {
       const playerData = {
-        name: this.props.name || this.state.uuid.substring(0, 4),
-        uuid: this.state.uuid,
-        bgColor: this.props.colour || "blue",
+        name: this.state.playerName || "Anon",
+        sessionId: this.state.sessionId,
+        bgColor: this.state.playerColour || "blue",
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
@@ -138,11 +148,11 @@ class Lobby extends React.Component {
             to={{
               pathname: `/tournament`,
               state: {
-                uuid: this.state.uuid,
+                uuid: this.state.sessionId,
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}
-            uuid={this.state.uuid}
+            uuid={this.state.sessionId}
             tournamentInfo={this.state.tournamentInfo}
           />
         )}
