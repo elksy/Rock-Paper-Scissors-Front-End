@@ -1,5 +1,10 @@
+body {
+  font-family: sans-serif;
+}
+
 .container {
   display: flex;
+  justify-content: center;
   align-items: flex-end;
 }
 

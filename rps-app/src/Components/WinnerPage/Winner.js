@@ -16,10 +16,12 @@ class Winner extends React.Component {
               <div className="winners-area">
                 Winners Podium <br />
                 {this.props.winner}
-                <Podium />
+                <Podium winner={this.props.winner} rounds={this.props.rounds} />
               </div>
 
-              <div className="losers-area">Losers!</div>
+              <div className="losers-area" rounds={this.props.rounds}>
+                Losers!
+              </div>
             </div>
 
             <div className="chat-comp"></div>
