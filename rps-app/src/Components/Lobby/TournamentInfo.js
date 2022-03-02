@@ -11,6 +11,8 @@ class TournamentInfo extends React.Component {
     return (
       <div className="tournament-info">
         <h4>Tournament Info</h4>
+        <br />
+        <p>Players: ({this.props.numberOfPlayers}/16)</p>
         <div className="tournament-id">
           <p>ID: {this.props.info.id}</p>
           <Button
