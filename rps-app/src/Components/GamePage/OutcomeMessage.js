@@ -1,7 +1,7 @@
 import React from "react";
-import rock from "/Users/rob/Rock-PaperScissors/Rock-Paper-Scissors-Front-End/rps-app/src/Components/GamePage/images/rock.png";
-import paper from "/Users/rob/Rock-PaperScissors/Rock-Paper-Scissors-Front-End/rps-app/src/Components/GamePage/images/paper.png";
-import scissors from "/Users/rob/Rock-PaperScissors/Rock-Paper-Scissors-Front-End/rps-app/src/Components/GamePage/images/scissors.png";
+import rock from ".//images/rock.png";
+import paper from ".//images/paper.png";
+import scissors from ".//images/scissors.png";
 import "./outcomeMessage.css";
 
 class OutcomeMessage extends React.Component {
