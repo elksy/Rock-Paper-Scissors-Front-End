@@ -1,10 +1,10 @@
 import React from "react";
 import Timer from "../../GamePage/Timer.js";
 import Opponent from "../../GamePage/Opponent";
-import "./gamepage.css";
-import OutcomeMessage from "./OutcomeMessage.js";
+import "./spectateGame.css";
+import OutcomeMessage from "../../GamePage/OutcomeMessage.js";
 
-class GamePage extends React.Component {
+class SpectateGame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,9 +78,14 @@ class GamePage extends React.Component {
   };
 
   showOutcomeMessage = () => {
-    const { roundOutcome } = this.state;
     return (
-      <OutcomeMessage outcome={roundOutcome} restartGame={this.restartGame} />
+      <OutcomeMessage
+        outcome={this.state.roundOutcome}
+        didPlayerWin={this.props.player.name === this.state.roundOutcome}
+        playerChoice={this.state.playerChoice}
+        opponentChoice={this.state.opponentChoice}
+        restartGame={this.restartGame}
+      />
     );
   };
 
@@ -128,4 +133,4 @@ class GamePage extends React.Component {
     );
   }
 }
-export default GamePage;
+export default SpectateGame;
