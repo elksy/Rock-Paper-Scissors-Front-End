@@ -22,15 +22,13 @@ class NameForm extends React.Component {
 
   render() {
     return (
-      <Form.Group className="mb-3">
-        <Form.Label className="username-label">Username</Form.Label>
+      <Form.Group className="name-input">
+        <Form.Label className="form-title">Username</Form.Label>
         <Form.Control
           data-testid="username-input-area"
-          className="username-input"
           type="text"
           placeholder="Enter nickname"
           value={this.props.playerName}
-          id="email"
           onChange={this.handleNameChange}
         />
       </Form.Group>

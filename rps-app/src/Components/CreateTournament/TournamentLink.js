@@ -34,7 +34,7 @@ class TournamentLink extends React.Component {
           <h5>Send this link out to your friends!</h5>
           <div className="copy-link">
             <Form.Control
-              id="link"
+              id="link-input"
               type="text"
               value={this.props.link}
               readOnly
@@ -49,7 +49,7 @@ class TournamentLink extends React.Component {
           </div>
           {this.state.copied && this.displayCopiedMsg()}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="tournament-link-footer">
           <Link to={`/lobby/${this.props.link}`}>
             <Button size="lg" id="join-btn" variant="outline-dark">
               Join the Lobby!

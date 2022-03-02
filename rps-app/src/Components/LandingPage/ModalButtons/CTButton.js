@@ -35,7 +35,11 @@ class CTButton extends React.Component {
           <Modal.Title>Choose a name and a colour!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form aria-label="form" className="form" onSubmit={this.handleSubmit}>
+          <Form
+            aria-label="form"
+            className="landing-form"
+            onSubmit={this.handleSubmit}
+          >
             <NameForm
               updateDisabledButton={(bool) =>
                 this.setState({ disableButton: bool })
@@ -52,16 +56,15 @@ class CTButton extends React.Component {
               playerColour={this.props.playerColour}
               playerName={this.props.playerName}
             />
-            {/* <Link to="/create-tournament" onClick={this.handleSubmit}> */}
-            <Button
-              className="example"
-              variant="primary"
-              type="submit"
-              disabled={this.state.disableButton}
-            >
-              Start Game
-            </Button>
-            {/* </Link> */}
+            <div className="modal-button">
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={this.state.disableButton}
+              >
+                Start Game
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
@@ -73,8 +76,9 @@ class CTButton extends React.Component {
       <div>
         {this.viewModal()}
         <Button
-          type="submit"
-          className="btn btn-primary"
+          type="button"
+          variant="dark"
+          id="landing-page-btn"
           onClick={() => {
             this.handleModal();
           }}

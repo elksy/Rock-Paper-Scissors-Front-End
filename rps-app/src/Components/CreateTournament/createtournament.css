@@ -1,16 +1,21 @@
 .create-tournament-page {
-  background-color: #d9d9d9;
+  background-color: white;
   padding: 1rem 8rem 1rem;
   width: 65vw;
   margin: 2rem auto;
-  box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px;
+  border: solid black 1px;
   color: black;
   font-weight: bold;
   border-radius: 20px;
 }
 
-header {
+.create-tournament-title-div {
   text-align: center;
+}
+
+#create-tournament-title {
+  font-size: 30pt;
+  font-weight: bold;
 }
 
 .tournament-option {
@@ -27,25 +32,20 @@ header {
   justify-content: flex-end;
 }
 
-div > button.btn {
+.option-btn {
   width: 10rem;
   margin-left: 3rem;
 }
 
-#type-btns {
+.type-btns {
   width: 9rem;
+  margin-left: 3rem;
 }
 
-.start-btn {
+.start-btn-div {
   display: flex;
   justify-content: center;
   margin: 5rem 0rem 2rem;
-}
-
-div.start-btn > button {
-  margin: auto;
-  padding: auto;
-  width: auto;
 }
 
 .copy-link {
@@ -54,7 +54,7 @@ div.start-btn > button {
   margin-bottom: 1rem;
 }
 
-#link {
+#link-input {
   width: 80%;
 }
 
@@ -62,11 +62,7 @@ div.start-btn > button {
   width: 20%;
 }
 
-div.modal-footer {
+.tournament-link-footer {
   display: flex;
   justify-content: center;
-}
-
-.create-tourn-title {
-  background-color: transparent;
 }

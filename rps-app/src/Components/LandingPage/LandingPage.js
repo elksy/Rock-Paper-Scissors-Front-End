@@ -82,11 +82,6 @@ class LandingPage extends React.Component {
               </h1>
             </div>
             <div className="menu-button-container">
-              <PGButton
-                addPlayer={this.addPlayer}
-                updatePlayerName={this.props.updatePlayerName}
-                playerName={this.props.playerName}
-              />
               <JTButton
                 addPlayer={this.addPlayer}
                 updatePlayerName={this.updatePlayerName}
