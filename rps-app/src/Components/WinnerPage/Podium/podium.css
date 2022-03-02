@@ -8,6 +8,7 @@
 }
 .podium__rank {
   display: flex;
+  border: black;
   justify-content: center;
   align-items: center;
   font-size: 35px;
@@ -23,12 +24,14 @@
 }
 .podium .first {
   min-height: 300px;
-  border: black;
+  border-style: solid;
   border-width: 5px;
 }
 .podium .second {
   min-height: 200px;
   border: black;
+  border-style: solid;
+  border-left: solid;
   border-width: 5px;
 }
 .podium-rank-third {
