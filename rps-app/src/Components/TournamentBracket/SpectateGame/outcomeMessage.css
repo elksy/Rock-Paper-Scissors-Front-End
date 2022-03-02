@@ -1,0 +1,359 @@
+.outcome-title {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  font-size: 50pt;
+}
+
+.outcome-images {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.rock-win,
+.paper-win,
+.scissors-win,
+.rock-loss,
+.scissors-loss,
+.rock-win-reverse,
+.paper-win-reverse,
+.scissors-win-reverse {
+  width: 20rem;
+  height: 20rem;
+  position: relative;
+}
+
+.rock-win {
+  animation-name: rock-win;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes rock-win {
+  from {
+    left: 0;
+  }
+  40% {
+    left: -20px;
+  }
+  60% {
+    left: calc(40vw - 20rem);
+  }
+  to {
+    left: calc(40vw - 22rem);
+  }
+}
+
+.scissors-loss {
+  animation-name: scissors-loss;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes scissors-loss {
+  from {
+    left: 0;
+  }
+  40% {
+    left: 20px;
+  }
+  60% {
+    left: calc(-40vw + 20rem);
+  }
+  85% {
+    left: 40vw;
+  }
+  to {
+    left: 40vw;
+  }
+}
+
+.paper-win {
+  animation-name: paper-win;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes paper-win {
+  from {
+    left: 0;
+  }
+
+  30% {
+    left: calc(40vw - 10rem);
+    transform: rotateY(90deg);
+
+    /* transform: skew(0deg, 8deg) scale(1); */
+  }
+
+  to {
+    left: calc(40vw - 10rem);
+    transform: rotateY(720deg);
+    /* transform: skew(0deg, 18deg) scale(1.1); */
+  }
+}
+
+.rock-loss {
+  animation-name: rock-loss;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes rock-loss {
+  from {
+    left: 0;
+  }
+
+  30% {
+    left: calc(-40vw + 10rem);
+    transform: rotateY(90deg) scale(1);
+    opacity: 100%;
+  }
+
+  to {
+    left: calc(-40vw + 10rem);
+    transform: rotateY(720deg) scale(0);
+    opacity: 0%;
+  }
+}
+
+.scissors-win {
+  transform: rotate(300deg);
+  animation-name: scissors-win;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes scissors-win {
+  from {
+    left: 0;
+    transform: rotate(300deg);
+  }
+
+  12.5% {
+    transform: scale(1.2, 0.6) rotate(300deg);
+  }
+
+  25% {
+    transform: scale(1, 1) rotate(300deg);
+  }
+
+  37.5% {
+    transform: scale(1.2, 0.6) rotate(300deg);
+  }
+
+  50% {
+    left: calc(40vw - 10rem);
+    transform: scale(1.2, 0.6) rotate(300deg);
+  }
+
+  75% {
+    left: calc(40vw - 10rem);
+    transform: scale(1, 1) rotate(300deg);
+  }
+
+  to {
+    left: calc(40vw - 20rem);
+    transform: scale(1, 1) rotate(300deg);
+  }
+}
+
+.paper-loss-top {
+  width: 20rem;
+  height: 9rem;
+  overflow: hidden;
+}
+
+.paper-loss-bottom {
+  width: 20rem;
+  height: 11rem;
+  overflow: hidden;
+}
+
+.paper-loss {
+  width: 20rem;
+  height: 20rem;
+}
+
+.paper-loss-bottom-image {
+  margin-top: -9rem;
+}
+
+.paper-loss-top {
+  position: relative;
+  animation-name: paper-loss-top;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes paper-loss-top {
+  from {
+    left: 0;
+  }
+
+  40% {
+    left: calc(-40vw + 10rem);
+    top: 0rem;
+    transform: rotate(0deg) rotateX(0deg);
+  }
+
+  70% {
+    left: calc(-40vw + 5rem);
+    top: 5rem;
+    transform: rotateX(20deg) rotateY(90deg);
+  }
+
+  to {
+    left: calc(-40vw - 10rem);
+    top: 40rem;
+    transform: rotateX(180deg) rotateY(360deg);
+  }
+}
+
+.paper-loss-bottom {
+  position: relative;
+  animation-name: paper-loss-bottom;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes paper-loss-bottom {
+  from {
+    left: 0;
+  }
+
+  40% {
+    left: calc(-40vw + 10rem);
+    top: 0rem;
+    transform: rotate(0deg) rotateX(0deg);
+  }
+
+  70% {
+    left: calc(-40vw + 15rem);
+    top: 5rem;
+    transform: rotate(45deg) rotateX(90deg);
+  }
+
+  to {
+    left: calc(-40vw + 20rem);
+    top: 40rem;
+    transform: rotate(180deg) rotateY(36deg);
+  }
+}
+
+.outcome-images-reversed {
+  transform: rotateY(180deg);
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.rock-win-reverse {
+  animation-name: rock-win-reverse;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes rock-win-reverse {
+  from {
+    left: 0;
+  }
+  40% {
+    left: 20px;
+  }
+  60% {
+    left: calc(-40vw + 20rem);
+  }
+  to {
+    left: calc(-40vw + 22rem);
+  }
+}
+
+.paper-win-reverse {
+  animation-name: paper-win-reverse;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes paper-win-reverse {
+  from {
+    left: 0;
+  }
+
+  30% {
+    left: calc(-40vw + 10rem);
+    transform: rotateY(90deg);
+
+    /* transform: skew(0deg, 8deg) scale(1); */
+  }
+
+  to {
+    left: calc(-40vw + 10rem);
+    transform: rotateY(720deg);
+    /* transform: skew(0deg, 18deg) scale(1.1); */
+  }
+}
+
+.scissors-win-reverse {
+  transform: rotate(120deg);
+  animation-name: scissors-win-reverse;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes scissors-win-reverse {
+  from {
+    left: 0;
+    transform: scale(1, 1) rotate(120deg);
+  }
+
+  12.5% {
+    transform: scale(1.2, 0.6) rotate(120deg);
+  }
+
+  25% {
+    transform: scale(1, 1) rotate(120deg);
+  }
+
+  37.5% {
+    transform: scale(1.2, 0.6) rotate(120deg);
+  }
+
+  50% {
+    left: calc(-40vw + 10rem);
+    transform: scale(1.2, 0.6) rotate(120deg);
+  }
+
+  75% {
+    left: calc(-40vw + 10rem);
+    transform: scale(1, 1) rotate(120deg);
+  }
+
+  to {
+    left: calc(-40vw + 20rem);
+    transform: scale(1, 1) rotate(120deg);
+  }
+}

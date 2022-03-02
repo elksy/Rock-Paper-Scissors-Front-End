@@ -3,9 +3,7 @@ import Timer from "./Timer.js";
 import Player from "./Player.js";
 import Opponent from "./Opponent.js";
 import "./gamepage.css";
-import WinnerMessage from "./WinnerMessage.js";
-import LoserMessage from "./LoserMessage.js";
-import DrawMessage from "./DrawMessage.js";
+import OutcomeMessage from "./OutcomeMessage.js";
 
 class GamePage extends React.Component {
   constructor(props) {
@@ -85,14 +83,15 @@ class GamePage extends React.Component {
   };
 
   showOutcomeMessage = () => {
-    const { roundOutcome } = this.state;
-    if (roundOutcome === "win") {
-      return <WinnerMessage restartGame={this.restartGame} />;
-    } else if (roundOutcome === "loss") {
-      return <LoserMessage restartGame={this.restartGame} />;
-    } else {
-      return <DrawMessage restartGame={this.restartGame} />;
-    }
+    return (
+      <OutcomeMessage
+        outcome={this.state.roundOutcome}
+        didPlayerWin={this.props.player.name === this.state.roundOutcome}
+        playerChoice={this.state.playerChoice}
+        opponentChoice={this.state.opponentChoice}
+        restartGame={this.restartGame}
+      />
+    );
   };
 
   calculateScore = () => {
@@ -106,12 +105,12 @@ class GamePage extends React.Component {
     ) {
       this.setState({
         playerScore: this.state.playerScore + 1,
-        roundOutcome: "win",
+        roundOutcome: this.props.player.name,
       });
     } else {
       this.setState({
         opponentScore: this.state.opponentScore + 1,
-        roundOutcome: "loss",
+        roundOutcome: this.props.opponent.name,
       });
     }
   };
