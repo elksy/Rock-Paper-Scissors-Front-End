@@ -71,7 +71,13 @@ class App extends React.Component {
         </Route>
         <Route
           path="/tournament"
-          render={(props) => <TournamentBracket {...props} />}
+          render={(props) => (
+            <TournamentBracket
+              {...props}
+              chatWs={this.state.chatWs}
+              chatMessages={this.state.chatMessages}
+            />
+          )}
         />
         <Route path="/">
           <LandingPage

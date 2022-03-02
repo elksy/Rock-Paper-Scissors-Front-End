@@ -178,6 +178,7 @@ class Lobby extends React.Component {
               pathname: `/tournament`,
               state: {
                 uuid: this.state.sessionId,
+                playerName: this.state.playerName,
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}

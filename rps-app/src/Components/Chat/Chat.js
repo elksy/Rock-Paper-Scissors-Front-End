@@ -1,4 +1,5 @@
 import React from "react";
+import "./chat.css";
 
 class Chat extends React.Component {
   constructor() {
@@ -36,7 +37,7 @@ class Chat extends React.Component {
     return (
       <div>
         {this.props.chatWs ? (
-          <div>
+          <div className="chat">
             {this.displayMessages()}
 
             <input
