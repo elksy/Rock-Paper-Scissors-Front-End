@@ -48,6 +48,18 @@ body {
 }
 
 .podium .third {
+  background-color: green;
+}
+.podium-rank-3a {
   min-height: 100px;
-  background: green;
+  weight: 100px;
+  background-color: yellow;
+}
+
+.podium-rank-3b {
+  min-height: 100px;
+  background: blue;
+  width: 100px;
+  display: flex;
+  justify-content: flex-start;
 }

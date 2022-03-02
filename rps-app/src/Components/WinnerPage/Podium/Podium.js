@@ -96,7 +96,13 @@ class Podium extends React.Component {
           <p class="podium__city">
             {this.state.thirdPlaceName} <br /> {this.state.alsoThirdPlaceName}
           </p>
-          <div class="podium__rank third">3</div>
+          <div
+            class="podium__rank third"
+            style={{ backgroundColor: this.state.thirdPlaceColour }}
+          >
+            <div className="podium-rank-3a"></div>
+            <div className="podium-rank-3b"></div>
+          </div>
         </div>
       </div>
     );
