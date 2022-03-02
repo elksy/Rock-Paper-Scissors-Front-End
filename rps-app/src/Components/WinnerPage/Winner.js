@@ -20,7 +20,7 @@ class Winner extends React.Component {
               <div className="losers-area">Losers!</div>
             </div>
 
-            <div className="chat-comp">Chat</div>
+            <div className="chat-comp"></div>
           </div>
           <div className="winner-page-btns">
             <Button className="winner-btns">Play Again</Button>

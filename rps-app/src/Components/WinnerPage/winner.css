@@ -35,7 +35,7 @@ Button.winner-btns {
   height: 37rem;
   margin: 1rem auto;
   margin-right: 4rem;
-  background-color: white;
+  background-color: transparent;
   border-radius: 10px;
 }
 
