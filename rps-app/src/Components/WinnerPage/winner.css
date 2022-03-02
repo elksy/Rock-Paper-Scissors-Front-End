@@ -1,56 +1,70 @@
 .winners-div,
 .winner-header {
-  background-color: cornflowerblue;
   margin: 1rem auto;
-  box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px;
-  color: black;
+  /* box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px; */
+  border: transparent;
   font-family: arial;
   font-weight: bold;
 }
 
+.winner-title {
+  border-radius: 10px;
+  padding: 1rem 15rem 1rem;
+}
+
+h1.winner-title {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
 .winner-comps {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
-.btn-primary {
+Button.winner-btns {
   background-color: black;
   border: black;
-  padding: 3px;
+  width: 60%;
 }
 
 .chat-comp {
-  border: 1px solid black;
-  width: 40%;
-  height: 30rem;
+  width: 20%;
+  height: 37rem;
   margin: 1rem auto;
+  margin-right: 4rem;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .winners-div {
-  border: 1px solid black;
-  width: 40%;
-  height: 30rem;
+  border-radius: 10px;
+  width: 70%;
+  height: 37rem;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-left: 2rem;
 }
 
 .winners-area,
 .losers-area {
   background-color: white;
-  border: 1px solid black;
-  width: 90%;
+  border-radius: 10px;
+  width: 100%;
   height: 30rem;
-  margin: 1rem auto;
 }
 
 .winners-area {
   height: 150%;
+  margin-bottom: 1rem;
 }
 .winner-page-btns {
-  padding-left: 2rem;
+  padding-left: 3rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  width: 60%;
 }
