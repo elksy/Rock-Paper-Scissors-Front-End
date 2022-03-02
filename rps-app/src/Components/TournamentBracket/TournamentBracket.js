@@ -4,6 +4,7 @@ import DisplayBracket from "./DisplayBracket.js";
 import GamePage from "../GamePage/GamePage.js";
 import SpectateGame from "./SpectateGame/SpectateGame.js";
 import "./tournamentBracket.css";
+import Chat from "../Chat/Chat.js";
 
 class TournamentBracket extends React.Component {
   constructor(props) {
@@ -41,13 +42,11 @@ class TournamentBracket extends React.Component {
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if ("bracket" in data) {
-        console.log(data);
         // this.setState({ rounds: rounds });
         this.setState({ rounds: data.bracket });
         this.checkForWin(data.bracket);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
-        console.log("starting round");
       }
     };
     ws.onclose = () => {
@@ -210,6 +209,12 @@ class TournamentBracket extends React.Component {
         <div className="page-wrapper">
           {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>
+        <Chat
+          chatWs={this.props.chatWs}
+          playerName={this.props.location.state.playerName}
+          playerColour={this.props.location.state.playerColour}
+          chatMessages={this.props.chatMessages}
+        />
       </div>
     );
   }

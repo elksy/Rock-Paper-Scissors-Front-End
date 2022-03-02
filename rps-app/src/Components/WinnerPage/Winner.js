@@ -6,8 +6,8 @@ class Winner extends React.Component {
   render() {
     return (
       <div className="winner-page">
-        <header className="winner-header">
-          <h1>Tournament Complete!</h1>
+        <header className="winner-title">
+          <h1 className="winner-title">Tournament Complete!</h1>
         </header>
         <main>
           <div className="winner-comps">
@@ -20,12 +20,12 @@ class Winner extends React.Component {
               <div className="losers-area">Losers!</div>
             </div>
 
-            <div className="chat-comp">Chat</div>
+            <div className="chat-comp"></div>
           </div>
           <div className="winner-page-btns">
-            <Button className="btn-primary">Play Again</Button>
-            <Button input="button">Leave</Button>
-            <Button input="button">End Tournament</Button>
+            <Button className="winner-btns">Play Again</Button>
+            <Button className="winner-btns">Leave</Button>
+            <Button className="winner-btns">End Tournament</Button>
           </div>
         </main>
       </div>

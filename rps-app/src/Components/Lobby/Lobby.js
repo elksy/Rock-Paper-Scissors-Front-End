@@ -4,6 +4,7 @@ import Options from "./Options.js";
 import "./lobby.css";
 import { Redirect } from "react-router-dom";
 import TournamentInfo from "./TournamentInfo.js";
+import Chat from "../Chat/Chat.js";
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Lobby extends React.Component {
       if (tournamentInfo.valid) {
         this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket(tournamentInfo.data);
+        this.props.createChatWebsocket(tournamentInfo.data.id);
       } else {
         this.setState({ validLobby: false });
       }
@@ -46,7 +48,8 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.ws.close();
+    //this.state.ws.close();
+    console.log("unmount");
   }
 
   getDataFromCookies(section) {
@@ -111,7 +114,6 @@ class Lobby extends React.Component {
         });
       }
     };
-
     this.setState({ ws: ws });
   };
 
@@ -148,6 +150,13 @@ class Lobby extends React.Component {
                 }
               />
               <div className="chat">Chat</div>
+              <Chat
+                chatWs={this.props.chatWs}
+                chatMessages={this.props.chatMessages}
+                playerName={this.state.playerName}
+                playerColour={this.state.playerColour}
+              />
+
             </div>
             <Options
               ws={this.state.ws}
@@ -179,6 +188,8 @@ class Lobby extends React.Component {
               pathname: `/tournament`,
               state: {
                 uuid: this.state.sessionId,
+                playerName: this.state.playerName,
+                playerColour: this.state.playerColour,
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}

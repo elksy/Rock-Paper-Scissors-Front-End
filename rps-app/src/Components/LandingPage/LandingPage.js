@@ -45,10 +45,10 @@ class LandingPage extends React.Component {
       }),
     });
     const jsonResponse = await response.json();
-    document.cookie = `sessionId=${jsonResponse.sessionId};expires=${jsonResponse.expiryDate}`;
-    document.cookie = `playerName=${jsonResponse.playerName};expires=${jsonResponse.expiryDate}`;
-    document.cookie = `playerColour=${jsonResponse.playerColour};expires=${jsonResponse.expiryDate}`;
-    console.log(document.cookie);
+
+    document.cookie = `sessionId=${jsonResponse.sessionId};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
+    document.cookie = `playerName=${jsonResponse.playerName};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
+    document.cookie = `playerColour=${jsonResponse.playerColour};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
     if (response.status === 200 && location === "lobby") {
       this.setState({ redirectToLobby: true });
     } else if (response.status === 200 && location === "createTournament") {
