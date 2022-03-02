@@ -12,6 +12,12 @@
   padding: 1rem 15rem 1rem;
 }
 
+h1.winner-title {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
 .winner-comps {
   display: flex;
   justify-content: space-between;
