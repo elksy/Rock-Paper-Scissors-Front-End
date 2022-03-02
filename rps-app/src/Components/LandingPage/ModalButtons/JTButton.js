@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NameForm from "./InputForms/NameForm";
 import ColourForm from "./InputForms/ColourForm.js";
+import { Alert } from "react-bootstrap";
 import TournamentIdForm from "./InputForms/TournamentIdForm.js";
 
 class JTButton extends React.Component {
@@ -59,11 +60,14 @@ class JTButton extends React.Component {
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}
             />
+            {this.props.disableButton && (
+              <Alert variant="warning">Name cannot contain spaces!</Alert>
+            )}
             <Button
               className="example"
               variant="primary"
               type="submit"
-              disabled={this.state.disableButton}
+              disabled={this.state.disableButton || this.props.disableButton}
             >
               Start Game
             </Button>
