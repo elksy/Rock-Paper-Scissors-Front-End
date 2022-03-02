@@ -1,6 +1,7 @@
 import React from "react";
 import "./winner.css";
 import { Button } from "react-bootstrap";
+import Podium from "./Podium/Podium.js";
 
 class Winner extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class Winner extends React.Component {
               <div className="winners-area">
                 Winners Podium <br />
                 {this.props.winner}
+                <Podium />
               </div>
 
               <div className="losers-area">Losers!</div>
