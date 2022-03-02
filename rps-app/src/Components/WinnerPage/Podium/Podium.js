@@ -52,23 +52,23 @@ class Podium extends React.Component {
         });
       }
     }
+  };
 
-    alsoPodiumRankThree = (rounds) => {
-      const semiFinals = rounds[rounds.length - 2].seeds[1];
-      if (semiFinals.score[0] !== 0 || semiFinals.score[1] !== 0) {
-        if (semiFinals.score[0] > semiFinals.score[1]) {
-          this.setState({
-            alsoThirdPlaceName: semiFinals.teams[0].name,
-            alsoThirdPlaceColour: semiFinals.team[0].bgColor,
-          });
-        } else {
-          this.setState({
-            alsoThirdPlaceName: semiFinals.teams[1].name,
-            alsoThirdPlaceColour: semiFinals.team[1].bgColor,
-          });
-        }
+  alsoPodiumRankThree = (rounds) => {
+    const semiFinals = rounds[rounds.length - 2].seeds[1];
+    if (semiFinals.score[0] !== 0 || semiFinals.score[1] !== 0) {
+      if (semiFinals.score[0] > semiFinals.score[1]) {
+        this.setState({
+          alsoThirdPlaceName: semiFinals.teams[0].name,
+          alsoThirdPlaceColour: semiFinals.team[0].bgColor,
+        });
+      } else {
+        this.setState({
+          alsoThirdPlaceName: semiFinals.teams[1].name,
+          alsoThirdPlaceColour: semiFinals.team[1].bgColor,
+        });
       }
-    };
+    }
   };
 
   render() {
