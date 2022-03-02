@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
 import Lobby from "./Components//Lobby/Lobby.js";
-import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
+import Winner from "./Components/WinnerPage/Winner.js";
 import LandingPage from "./Components/LandingPage/LandingPage.js";
+import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
 import { Switch, Route } from "react-router-dom";
 
@@ -40,6 +41,9 @@ class App extends React.Component {
           path="/tournament"
           render={(props) => <TournamentBracket {...props} />}
         />
+        <Route path="/winner">
+          <Winner winner="Mariam" losers={["Kishor", "Harry", "Rob"]} />
+        </Route>
         <Route path="/">
           <LandingPage
             updatePlayerName={this.updatePlayerName}
