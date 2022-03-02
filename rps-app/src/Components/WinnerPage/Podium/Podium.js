@@ -1,6 +1,5 @@
 import React from "react";
-import { First } from "react-bootstrap/esm/PageItem";
-import podium from "./podium.css";
+import "./podium.css";
 
 class Podium extends React.Component {
   constructor(props) {
@@ -12,18 +11,10 @@ class Podium extends React.Component {
       secondPlaceColour: "",
       thirdPlaceName: "",
       thirdPlaceColour: "",
+      alsoThirdPlaceName: "",
+      alsoThirdPlaceColour: "",
     };
   }
-  checkForWin = (rounds) => {
-    const finals = rounds[rounds.length - 1].seeds[0];
-    if (finals.score[0] !== 0 || finals.score[1] !== 0) {
-      const winner =
-        finals.score[0] > finals.score[1]
-          ? finals.teams[0].name
-          : finals.teams[1].name;
-      this.setState({ winner: winner });
-    }
-  };
 
   podiumRanksOneAndTwo = (rounds) => {
     const finals = rounds[rounds.length - 1].seeds[0];
@@ -46,6 +37,40 @@ class Podium extends React.Component {
     }
   };
 
+  podiumRankThree = (rounds) => {
+    const semiFinals = rounds[rounds.length - 2].seeds[0];
+    if (semiFinals.score[0] !== 0 || semiFinals.score[1] !== 0) {
+      if (semiFinals.score[0] > semiFinals.score[1]) {
+        this.setState({
+          thirdPlaceName: semiFinals.teams[0].name,
+          thirdPlaceColour: semiFinals.team[0].bgColor,
+        });
+      } else {
+        this.setState({
+          thirdPlaceName: semiFinals.teams[1].name,
+          thirdPlaceColour: semiFinals.team[1].bgColor,
+        });
+      }
+    }
+
+    alsoPodiumRankThree = (rounds) => {
+      const semiFinals = rounds[rounds.length - 2].seeds[1];
+      if (semiFinals.score[0] !== 0 || semiFinals.score[1] !== 0) {
+        if (semiFinals.score[0] > semiFinals.score[1]) {
+          this.setState({
+            alsoThirdPlaceName: semiFinals.teams[0].name,
+            alsoThirdPlaceColour: semiFinals.team[0].bgColor,
+          });
+        } else {
+          this.setState({
+            alsoThirdPlaceName: semiFinals.teams[1].name,
+            alsoThirdPlaceColour: semiFinals.team[1].bgColor,
+          });
+        }
+      }
+    };
+  };
+
   render() {
     return (
       <div class="container podium">
@@ -53,7 +78,7 @@ class Podium extends React.Component {
           <p class="podium__city">{this.state.secondPlaceName}</p>
           <div
             class="podium__rank second"
-            style={{ backgroundColor: this.state.secon }}
+            style={{ backgroundColor: this.state.secondPlaceColour }}
           >
             2
           </div>
@@ -62,14 +87,15 @@ class Podium extends React.Component {
           <p class="podium__city"> {this.state.firstPlaceName}</p>
           <div
             className="podium__rank first"
-            // key={i}
             style={{ backgroundColor: this.state.firstPlaceColour }}
           >
             1
           </div>
         </div>
         <div class="podium__item">
-          <p class="podium__city">Clermont-Ferrand Essentielle</p>
+          <p class="podium__city">
+            {this.state.thirdPlaceName} <br /> {this.state.alsoThirdPlaceName}
+          </p>
           <div class="podium__rank third">3</div>
         </div>
       </div>
