@@ -37,7 +37,9 @@ class LandingPage extends React.Component {
     const jsonResponse = await response.json();
     console.log(document.cookie);
     console.log(jsonResponse);
-    document.cookie = jsonResponse.cookies;
+    document.cookie = `sessionId=${jsonResponse.sessionId};expires=${jsonResponse.expiryDate}`;
+    document.cookie = `playerName=${jsonResponse.playerName};expires=${jsonResponse.expiryDate}`;
+    document.cookie = `playerColour=${jsonResponse.playerColour};expires=${jsonResponse.expiryDate}`;
     console.log(document.cookie);
     if (response.status === 200 && location === "lobby") {
       this.setState({ redirectToLobby: true });
