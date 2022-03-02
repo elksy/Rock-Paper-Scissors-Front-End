@@ -1,5 +1,5 @@
 import React from "react";
-import Timer from "../../GamePage/Timer.js";
+import Timer from "./Timer.js";
 import Opponent from "../../GamePage/Opponent";
 import "./spectateGame.css";
 import OutcomeMessage from "../../GamePage/OutcomeMessage.js";
