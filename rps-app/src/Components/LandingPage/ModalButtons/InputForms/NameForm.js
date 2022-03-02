@@ -13,7 +13,7 @@ class NameForm extends React.Component {
   };
 
   disableButton = (playerName) => {
-    if (playerName.length > 2) {
+    if (playerName.length > 2 && this.props.playerColour) {
       this.props.updateDisabledButton(false);
     } else {
       this.props.updateDisabledButton(true);

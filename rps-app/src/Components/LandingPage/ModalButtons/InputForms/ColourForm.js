@@ -10,8 +10,13 @@ class ColourForm extends React.Component {
     };
   }
 
-  updatePlayerColour = (playerColour) => {
-    this.props.updatePlayerColour(playerColour);
+  updatePlayerColour = async (playerColour) => {
+    await this.props.updatePlayerColour(playerColour);
+    if (this.props.playerColour && this.props.playerName.length > 2) {
+      this.props.updateDisabledButton(false);
+    } else {
+      this.props.updateDisabledButton(true);
+    }
   };
 
   render() {

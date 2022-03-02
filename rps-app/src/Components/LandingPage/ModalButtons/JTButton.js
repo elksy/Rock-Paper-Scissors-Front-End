@@ -43,10 +43,17 @@ class JTButton extends React.Component {
               }
               updatePlayerName={this.props.updatePlayerName}
               playerName={this.props.playerName}
+              playerColour={this.props.playerColour}
+              tournamentId={this.state.tournamentId}
             />
             <ColourForm
+              updateDisabledButton={(bool) =>
+                this.setState({ disableButton: bool })
+              }
               updatePlayerColour={this.props.updatePlayerColour}
               playerColour={this.props.playerColour}
+              playerName={this.props.playerName}
+              tournamentId={this.state.tournamentId}
             />
             <TournamentIdForm
               updateTournamentId={this.props.updateTournamentId}
@@ -56,7 +63,7 @@ class JTButton extends React.Component {
               className="example"
               variant="primary"
               type="submit"
-              // disabled={this.state.disableButton}
+              disabled={this.state.disableButton}
             >
               Start Game
             </Button>
