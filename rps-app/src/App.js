@@ -12,6 +12,8 @@ class App extends React.Component {
     this.state = {
       playerName: "",
       tournamentId: "",
+      chatWs: "",
+      chatMessages: [{ name: "server", message: "Welcome to chat!" }],
     };
   }
 
@@ -27,11 +29,42 @@ class App extends React.Component {
     this.setState({ tournamentId: tournamentId });
   };
 
+  createChatWebsocket = (tournamentId) => {
+    const ws = new WebSocket(
+      `ws${
+        process.env.REACT_APP_WS_ENDPOINT === "localhost:8080" ? `` : `s`
+      }://${process.env.REACT_APP_WS_ENDPOINT}/wschat/${tournamentId}`
+    );
+
+    ws.onopen = () => {};
+
+    ws.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if ("message" in data) {
+        let messages = this.state.chatMessages;
+        console.log(messages);
+        messages.unshift(data);
+        console.log(messages);
+        this.setState({ chatMessages: messages });
+      }
+    };
+
+    ws.onclose = () => {
+      console.log("closing");
+    };
+
+    this.setState({ chatWs: ws });
+  };
+
   render() {
     return (
       <Switch>
         <Route path="/lobby">
-          <Lobby />
+          <Lobby
+            chatWs={this.state.chatWs}
+            chatMessages={this.state.chatMessages}
+            createChatWebsocket={this.createChatWebsocket}
+          />
         </Route>
         <Route path="/create-tournament">
           <CreateTournament playerName={this.state.playerName} />
