@@ -1,8 +1,7 @@
 .winners-div,
 .winner-header {
-  background-color: transparent;
   margin: 1rem auto;
-  box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px;
+  /* box-shadow: rgba(0, 0, 0, 0.05) -2px -2px 4px; */
   border: transparent;
   font-family: arial;
   font-weight: bold;
@@ -10,7 +9,7 @@
 
 .winner-title {
   border-radius: 10px;
-  padding: 1rem 6rem 1rem;
+  padding: 1rem 15rem 1rem;
 }
 
 .winner-comps {
@@ -26,28 +25,28 @@ Button.winner-btns {
 }
 
 .chat-comp {
-  border: 1px solid black;
   width: 20%;
-  height: 40rem;
+  height: 37rem;
   margin: 1rem auto;
+  margin-right: 4rem;
   background-color: white;
   border-radius: 10px;
 }
 
 .winners-div {
   border-radius: 10px;
-  width: 55%;
-  height: 40rem;
+  width: 70%;
+  height: 37rem;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  padding-left: 2rem;
 }
 
 .winners-area,
 .losers-area {
   background-color: white;
-  border: 1px solid black;
   border-radius: 10px;
   width: 100%;
   height: 30rem;
