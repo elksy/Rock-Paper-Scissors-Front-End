@@ -68,7 +68,7 @@ class TournamentBracket extends React.Component {
 
   startRound = () => {
     if (this.state.winner) {
-      return <Winner winner={this.state.winner} />;
+      return <Winner winner={this.state.winner} rounds={this.state.rounds} />;
     } else if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
       return (

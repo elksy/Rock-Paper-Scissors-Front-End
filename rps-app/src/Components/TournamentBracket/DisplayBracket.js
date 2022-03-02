@@ -24,7 +24,7 @@ class DisplayBracket extends React.Component {
           <div>
             <SeedTeam
               style={{
-                color: seed.teams[0].textColor,
+                color: "black",
                 background: seed.teams[0].bgColor,
               }}
             >

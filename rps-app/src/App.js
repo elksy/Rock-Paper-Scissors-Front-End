@@ -83,19 +83,17 @@ class App extends React.Component {
             />
           )}
         />
-        <Route path="/winner">
-          <Winner winner="Mariam" losers={["Kishor", "Harry", "Rob"]} />
-        </Route>
-        <Route path="/">
-          <LandingPage
-            updatePlayerName={this.updatePlayerName}
-            playerName={this.state.playerName}
-            updatePlayerColour={this.updatePlayerColour}
-            playerColour={this.state.playerColour}
-            updateTournamentId={this.updateTournamentId}
-            tournamentId={this.state.tournamentId}
-          />
-        </Route>
+        <Route
+          path="/"
+          render={(props) => (
+            <LandingPage
+              updateTournamentId={this.updateTournamentId}
+              tournamentId={this.state.tournamentId}
+              {...props}
+            />
+          )}
+        />
+
       </Switch>
     );
   }

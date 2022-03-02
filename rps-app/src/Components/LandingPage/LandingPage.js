@@ -3,6 +3,7 @@ import "./LandingPage.css";
 import PGButton from "./ModalButtons/PGButton.js";
 import JTButton from "./ModalButtons/JTButton.js";
 import CTButton from "./ModalButtons/CTButton.js";
+import ExitLobby from "./ExitLobby.js";
 import Header from "../Header/Header.js";
 import { Redirect } from "react-router-dom";
 
@@ -16,7 +17,16 @@ class LandingPage extends React.Component {
       redirectToCreateTournament: false,
       playerName: "",
       playerColour: "",
+      leaveReason: "",
     };
+  }
+
+  componentDidMount() {
+    const { location, history } = this.props;
+    if (location.state && "leaveReason" in location.state) {
+      this.setState({ leaveReason: location.state.leaveReason });
+    }
+    history.replace();
   }
 
   addPlayer = async (location) => {
@@ -35,12 +45,10 @@ class LandingPage extends React.Component {
       }),
     });
     const jsonResponse = await response.json();
-    console.log(document.cookie);
-    console.log(jsonResponse);
+
     document.cookie = `sessionId=${jsonResponse.sessionId};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
     document.cookie = `playerName=${jsonResponse.playerName};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
     document.cookie = `playerColour=${jsonResponse.playerColour};expires=${jsonResponse.expiryDate};SameSite:None;Secure`;
-    console.log(document.cookie);
     if (response.status === 200 && location === "lobby") {
       this.setState({ redirectToLobby: true });
     } else if (response.status === 200 && location === "createTournament") {
@@ -101,6 +109,9 @@ class LandingPage extends React.Component {
             </div>
           </div>
         </div>
+        {this.state.leaveReason && (
+          <ExitLobby message={this.state.leaveReason} />
+        )}
       </div>
     );
   }

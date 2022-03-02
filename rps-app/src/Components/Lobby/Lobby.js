@@ -18,11 +18,11 @@ class Lobby extends React.Component {
       tournamentInfo: {},
       players: [],
       startTournament: false,
+      leaveReason: "",
     };
   }
 
   async componentDidMount() {
-    //const sessionIdReg = /sessionId=(.*);?/;
     this.getDataFromCookies("sessionId");
     this.getDataFromCookies("playerName");
     this.getDataFromCookies("playerColour");
@@ -98,23 +98,22 @@ class Lobby extends React.Component {
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log(data);
       if ("players" in data) {
         this.setState({ players: data });
+      } else if ("message" in data && data.message === "Game Full") {
+        this.setState({
+          leaveReason: "Lobby is full!",
+          validLobby: false,
+        });
       } else if ("message" in data && data.message === "Start Game") {
         this.setState({ startTournament: true });
-      } else if ("message" in data && data.message === "Leave Game") {
-        console.log("redirecting");
-
-        this.setState({ validLobby: false });
+      } else if ("message" in data && data.message === "Kick Player") {
+        this.setState({
+          leaveReason: "You have been kicked",
+          validLobby: false,
+        });
       }
     };
-
-    ws.onclose = () => {
-      // ws.send(CloseEvent());
-      console.log("closing");
-    };
-
     this.setState({ ws: ws });
   };
 
@@ -128,6 +127,7 @@ class Lobby extends React.Component {
         <div className="lobby-div">
           <h1 className="lobby-title">Lobby</h1>
         </div>
+
         <div className="lobby-components">
           {this.state.players.players && (
             <Players
@@ -141,13 +141,22 @@ class Lobby extends React.Component {
           {/* Chat will be imported from another component */}
           <div className="rhs">
             <div className="info-and-chat">
-              <TournamentInfo info={this.state.tournamentInfo} />
+              <TournamentInfo
+                info={this.state.tournamentInfo}
+                numberOfPlayers={
+                  "players" in this.state.players
+                    ? this.state.players.players.length
+                    : 1
+                }
+              />
+              <div className="chat">Chat</div>
               <Chat
                 chatWs={this.props.chatWs}
                 chatMessages={this.props.chatMessages}
                 playerName={this.state.playerName}
                 playerColour={this.state.playerColour}
               />
+
             </div>
             <Options
               ws={this.state.ws}
@@ -184,11 +193,20 @@ class Lobby extends React.Component {
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}
-            uuid={this.state.sessionId}
-            tournamentInfo={this.state.tournamentInfo}
+            // uuid={this.state.sessionId}
+            // tournamentInfo={this.state.tournamentInfo}
           />
         )}
-        {!this.state.validLobby && <Redirect to="/" />}
+        {!this.state.validLobby && (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: {
+                leaveReason: this.state.leaveReason,
+              },
+            }}
+          />
+        )}
         {this.state.ws ? this.displayLobby() : this.loading()}
       </div>
     );

@@ -29,6 +29,7 @@ class NameForm extends React.Component {
           type="text"
           placeholder="Enter nickname"
           value={this.props.playerName}
+          maxLength={12}
           onChange={this.handleNameChange}
         />
       </Form.Group>
