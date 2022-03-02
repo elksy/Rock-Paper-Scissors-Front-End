@@ -13,7 +13,9 @@ class App extends React.Component {
       playerName: "",
       tournamentId: "",
       chatWs: "",
-      chatMessages: [{ name: "server", message: "Welcome to chat!" }],
+      chatMessages: [
+        { name: "Server", message: "Welcome to chat!", color: "black" },
+      ],
     };
   }
 
@@ -42,9 +44,10 @@ class App extends React.Component {
       const data = JSON.parse(e.data);
       if ("message" in data) {
         let messages = this.state.chatMessages;
-        console.log(messages);
         messages.unshift(data);
-        console.log(messages);
+        if (messages.length > 15) {
+          messages = messages.slice(0, 15);
+        }
         this.setState({ chatMessages: messages });
       }
     };

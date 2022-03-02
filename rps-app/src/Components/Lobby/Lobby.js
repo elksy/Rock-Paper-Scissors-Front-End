@@ -146,6 +146,7 @@ class Lobby extends React.Component {
                 chatWs={this.props.chatWs}
                 chatMessages={this.props.chatMessages}
                 playerName={this.state.playerName}
+                playerColour={this.state.playerColour}
               />
             </div>
             <Options
@@ -179,6 +180,7 @@ class Lobby extends React.Component {
               state: {
                 uuid: this.state.sessionId,
                 playerName: this.state.playerName,
+                playerColour: this.state.playerColour,
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}

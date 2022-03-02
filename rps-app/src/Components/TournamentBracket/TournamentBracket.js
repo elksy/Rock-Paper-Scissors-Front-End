@@ -212,6 +212,7 @@ class TournamentBracket extends React.Component {
         <Chat
           chatWs={this.props.chatWs}
           playerName={this.props.location.state.playerName}
+          playerColour={this.props.location.state.playerColour}
           chatMessages={this.props.chatMessages}
         />
       </div>

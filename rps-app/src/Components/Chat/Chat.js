@@ -10,22 +10,28 @@ class Chat extends React.Component {
     this.setState({ message: event.target.value });
   };
 
-  sendMessage = (event) => {
-    event.preventDefault();
+  sendMessage = () => {
     this.props.chatWs.send(
       JSON.stringify({
         name: this.props.playerName,
         message: this.state.message,
+        color: this.props.playerColour,
       })
     );
     this.setState({ message: "" });
+  };
+
+  handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      this.sendMessage();
+    }
   };
 
   displayMessages = () => {
     console.log(this.props.chatMessages);
     const messages = this.props.chatMessages.map((message, key) => {
       return (
-        <div className="message" key={key}>
+        <div className="message" key={key} style={{ color: message.color }}>
           {message.name}: {message.message}
         </div>
       );
@@ -38,14 +44,17 @@ class Chat extends React.Component {
       <div>
         {this.props.chatWs ? (
           <div className="chat">
-            {this.displayMessages()}
-
+            {/* <h3 className="chat-title">Tournament Chat</h3> */}
             <input
               type="text"
+              className="chat-input"
+              placeholder="Hit enter to send chat!"
               value={this.state.message}
               onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
             />
-            <button onClick={this.sendMessage}>Send</button>
+
+            {this.displayMessages()}
           </div>
         ) : (
           <div>Loading</div>
