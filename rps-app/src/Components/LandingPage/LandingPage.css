@@ -70,8 +70,9 @@ h1.landing-title {
   top: 170px;
   transform: translate(-50%, -50%);
   display: block;
-  color: #cf1b1b;
+  color: black;
   font-size: 64px;
+  font-weight: bold;
   letter-spacing: 8px;
   cursor: pointer;
 }
@@ -84,8 +85,8 @@ h1.landing-title::before {
     45deg,
     transparent 0,
     transparent 2px,
-    black 2px,
-    yellow 4px
+    rgb(255, 140, 0) 2px,
+    orange 4px
   );
   -webkit-background-clip: text;
   top: 0px;
