@@ -53,9 +53,6 @@ class App extends React.Component {
       }
     };
 
-    ws.onclose = () => {
-      console.log("closing");
-    };
 
     this.setState({ chatWs: ws });
   };

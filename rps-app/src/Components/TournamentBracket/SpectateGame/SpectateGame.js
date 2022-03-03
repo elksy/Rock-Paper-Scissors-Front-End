@@ -21,6 +21,10 @@ class SpectateGame extends React.Component {
     this.createWebsocket();
   }
 
+  componentWillUnmount() {
+    this.state.ws.close();
+  }
+
   createWebsocket = () => {
     const ws = new WebSocket(
       `ws://${process.env.REACT_APP_WS_ENDPOINT}/wsgame/${this.props.tournamentInfo.id}/${this.props.seed}`
@@ -37,10 +41,6 @@ class SpectateGame extends React.Component {
           this.setState({ opponentChoice: data.move.choice });
         }
       }
-    };
-
-    ws.onclose = () => {
-      ws.send(CloseEvent());
     };
 
     this.setState({ ws: ws });

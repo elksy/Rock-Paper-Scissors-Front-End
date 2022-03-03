@@ -1,14 +1,9 @@
 import React from "react";
 
-class Timer extends React.Component {
+class PlayerTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { countdown: undefined };
-  }
-
-  componentDidMount() {
-    this.setState({ countdown: this.props.timer });
-    this.timer = setInterval(() => this.tick(), 1000);
   }
 
   tick() {
@@ -16,13 +11,15 @@ class Timer extends React.Component {
     if (current === 1) {
       clearInterval(this.timer);
       this.setState({ countdown: "Time up!" });
+      this.props.timeUp();
     } else {
       this.setState({ countdown: current - 1 });
     }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
+  componentDidMount() {
+    this.setState({ countdown: this.props.timer });
+    this.timer = setInterval(() => this.tick(), 1000);
   }
 
   render() {
@@ -44,4 +41,4 @@ class Timer extends React.Component {
   }
 }
 
-export default Timer;
+export default PlayerTimer;

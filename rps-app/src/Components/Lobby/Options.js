@@ -34,6 +34,7 @@ class Options extends React.Component {
           size="lg"
           className="option-button"
           onClick={this.handleLeave}
+          disabled={this.props.host === this.props.userId}
         >
           Leave Lobby
         </Button>

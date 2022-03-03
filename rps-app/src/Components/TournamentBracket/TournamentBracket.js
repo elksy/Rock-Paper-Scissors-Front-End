@@ -30,6 +30,10 @@ class TournamentBracket extends React.Component {
     this.createWebsocket();
   }
 
+  componentWillUnmount() {
+    this.state.ws.close();
+  }
+
   createWebsocket = () => {
     const ws = new WebSocket(
       `ws${
@@ -49,9 +53,9 @@ class TournamentBracket extends React.Component {
         this.setState({ startRound: true });
       }
     };
-    ws.onclose = () => {
-      ws.send(CloseEvent());
-    };
+    // ws.onclose = () => {
+    //   ws.send(CloseEvent());
+    // };
     this.setState({ ws: ws });
   };
 
@@ -212,12 +216,12 @@ class TournamentBracket extends React.Component {
         <div className="page-wrapper">
           {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>
-        <Chat
+        {/* <Chat
           chatWs={this.props.chatWs}
           playerName={this.props.location.state.playerName}
           playerColour={this.props.location.state.playerColour}
           chatMessages={this.props.chatMessages}
-        />
+        /> */}
       </div>
     );
   }

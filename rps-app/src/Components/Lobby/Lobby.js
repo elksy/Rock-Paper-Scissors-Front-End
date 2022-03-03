@@ -40,7 +40,7 @@ class Lobby extends React.Component {
       if (tournamentInfo.valid) {
         this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket(tournamentInfo.data);
-        this.props.createChatWebsocket(tournamentInfo.data.id);
+        // this.props.createChatWebsocket(tournamentInfo.data.id);
       } else {
         this.setState({ validLobby: false });
       }
@@ -48,10 +48,12 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.state.leaveReason === "") {
-      this.state.ws.close(3000, "Game started");
-    } else {
-      this.state.ws.close(4000, "Leaving lobby");
+    if (this.state.ws) {
+      if (this.state.leaveReason === "") {
+        this.state.ws.close(3000, "Game started");
+      } else {
+        this.state.ws.close(4000, "Leaving lobby");
+      }
     }
   }
 
@@ -168,12 +170,12 @@ class Lobby extends React.Component {
                 }
               />
               <div className="chat">Chat</div>
-              <Chat
+              {/* <Chat
                 chatWs={this.props.chatWs}
                 chatMessages={this.props.chatMessages}
                 playerName={this.state.playerName}
                 playerColour={this.state.playerColour}
-              />
+              /> */}
             </div>
             <Options
               ws={this.state.ws}
