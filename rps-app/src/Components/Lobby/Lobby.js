@@ -48,8 +48,11 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("unmount");
-    this.state.ws.close();
+    if (this.state.leaveReason === "") {
+      this.state.ws.close(3000, "Game started");
+    } else {
+      this.state.ws.close(4000, "Leaving lobby");
+    }
   }
 
   getDataFromCookies(section) {
@@ -70,7 +73,6 @@ class Lobby extends React.Component {
       }://${process.env.REACT_APP_WS_ENDPOINT}/getTournamentInfo/${id}`,
       {
         method: "GET",
-        // credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -95,6 +97,12 @@ class Lobby extends React.Component {
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
     };
+
+    // ws.onclose = (e) => {
+    //   if (this.state.leaveReason === "") {
+    //     this.state.ws.close(4000, "Leaving lobby");
+    //   }
+    // };
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
@@ -127,7 +135,10 @@ class Lobby extends React.Component {
   };
 
   leaveLobby = () => {
-    this.setState({ validLobby: false });
+    this.setState({
+      validLobby: false,
+      leaveReason: "You have left the lobby",
+    });
   };
 
   displayLobby = () => {
