@@ -42,21 +42,24 @@ class TournamentBracket extends React.Component {
         this.props.location.state.tournamentInfo.id
       }`
     );
-    ws.onopen = () => {};
+    ws.onopen = () => {
+      this.ping = setInterval(this.ping, 45000);
+    };
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if ("bracket" in data) {
-        // this.setState({ rounds: rounds });
         this.setState({ rounds: data.bracket });
         this.checkForWin(data.bracket);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
       }
     };
-    // ws.onclose = () => {
-    //   ws.send(CloseEvent());
-    // };
+
     this.setState({ ws: ws });
+  };
+
+  ping = () => {
+    this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
   checkForWin = (rounds) => {
@@ -216,12 +219,12 @@ class TournamentBracket extends React.Component {
         <div className="page-wrapper">
           {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>
-        {/* <Chat
+        <Chat
           chatWs={this.props.chatWs}
           playerName={this.props.location.state.playerName}
           playerColour={this.props.location.state.playerColour}
           chatMessages={this.props.chatMessages}
-        /> */}
+        />
       </div>
     );
   }

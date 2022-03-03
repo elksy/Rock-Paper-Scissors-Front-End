@@ -39,7 +39,9 @@ class App extends React.Component {
       }://${process.env.REACT_APP_WS_ENDPOINT}/wschat/${tournamentId}`
     );
 
-    ws.onopen = () => {};
+    ws.onopen = () => {
+      this.ping = setInterval(this.ping, 45000);
+    };
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
@@ -54,6 +56,10 @@ class App extends React.Component {
     };
 
     this.setState({ chatWs: ws });
+  };
+
+  ping = () => {
+    this.state.chatWs.send(JSON.stringify({ ping: "ping" }));
   };
 
   render() {
