@@ -1,20 +1,20 @@
-.message {
-  text-align: left;
-}
 .chat {
   z-index: 1;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 250px;
+  top: 20px;
+  right: 20px;
+  width: 280px;
   height: 350px;
 }
 
 .chat-input {
   width: 100%;
+  font-size: 12pt;
+  border-radius: 10px;
+  border: 1pt solid black;
 }
 
-.chat-title {
-  text-align: center;
-  color: black;
+.message {
+  text-align: left;
+  background-color: white;
 }

@@ -17,39 +17,36 @@ class Options extends React.Component {
   render() {
     return (
       <div className="options">
-        <div className="buttons">
-          <Button
-            onClick={this.handleStart}
-            variant="primary"
-            size="lg"
-            disabled={
-              this.props.numberOfPlayers === 1 ||
-              this.props.host !== this.props.userId
-            }
-          >
-            Start Game
-          </Button>
-          <Button variant="danger" size="lg" onClick={this.handleLeave}>
-            Leave Lobby
-          </Button>
-        </div>
-        <div className="buttons">
-          <Button
-            variant="warning"
-            size="lg"
-            disabled={this.props.host !== this.props.userId}
-          >
-            Assign New Host
-          </Button>
-          <Button
-            variant="danger"
-            size="lg"
-            disabled={this.props.host !== this.props.userId}
-            onClick={this.handleClose}
-          >
-            Close Lobby
-          </Button>
-        </div>
+        <Button
+          className="option-button"
+          onClick={this.handleStart}
+          variant="success"
+          size="lg"
+          disabled={
+            this.props.numberOfPlayers === 1 ||
+            this.props.host !== this.props.userId
+          }
+        >
+          Start Game
+        </Button>
+        <Button
+          variant="warning"
+          size="lg"
+          className="option-button"
+          onClick={this.handleLeave}
+        >
+          Leave Lobby
+        </Button>
+
+        <Button
+          variant="danger"
+          size="lg"
+          className="option-button"
+          disabled={this.props.host !== this.props.userId}
+          onClick={this.handleClose}
+        >
+          Close Lobby
+        </Button>
       </div>
     );
   }

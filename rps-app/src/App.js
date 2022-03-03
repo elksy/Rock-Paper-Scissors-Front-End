@@ -46,8 +46,8 @@ class App extends React.Component {
       if ("message" in data) {
         let messages = this.state.chatMessages;
         messages.unshift(data);
-        if (messages.length > 15) {
-          messages = messages.slice(0, 15);
+        if (messages.length > 25) {
+          messages = messages.slice(0, 25);
         }
         this.setState({ chatMessages: messages });
       }
@@ -93,7 +93,6 @@ class App extends React.Component {
             />
           )}
         />
-
       </Switch>
     );
   }
