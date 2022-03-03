@@ -92,7 +92,7 @@ class LandingPage extends React.Component {
           <div className="landing-page-container">
             <div className="landing-div">
               <h1 className="landing-title">
-                Rock, Paper, Scissors Tournament 🪨📄✂️
+                R🪨CK, P📄PER, SC✂️SSORS TOURNAMENT
               </h1>
             </div>
             <div className="menu-button-container">

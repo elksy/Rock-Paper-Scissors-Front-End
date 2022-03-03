@@ -69,10 +69,10 @@ class JTButton extends React.Component {
                 className="modal-button"
                 variant="primary"
                 type="submit"
-              disabled={this.state.disableButton || this.props.disableButton}
-            >
-              Start Game
-            </Button>
+                disabled={this.state.disableButton || this.props.disableButton}
+              >
+                Start Game
+              </Button>
             </div>
           </Form>
         </Modal.Body>
@@ -86,7 +86,6 @@ class JTButton extends React.Component {
         {this.viewModal()}
         <Button
           type="button"
-          variant="dark"
           id="landing-page-btn"
           onClick={() => {
             this.handleModal();
