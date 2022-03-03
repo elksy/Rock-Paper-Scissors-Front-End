@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 
 class Players extends React.Component {
   displayPlayers = () => {
-    // console.log(this.props.players.players);
     const players = this.props.players.players.map((player, i) => {
       return (
         <div
@@ -27,17 +26,11 @@ class Players extends React.Component {
     return players;
   };
 
-  // kickPlayer = (player) => {
-  //   this.props.kickPlayer(player);
-  // };
-
   render() {
     return (
       <div className="players">
-        <div className="players-div">
-          <h2>Players</h2>
-          {this.displayPlayers()}
-        </div>
+        <p className="player-title">Players</p>
+        {this.displayPlayers()}
       </div>
     );
   }

@@ -1,79 +1,91 @@
+h1.lobby-title {
+}
+.lobby-title-div {
+  border-radius: 10px;
+  padding: 1rem 6rem 1rem;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: 70%;
+  margin-left: 6rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: solid black 1pt;
+}
+
 .lobby-components {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
   margin-top: 1rem;
+  margin-left: 6rem;
 }
 .players {
-  width: 30%;
+  width: 35%;
   height: 40rem;
   background-color: white;
   border-radius: 10px;
+  border: solid black 1pt;
+}
+
+.player-title {
+  font-size: 24pt;
+  font-weight: bold;
+  text-align: center;
 }
 .player {
   display: flex;
   justify-content: space-between;
   padding-left: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   border-radius: 5px;
+  font-size: 16pt;
+  font-weight: bold;
+  border: solid 1px grey;
 }
 .rhs {
-  width: 50%;
+  width: 55%;
+  margin-right: 6rem;
 }
 .info-and-chat {
   display: flex;
   justify-content: space-between;
 }
 .tournament-info {
-  width: 45%;
-  height: 30rem;
-  margin-bottom: 2rem;
-  font-size: 12pt;
+  width: 68%;
+  height: 25rem;
+  margin-bottom: 1rem;
+  font-size: 16pt;
   font-weight: bold;
   background-color: white;
   border-radius: 10px;
+  border: solid black 1pt;
   padding: 10px;
 }
 
 .options {
-  height: 8rem;
+  width: 68%;
+  height: 14rem;
+  background-color: white;
+  border-radius: 10px;
+  border: solid black 1pt;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: yellow;
-  border-radius: 10px;
-  padding-right: 45px;
+  align-items: center;
 }
-.buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-#root > div > div > div > div.rhs > div.options > div > button.btn.btn-lg {
+
+.option-button {
   width: 20rem;
 }
+
 .tournament-id {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
-.players-div {
-  padding: 10px;
-  border-radius: 10px;
-}
-.lobby-title {
-  border-radius: 10px;
-}
 
-h1.lobby-title {
-  display: flex;
-  justify-content: center;
-  background-color: white;
-}
-.lobby-div {
-  border-radius: 10px;
-  padding: 1rem 6rem 1rem;
-}
 #copy-btn {
   width: 3rem;
 }
