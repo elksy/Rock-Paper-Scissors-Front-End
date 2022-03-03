@@ -71,19 +71,23 @@ class TournamentBracket extends React.Component {
       return <Winner winner={this.state.winner} rounds={this.state.rounds} />;
     } else if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
-      return (
-        <GamePage
-          seedId={seed}
-          opponent={opponent}
-          player={player}
-          round={this.state.currentRound}
-          tournamentInfo={this.state.tournamentInfo}
-          tournamentWs={this.state.ws}
-          updatePlayerLost={this.updatePlayerLost} //call if player has lost
-          endCurrentRound={this.endCurrentRound}
-          //tournament data
-        />
-      );
+      if (opponent.name === "BYE" && opponent.uuid === "2255") {
+        this.endCurrentRound();
+      } else {
+        return (
+          <GamePage
+            seedId={seed}
+            opponent={opponent}
+            player={player}
+            round={this.state.currentRound}
+            tournamentInfo={this.state.tournamentInfo}
+            tournamentWs={this.state.ws}
+            updatePlayerLost={this.updatePlayerLost} //call if player has lost
+            endCurrentRound={this.endCurrentRound}
+            //tournament data
+          />
+        );
+      }
     } else {
       const [player, opponent] = this.getSpectateMatchInfo();
       console.log(player, opponent);
