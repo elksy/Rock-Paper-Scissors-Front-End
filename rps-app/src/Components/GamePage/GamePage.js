@@ -25,7 +25,6 @@ class GamePage extends React.Component {
     console.log("before");
 
     this.state.ws.close();
-    console.log("umounting");
   }
 
   createWebsocket = () => {
