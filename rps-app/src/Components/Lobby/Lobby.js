@@ -99,6 +99,7 @@ class Lobby extends React.Component {
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
+      this.ping = setInterval(() => ws.send("ping"), 45000);
     };
 
     ws.onclose = (e) => {
