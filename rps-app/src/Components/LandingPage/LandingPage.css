@@ -1,23 +1,19 @@
-.landing-div {
-  padding: 1rem 20rem 1rem;
-}
-
-.landing-title {
+/* .landing-title {
   border-radius: 10px;
   font-weight: bold;
-  text-align: center;
+
   background-color: white;
   border: black;
   border-style: solid;
-}
+} */
 
 .menu-button-container {
   display: flex;
-  justify-content: center;
+  align-content: flex-end;
   margin: auto;
   flex-direction: column;
   align-items: center;
-  margin-top: 7rem;
+  margin-top: 18rem;
 }
 
 #landing-page-btn {
@@ -57,4 +53,70 @@
 Button.ct-button,
 Button.jt-button {
   background-color: black;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
+h1.landing-title {
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  background: rgba(255, 255, 255, 0.13);
+  text-align: center;
+  border-radius: 10px;
+}
+
+h1.landing-title {
+  position: absolute;
+  left: 50%;
+  top: 170px;
+  transform: translate(-50%, -50%);
+  display: block;
+  color: #cf1b1b;
+  font-size: 64px;
+  letter-spacing: 8px;
+  cursor: pointer;
+}
+
+h1.landing-title::before {
+  content: "ROCK, PAPER, SCISSORS TOURNAMENT";
+  position: absolute;
+  color: transparent;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0,
+    transparent 2px,
+    black 2px,
+    yellow 4px
+  );
+  -webkit-background-clip: text;
+  top: 0px;
+  left: 0;
+  z-index: -1;
+  transition: 1s;
+}
+
+/* h1.landing-title::after {
+  content: "ROCK, PAPER, SCISSORS TOURNAMENT";
+  position: absolute;
+  color: rgb(255, 208, 0); */
+/* background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0,
+    transparent 2px,
+    white 2px,
+    white 4px
+  ); */
+/* -webkit-background-clip: text;
+  top: 0px;
+  left: 0px;
+  transition: 1s;
+} */
+
+h1.landing-title:hover:before {
+  top: 10px;
+  left: 10px;
+}
+
+h1.landing-title:hover:after {
+  top: -10px;
+  left: -10px;
 }
