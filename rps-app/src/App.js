@@ -85,7 +85,6 @@ class App extends React.Component {
         <Route
           path="/tournament"
           render={(props) => {
-            console.log("hi");
             if (document.cookie.indexOf("sessionId=") !== -1) {
               return (
                 <TournamentBracket
