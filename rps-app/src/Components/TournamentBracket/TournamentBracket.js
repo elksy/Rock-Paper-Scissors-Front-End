@@ -205,7 +205,6 @@ class TournamentBracket extends React.Component {
   render() {
     return (
       <div>
-        <div className="title">Tournament</div>
         <div className="page-wrapper">
           {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>

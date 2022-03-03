@@ -25,18 +25,18 @@
 .podium .first {
   min-height: 300px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 3px;
 }
 .podium .second {
   min-height: 200px;
   border: black;
   border-style: solid;
   border-right: none;
-  border-width: 5px;
+  border-width: 3px;
 }
 .podium-rank-third {
   border: black;
-  border-width: 5px;
+  border-width: 3px;
   display: flex;
   border-left: none;
   align-items: column;

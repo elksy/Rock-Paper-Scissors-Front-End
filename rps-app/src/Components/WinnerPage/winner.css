@@ -16,6 +16,8 @@ h1.winner-title {
   display: flex;
   justify-content: center;
   background-color: white;
+  border: black;
+  border-style: solid;
 }
 
 .winner-comps {
@@ -57,6 +59,8 @@ Button.winner-btns {
   width: 100%;
   height: 30rem;
   padding-left: 5px;
+  border: black;
+  border-style: solid;
 }
 
 .winners-area {
