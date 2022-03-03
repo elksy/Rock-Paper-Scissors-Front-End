@@ -48,6 +48,7 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log("unmount");
     if (this.state.ws) {
       if (this.state.leaveReason === "") {
         this.state.ws.close(3000, "Game started");
@@ -100,11 +101,15 @@ class Lobby extends React.Component {
       ws.send(JSON.stringify({ newPlayer: playerData }));
     };
 
-    // ws.onclose = (e) => {
-    //   if (this.state.leaveReason === "") {
-    //     this.state.ws.close(4000, "Leaving lobby");
-    //   }
-    // };
+    ws.onclose = (e) => {
+      console.log("closed");
+      console.log(e);
+    };
+
+    ws.onerror = (e) => {
+      console.log("error");
+      console.log(e);
+    };
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
