@@ -50,9 +50,9 @@
   justify-content: center;
 }
 
-Button.ct-button,
-Button.jt-button {
-  background-color: black;
+#landing-page-btn:hover {
+  background-color: rgb(255, 140, 0);
+  color: black;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
@@ -86,7 +86,7 @@ h1.landing-title::before {
     transparent 0,
     transparent 2px,
     rgb(255, 140, 0) 2px,
-    orange 4px
+    rgb(255, 140, 0) 4px
   );
   -webkit-background-clip: text;
   top: 0px;
@@ -94,23 +94,6 @@ h1.landing-title::before {
   z-index: -1;
   transition: 1s;
 }
-
-/* h1.landing-title::after {
-  content: "ROCK, PAPER, SCISSORS TOURNAMENT";
-  position: absolute;
-  color: rgb(255, 208, 0); */
-/* background-image: repeating-linear-gradient(
-    135deg,
-    transparent 0,
-    transparent 2px,
-    white 2px,
-    white 4px
-  ); */
-/* -webkit-background-clip: text;
-  top: 0px;
-  left: 0px;
-  transition: 1s;
-} */
 
 h1.landing-title:hover:before {
   top: 10px;
