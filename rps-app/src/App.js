@@ -53,7 +53,6 @@ class App extends React.Component {
       }
     };
 
-
     this.setState({ chatWs: ws });
   };
 
@@ -70,7 +69,6 @@ class App extends React.Component {
         <Route
           path="/create-tournament"
           render={(props) => {
-            console.log("hi");
             if (document.cookie.indexOf("sessionId=") !== -1) {
               return <CreateTournament playerName={this.state.playerName} />;
             } else {
