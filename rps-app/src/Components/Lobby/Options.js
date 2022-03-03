@@ -2,15 +2,24 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 class Options extends React.Component {
-  handleClick = (event) => {
+  handleStart = (event) => {
     this.props.ws.send(JSON.stringify({ message: "Start Game" }));
   };
+
+  handleLeave = (event) => {
+    this.props.leaveLobby();
+  };
+
+  handleClose = (event) => {
+    this.props.ws.send(JSON.stringify({ message: "Close Lobby" }));
+  };
+
   render() {
     return (
       <div className="options">
         <div className="buttons">
           <Button
-            onClick={this.handleClick}
+            onClick={this.handleStart}
             variant="primary"
             size="lg"
             disabled={
@@ -20,7 +29,7 @@ class Options extends React.Component {
           >
             Start Game
           </Button>
-          <Button variant="danger" size="lg">
+          <Button variant="danger" size="lg" onClick={this.handleLeave}>
             Leave Lobby
           </Button>
         </div>
@@ -36,6 +45,7 @@ class Options extends React.Component {
             variant="danger"
             size="lg"
             disabled={this.props.host !== this.props.userId}
+            onClick={this.handleClose}
           >
             Close Lobby
           </Button>
