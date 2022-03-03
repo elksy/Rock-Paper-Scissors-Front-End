@@ -18,6 +18,7 @@ class LandingPage extends React.Component {
       playerName: "",
       playerColour: "",
       leaveReason: "",
+      disableButton: false,
     };
   }
 
@@ -62,6 +63,11 @@ class LandingPage extends React.Component {
 
   updatePlayerName = (playerName) => {
     this.setState({ playerName: playerName });
+    if (playerName.includes(" ")) {
+      this.setState({ disableButton: true });
+    } else {
+      this.setState({ disableButton: false });
+    }
   };
 
   updatePlayerColour = (playerColour) => {
@@ -103,6 +109,7 @@ class LandingPage extends React.Component {
                 playerColour={this.state.playerColour}
                 updateTournamentId={this.props.updateTournamentId}
                 tournamentId={this.props.tournamentId}
+                disableButton={this.state.disableButton}
               />
               <CTButton
                 addPlayer={this.addPlayer}
@@ -110,6 +117,7 @@ class LandingPage extends React.Component {
                 playerName={this.state.playerName}
                 updatePlayerColour={this.updatePlayerColour}
                 playerColour={this.state.playerColour}
+                disableButton={this.state.disableButton}
               />
             </div>
           </div>
