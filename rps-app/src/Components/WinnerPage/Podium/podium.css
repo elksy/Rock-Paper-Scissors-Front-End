@@ -31,13 +31,14 @@
   min-height: 200px;
   border: black;
   border-style: solid;
-  border-left: solid;
+  border-right: none;
   border-width: 5px;
 }
 .podium-rank-third {
   border: black;
   border-width: 5px;
   display: flex;
+  border-left: none;
   align-items: column;
 }
 .podium-rank-3a {
@@ -49,4 +50,14 @@
   min-height: 100px;
   width: 50%;
   left: 50px;
+}
+
+#podium-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.first-second {
+  display: flex;
+  align-items: flex-end;
 }

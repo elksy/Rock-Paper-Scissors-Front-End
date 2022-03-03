@@ -69,3 +69,8 @@ Button.winner-btns {
   justify-content: space-between;
   width: 60%;
 }
+
+.winners-podium-title {
+  display: flex;
+  justify-content: center;
+}

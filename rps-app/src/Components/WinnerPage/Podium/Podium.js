@@ -81,9 +81,9 @@ class Podium extends React.Component {
     }
   };
 
-  render() {
+  renderFirstAndSecond() {
     return (
-      <div className="container podium">
+      <div className="first-second">
         <div className="podium__item">
           <p className="podium__city">{this.state.secondPlaceName}</p>
           <div
@@ -94,7 +94,7 @@ class Podium extends React.Component {
           </div>
         </div>
         <div className="podium__item">
-          <p className="podium__city"> {this.state.firstPlaceName}</p>
+          <p className="podium__city">{this.state.firstPlaceName}</p>
           <div
             className="podium__rank first"
             style={{ backgroundColor: this.state.firstPlaceColour }}
@@ -102,14 +102,20 @@ class Podium extends React.Component {
             1
           </div>
         </div>
+      </div>
+    );
+  }
+
+  renderThird() {
+    if (this.state.thirdPlaceName !== "") {
+      return (
         <div className="podium__item">
           <p className="podium__city">
             {this.state.thirdPlaceName} <br /> {this.state.alsoThirdPlaceName}
           </p>
-          <div
-            className="podium-rank-third"
-            //style={{ backgroundColor: this.state.thirdPlaceColour }}
-          >
+          <div className="podium-rank-third">
+            {" "}
+            3
             <div
               className="podium-rank-3a"
               style={{ backgroundColor: this.state.thirdPlaceColour }}
@@ -120,6 +126,15 @@ class Podium extends React.Component {
             ></div>
           </div>
         </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div className="container podium" id="podium-container">
+        {this.renderFirstAndSecond()}
+        {this.renderThird()}
       </div>
     );
   }

@@ -14,8 +14,7 @@ class Winner extends React.Component {
           <div className="winner-comps">
             <div className="winners-div">
               <div className="winners-area">
-                Winners Podium <br />
-                {this.props.winner}
+                <p className="winners-podium-title"> Winners Podium </p>
                 <Podium winner={this.props.winner} rounds={this.props.rounds} />
               </div>
 
