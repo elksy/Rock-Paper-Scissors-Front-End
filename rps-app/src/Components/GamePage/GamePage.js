@@ -1,5 +1,5 @@
 import React from "react";
-import Timer from "./Timer.js";
+import PlayerTimer from "./PlayerTimer.js";
 import Player from "./Player.js";
 import Opponent from "./Opponent.js";
 import "./gamepage.css";
@@ -21,6 +21,12 @@ class GamePage extends React.Component {
   componentDidMount() {
     this.createWebsocket();
   }
+  componentWillUnmount() {
+    console.log("before");
+
+    this.state.ws.close();
+    console.log("umounting");
+  }
 
   createWebsocket = () => {
     const ws = new WebSocket(
@@ -40,10 +46,6 @@ class GamePage extends React.Component {
           this.setState({ opponentChoice: data.move.choice });
         }
       }
-    };
-
-    ws.onclose = () => {
-      ws.send(CloseEvent());
     };
 
     this.setState({ ws: ws });
@@ -129,8 +131,7 @@ class GamePage extends React.Component {
             opponentScore: this.state.opponentScore,
           },
         })
-      ); //{winner: id, score: [2, 1], seed: 'final'}
-      //  { winner: uuid, round: index, roundMatch: index, score: [score,score]}
+      );
       this.props.endCurrentRound();
     } else if (
       this.state.opponentScore >=
@@ -146,7 +147,7 @@ class GamePage extends React.Component {
     return (
       <div>
         <div className="timer-container">
-          <Timer
+          <PlayerTimer
             timer={this.props.tournamentInfo.timeLimit}
             timeUp={this.sendPlayerChoice}
           />

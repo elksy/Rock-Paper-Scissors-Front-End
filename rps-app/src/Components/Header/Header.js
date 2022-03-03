@@ -15,7 +15,6 @@ class Header extends React.Component {
     const regex = new RegExp("(^| )playerName=([^;]+)");
     if (regex.test(cookies)) {
       const result = cookies.match(regex)[2];
-      console.log(result);
       this.setState({ playerName: result });
     }
   }
