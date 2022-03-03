@@ -17,4 +17,6 @@
 .message {
   text-align: left;
   background-color: white;
+  color: black;
+  padding-left: 10px;
 }
