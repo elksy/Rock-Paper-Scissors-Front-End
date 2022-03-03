@@ -28,7 +28,7 @@ class ExitLobby extends React.Component {
             variant="outline-dark"
             onClick={() => this.setState({ show: false })}
           >
-            Back to lobby
+            Okay
           </Button>
         </Modal.Footer>
       </Modal>
