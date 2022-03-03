@@ -37,6 +37,10 @@ Button.modal-btns:hover {
   color: black;
 }
 
+Button.modal-btns:disabled {
+  background-color: black;
+}
+
 .colour-picker {
   margin-top: 1rem;
   margin-bottom: 2rem;
