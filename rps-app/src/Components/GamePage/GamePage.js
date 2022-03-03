@@ -149,8 +149,7 @@ class GamePage extends React.Component {
           <Timer
             timer={this.props.tournamentInfo.timeLimit}
             timeUp={this.sendPlayerChoice}
-          />{" "}
-          {/* Need timer data */}
+          />
         </div>
         <div className="game-wrapper">
           <Player
