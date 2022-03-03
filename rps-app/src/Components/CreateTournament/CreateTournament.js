@@ -78,10 +78,10 @@ class CreateTournament extends React.Component {
   render() {
     return (
       <div className="create-tournament-page">
-        <header>
-          <h1 className="create-tourn-title">Create Tournament</h1>
+        <div className="create-tournament-title-div">
+          <p id="create-tournament-title">Create Tournament</p>
           <Header />
-        </header>
+        </div>
         <TournamentOptions
           rounds={this.state.rounds}
           timeLimit={this.state.timeLimit}
@@ -92,12 +92,12 @@ class CreateTournament extends React.Component {
           handleAddBots={this.handleAddBots}
           handleTournamentType={this.handleTournamentType}
         />
-        <div className="start-btn">
+        <div className="start-btn-div">
           <Button
             onClick={this.startTournament}
             size="lg"
-            variant="outline-dark"
-            type="submit"
+            variant="outline-success"
+            type="button"
           >
             Start Tournament
           </Button>

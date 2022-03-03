@@ -60,17 +60,20 @@ class JTButton extends React.Component {
               updateTournamentId={this.props.updateTournamentId}
               tournamentId={this.props.tournamentId}
             />
+
             {this.props.disableButton && (
               <Alert variant="warning">Name cannot contain spaces!</Alert>
             )}
-            <Button
-              className="example"
-              variant="primary"
-              type="submit"
+            <div className="modal-button">
+              <Button
+                className="modal-button"
+                variant="primary"
+                type="submit"
               disabled={this.state.disableButton || this.props.disableButton}
             >
               Start Game
             </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
@@ -82,13 +85,14 @@ class JTButton extends React.Component {
       <div>
         {this.viewModal()}
         <Button
-          type="submit"
-          className="btn btn-primary"
+          type="button"
+          variant="dark"
+          id="landing-page-btn"
           onClick={() => {
             this.handleModal();
           }}
         >
-          Join Tournament
+          Play Game
         </Button>
       </div>
     );

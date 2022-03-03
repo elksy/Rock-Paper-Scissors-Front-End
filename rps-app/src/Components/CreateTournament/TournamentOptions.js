@@ -9,23 +9,32 @@ class TournamentOptions extends React.Component {
           <h3>Number of Rounds: </h3>
           <div className="option-btns">
             <Button
+              className="option-btn"
               onClick={this.props.handleRoundsClick}
               value="1"
-              variant={this.props.rounds === "1" ? "dark" : "outline-dark"}
+              variant={
+                this.props.rounds === "1" ? "success" : "outline-success"
+              }
             >
               1
             </Button>
             <Button
+              className="option-btn"
               onClick={this.props.handleRoundsClick}
               value="3"
-              variant={this.props.rounds === "3" ? "dark" : "outline-dark"}
+              variant={
+                this.props.rounds === "3" ? "success" : "outline-success"
+              }
             >
               3
             </Button>
             <Button
+              className="option-btn"
               onClick={this.props.handleRoundsClick}
               value="5"
-              variant={this.props.rounds === "5" ? "dark" : "outline-dark"}
+              variant={
+                this.props.rounds === "5" ? "success" : "outline-success"
+              }
             >
               5
             </Button>
@@ -36,23 +45,32 @@ class TournamentOptions extends React.Component {
           <h3>Time Limit: </h3>
           <div className="option-btns">
             <Button
+              className="option-btn"
               onClick={this.props.handleTimeClick}
               value="5"
-              variant={this.props.timeLimit === "5" ? "dark" : "outline-dark"}
+              variant={
+                this.props.timeLimit === "5" ? "success" : "outline-success"
+              }
             >
               5
             </Button>
             <Button
+              className="option-btn"
               onClick={this.props.handleTimeClick}
               value="10"
-              variant={this.props.timeLimit === "10" ? "dark" : "outline-dark"}
+              variant={
+                this.props.timeLimit === "10" ? "success" : "outline-success"
+              }
             >
               10
             </Button>
             <Button
+              className="option-btn"
               onClick={this.props.handleTimeClick}
               value="15"
-              variant={this.props.timeLimit === "15" ? "dark" : "outline-dark"}
+              variant={
+                this.props.timeLimit === "15" ? "success" : "outline-success"
+              }
             >
               15
             </Button>
@@ -63,14 +81,16 @@ class TournamentOptions extends React.Component {
           <h3>Add Bots: </h3>
           <div className="option-btns">
             <Button
+              className="option-btn"
               onClick={this.props.handleAddBots}
-              variant={this.props.addBots ? "dark" : "outline-dark"}
+              variant={this.props.addBots ? "success" : "outline-success"}
             >
               Yes
             </Button>
             <Button
+              className="option-btn"
               onClick={this.props.handleAddBots}
-              variant={!this.props.addBots ? "dark" : "outline-dark"}
+              variant={!this.props.addBots ? "success" : "outline-success"}
             >
               No
             </Button>
@@ -83,20 +103,12 @@ class TournamentOptions extends React.Component {
             <Button
               onClick={this.props.handleTournamentType}
               value="knockout"
-              id="type-btns"
-              variant={this.props.type === "knockout" ? "dark" : "outline-dark"}
-            >
-              Knockout
-            </Button>
-            <Button
-              onClick={this.props.handleTournamentType}
-              value="round-robin"
-              id="type-btns"
+              className="type-btns"
               variant={
-                this.props.type === "round-robin" ? "dark" : "outline-dark"
+                this.props.type === "knockout" ? "success" : "outline-success"
               }
             >
-              Round-robin
+              Knockout
             </Button>
           </div>
         </div>

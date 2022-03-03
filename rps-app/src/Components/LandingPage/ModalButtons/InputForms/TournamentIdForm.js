@@ -13,8 +13,8 @@ class TournamentIdForm extends React.Component {
 
   render() {
     return (
-      <Form.Group className="mb-3">
-        <Form.Label className="tournament-id-label">Tournament ID</Form.Label>
+      <Form.Group className="tournament-input">
+        <Form.Label className="form-title">Tournament Code</Form.Label>
         <Form.Control
           className="tournament-id-input"
           type="text"
