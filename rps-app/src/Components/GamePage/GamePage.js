@@ -22,7 +22,6 @@ class GamePage extends React.Component {
     this.createWebsocket();
   }
   componentWillUnmount() {
-    console.log("before");
 
     this.state.ws.close();
   }
