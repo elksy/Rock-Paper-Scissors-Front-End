@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import NameForm from "./InputForms/NameForm.js";
 import ColourForm from "./InputForms/ColourForm.js";
 
@@ -56,15 +56,19 @@ class CTButton extends React.Component {
               playerColour={this.props.playerColour}
               playerName={this.props.playerName}
             />
+
+            {this.props.disableButton && (
+              <Alert variant="warning">Name cannot contain spaces!</Alert>
+            )}
             <div className="modal-button">
               <Button
                 variant="primary"
                 type="submit"
-                disabled={this.state.disableButton}
-              >
-                Start Game
-              </Button>
-            </div>
+              disabled={this.state.disableButton || this.props.disableButton}
+            >
+              Start Game
+            </Button>
+ </div>
           </Form>
         </Modal.Body>
       </Modal>
