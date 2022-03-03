@@ -29,20 +29,20 @@ class DisplayBracket extends React.Component {
               }}
             >
               <div className="seed-item">
-                <div>{seed.teams[0]?.name || "NO TEAM "}</div>
+                <div>{seed.teams[0]?.name || ""}</div>
                 <div>{seed.score[0]}</div>
               </div>
             </SeedTeam>
             <SeedTeam
               style={{
-                color: seed.teams[1].textColor,
+                color: "black",
                 background: seed.teams[1].bgColor,
               }}
             >
               <div className="seed-item">
-                <div>{seed.teams[1]?.name || "NO TEAM "}</div>
+                <div>{seed.teams[1]?.name || ""}</div>
                 <div>{seed.score[1]}</div>
-              </div>{" "}
+              </div>
             </SeedTeam>
           </div>
         </SeedItem>
