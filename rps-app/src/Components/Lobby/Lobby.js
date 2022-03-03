@@ -48,10 +48,12 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.state.leaveReason === "") {
-      this.state.ws.close(3000, "Game started");
-    } else {
-      this.state.ws.close(4000, "Leaving lobby");
+    if (this.state.ws) {
+      if (this.state.leaveReason === "") {
+        this.state.ws.close(3000, "Game started");
+      } else {
+        this.state.ws.close(4000, "Leaving lobby");
+      }
     }
   }
 
