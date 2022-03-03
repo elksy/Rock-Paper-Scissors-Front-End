@@ -1,7 +1,6 @@
 import React from "react";
 import Timer from "./Timer.js";
 import Opponent from "../../GamePage/Opponent";
-import "./spectateGame.css";
 import OutcomeMessage from "../../GamePage/OutcomeMessage.js";
 
 class SpectateGame extends React.Component {

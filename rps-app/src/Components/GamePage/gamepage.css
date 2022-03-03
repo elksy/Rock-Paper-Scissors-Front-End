@@ -3,17 +3,19 @@
 
 .game-wrapper {
   width: 100%;
-  height: 50rem;
+  height: 70%;
   display: flex;
   justify-content: space-evenly;
   margin-top: 2rem;
   padding: 2rem 0.5rem;
+  min-height: 50%;
 }
 
 .game {
   border: 1px solid rgb(255, 140, 0);
   border-radius: 5px;
   width: 40%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,6 +26,7 @@
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 3rem;
+  padding-top: 5px;
 }
 
 .selection-div {
@@ -34,6 +37,12 @@
 
 .selection-div:hover {
   border: rgb(255, 140, 0) solid 2px;
+}
+
+.opponent-div {
+  border: black solid 2px;
+  border-radius: 20px;
+  padding: 0.5rem;
 }
 
 .selection-image {
@@ -49,7 +58,7 @@
 .selected-div {
   display: flex;
   justify-content: center;
-  height: 60%;
+  height: 70%;
 }
 
 #loading {
@@ -108,4 +117,8 @@
 
 .make-text-red {
   color: rgb(156, 27, 27);
+}
+
+#opponent:hover {
+  border: black solid 2px;
 }
