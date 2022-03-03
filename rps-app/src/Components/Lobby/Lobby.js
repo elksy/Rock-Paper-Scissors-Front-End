@@ -99,7 +99,7 @@ class Lobby extends React.Component {
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
-      this.ping = setInterval(() => ws.send("ping"), 45000);
+      this.ping = setInterval(this.ping, 45000);
     };
 
     ws.onclose = (e) => {
@@ -136,6 +136,11 @@ class Lobby extends React.Component {
       }
     };
     this.setState({ ws: ws });
+  };
+
+  ping = () => {
+    console.log("ping");
+    this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
   kickPlayer = (player) => {
