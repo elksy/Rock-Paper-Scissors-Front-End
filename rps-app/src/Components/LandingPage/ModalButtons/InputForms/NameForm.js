@@ -10,7 +10,6 @@ class NameForm extends React.Component {
   handleNameChange = (e) => {
     this.props.updatePlayerName(e.target.value);
     this.disableButton(e.target.value);
-    // e.preventDefault();
   };
 
   disableButton = (playerName) => {
