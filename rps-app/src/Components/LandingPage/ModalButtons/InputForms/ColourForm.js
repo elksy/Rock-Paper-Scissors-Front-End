@@ -21,7 +21,7 @@ class ColourForm extends React.Component {
 
   render() {
     return (
-      <Form.Group className="colour-picker">
+      <Form.Group className="colour-picker" data-testid="circle-picker">
         <Form.Label className="form-title">Choose a colour</Form.Label>
         <CirclePicker
           color={this.props.playerColour}

@@ -22,7 +22,6 @@ test("Clicking on 'Create Tournament' button opens up create tournament Modal", 
 
   const tournamentIDSection = screen.queryByText(/Tournament ID/i);
   expect(tournamentIDSection).not.toBeInTheDocument();
-
 });
 
 test("You can't create a tournament without a name", () => {
@@ -63,9 +62,7 @@ test("Create Tournament Page will have your inputted name and correct options to
   screen.getByRole("heading", { name: "Tournament Type:" });
 });
 
-
 test("Start tournament sends you to tournament lobby", async () => {
-
   const name = "hkmr";
   const { container } = render(
     <Router>
@@ -77,14 +74,21 @@ test("Start tournament sends you to tournament lobby", async () => {
   userEvent.click(screen.getByRole("button", { name: "Create Tournament" }));
 
   userEvent.type(screen.getByTestId("username-input-area"), name);
-
-  userEvent.click(screen.getByRole("link"));
-
-  await userEvent.click(
-    screen.getByRole("button", { name: "Start Tournament" })
+  userEvent.click(container.querySelector(".circle-picker"));
+  console.log(
+    screen
+      .getByTestId("circle-picker")
+      .querySelector("div")
+      .querySelectorAll("span")[0]
+      .querySelector("div")
+      .querySelector("span")
+      .querySelector("div")
   );
+
+  userEvent.click(screen.getByRole("button", { name: "Start Game" }));
+
+  userEvent.click(screen.getByRole("button", { name: "Start Tournament" }));
 
   const linkTitle = screen.getByText(/Here Is Your Tournament Link!/i);
   // expect(linkTitle).toBeInTheDocument();
-
 });

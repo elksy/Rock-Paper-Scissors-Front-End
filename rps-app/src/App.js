@@ -5,7 +5,7 @@ import Winner from "./Components/WinnerPage/Winner.js";
 import LandingPage from "./Components/LandingPage/LandingPage.js";
 import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -67,18 +67,33 @@ class App extends React.Component {
             createChatWebsocket={this.createChatWebsocket}
           />
         </Route>
-        <Route path="/create-tournament">
-          <CreateTournament playerName={this.state.playerName} />
-        </Route>
+        <Route
+          path="/create-tournament"
+          render={(props) => {
+            console.log("hi");
+            if (document.cookie.indexOf("sessionId=") !== -1) {
+              return <CreateTournament playerName={this.state.playerName} />;
+            } else {
+              return <Redirect to="/" />;
+            }
+          }}
+        ></Route>
         <Route
           path="/tournament"
-          render={(props) => (
-            <TournamentBracket
-              {...props}
-              chatWs={this.state.chatWs}
-              chatMessages={this.state.chatMessages}
-            />
-          )}
+          render={(props) => {
+            console.log("hi");
+            if (document.cookie.indexOf("sessionId=") !== -1) {
+              return (
+                <TournamentBracket
+                  {...props}
+                  chatWs={this.state.chatWs}
+                  chatMessages={this.state.chatMessages}
+                />
+              );
+            } else {
+              return <Redirect to="/" />;
+            }
+          }}
         />
         <Route
           path="/"
