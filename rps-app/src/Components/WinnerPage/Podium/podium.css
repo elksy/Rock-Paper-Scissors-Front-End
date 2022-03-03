@@ -37,6 +37,7 @@
 .podium-rank-third {
   border: black;
   border-width: 3px;
+  border-style: solid;
   display: flex;
   border-left: none;
   align-items: column;

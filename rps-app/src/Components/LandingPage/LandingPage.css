@@ -1,39 +1,19 @@
-.landing-div {
-  padding: 1rem 20rem 1rem;
-}
-
-.landing-title {
+/* .landing-title {
   border-radius: 10px;
-
-  font-family: monospace;
   font-weight: bold;
-  text-align: center;
-  background-color: transparent;
-  /* background: rgb(75, 20, 50); */
-  /* background: linear-gradient(
-    135deg,
-    rgb(56, 0, 34) 0%,
-    rgb(77, 0, 59) 50%,
-    rgb(56, 0, 34) 100%
-  ); */
 
-  cursor: pointer;
-  text-decoration: none;
-  color: rgb(97, 3, 44);
-  border-radius: 10px;
-
-  text-shadow: 0 0 0.125em rgba(0, 0, 0, 0.3), 0 0 1.5em currentColor;
-
-  box-shadow: inset 0 0 0em 0 var(--neon-color), 0 0 1em 0 rgb(0, 0, 0);
-}
+  background-color: white;
+  border: black;
+  border-style: solid;
+} */
 
 .menu-button-container {
   display: flex;
-  justify-content: center;
+  align-content: flex-end;
   margin: auto;
   flex-direction: column;
   align-items: center;
-  margin-top: 7rem;
+  margin-top: 18rem;
 }
 
 #landing-page-btn {
@@ -43,7 +23,22 @@
   font-size: larger;
   font-weight: bold;
   border-radius: 20px;
-  background-color: steelblue;
+  background-color: black;
+  border: black;
+}
+
+Button.modal-btns {
+  background-color: black;
+  border: black;
+}
+
+Button.modal-btns:hover {
+  background-color: rgb(255, 140, 0);
+  color: black;
+}
+
+Button.modal-btns:disabled {
+  background-color: black;
 }
 
 .colour-picker {
@@ -67,4 +62,59 @@
   margin-top: 1rem;
   display: flex;
   justify-content: center;
+}
+
+#landing-page-btn:hover {
+  background-color: rgb(255, 140, 0);
+  color: black;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap");
+h1.landing-title {
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  background: rgba(255, 255, 255, 0.13);
+  text-align: center;
+  border-radius: 10px;
+}
+
+h1.landing-title {
+  position: absolute;
+  left: 50%;
+  top: 170px;
+  transform: translate(-50%, -50%);
+  display: block;
+  color: black;
+  font-size: 64px;
+  font-weight: bold;
+  letter-spacing: 8px;
+  cursor: pointer;
+}
+
+h1.landing-title::before {
+  content: "ROCK, PAPER, SCISSORS TOURNAMENT";
+  position: absolute;
+  color: transparent;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0,
+    transparent 2px,
+    rgb(255, 140, 0) 2px,
+    rgb(255, 140, 0) 4px
+  );
+  -webkit-background-clip: text;
+  top: 0px;
+  left: 0;
+  z-index: -1;
+  transition: 1s;
+}
+
+h1.landing-title:hover:before {
+  top: 10px;
+  left: 10px;
+}
+
+h1.landing-title:hover:after {
+  top: -10px;
+  left: -10px;
 }

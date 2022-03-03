@@ -62,13 +62,13 @@ class CTButton extends React.Component {
             )}
             <div className="modal-button">
               <Button
-                variant="primary"
+                className="modal-btns"
                 type="submit"
-              disabled={this.state.disableButton || this.props.disableButton}
-            >
-              Start Game
-            </Button>
- </div>
+                disabled={this.state.disableButton || this.props.disableButton}
+              >
+                Start Game
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
@@ -81,7 +81,6 @@ class CTButton extends React.Component {
         {this.viewModal()}
         <Button
           type="button"
-          variant="dark"
           id="landing-page-btn"
           onClick={() => {
             this.handleModal();
