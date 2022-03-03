@@ -27,6 +27,16 @@
   border: black;
 }
 
+Button.modal-btns {
+  background-color: black;
+  border: black;
+}
+
+Button.modal-btns:hover {
+  background-color: rgb(255, 140, 0);
+  color: black;
+}
+
 .colour-picker {
   margin-top: 1rem;
   margin-bottom: 2rem;

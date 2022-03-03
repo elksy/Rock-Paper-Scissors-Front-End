@@ -66,8 +66,7 @@ class JTButton extends React.Component {
             )}
             <div className="modal-button">
               <Button
-                className="modal-button"
-                variant="primary"
+                className="modal-btns"
                 type="submit"
                 disabled={this.state.disableButton || this.props.disableButton}
               >

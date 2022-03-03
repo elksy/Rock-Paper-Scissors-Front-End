@@ -62,7 +62,7 @@ class CTButton extends React.Component {
             )}
             <div className="modal-button">
               <Button
-                variant="primary"
+                className="modal-btns"
                 type="submit"
                 disabled={this.state.disableButton || this.props.disableButton}
               >
