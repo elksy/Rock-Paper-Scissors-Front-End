@@ -35,6 +35,28 @@
 .option-btn {
   width: 10rem;
   margin-left: 3rem;
+  background-color: black;
+}
+
+#not-selected {
+  background-color: transparent;
+  color: rgb(255, 140, 0);
+  border: rgb(255, 140, 0);
+  border-style: solid;
+}
+
+#not-selected:hover {
+  background-color: rgb(255, 140, 0);
+  color: white;
+  border: rgb(255, 140, 0);
+  border-style: solid;
+}
+
+#selected {
+  background-color: rgb(255, 140, 0);
+  color: white;
+  border: rgb(255, 140, 0);
+  border-style: solid;
 }
 
 .type-btns {

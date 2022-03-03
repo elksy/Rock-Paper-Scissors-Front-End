@@ -94,6 +94,7 @@ class CreateTournament extends React.Component {
         />
         <div className="start-btn-div">
           <Button
+            id="not-selected"
             onClick={this.startTournament}
             size="lg"
             variant="outline-success"
