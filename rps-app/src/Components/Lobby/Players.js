@@ -14,7 +14,10 @@ class Players extends React.Component {
           {player.name}{" "}
           {this.props.host === this.props.userId &&
           this.props.host !== player.uuid ? (
-            <Button size="sm" onClick={() => this.kickPlayer(player.uuid)}>
+            <Button
+              size="sm"
+              onClick={() => this.props.kickPlayer(player.uuid)}
+            >
               Kick Player
             </Button>
           ) : null}
@@ -24,9 +27,9 @@ class Players extends React.Component {
     return players;
   };
 
-  kickPlayer = (player) => {
-    this.props.leaveLobby(player);
-  };
+  // kickPlayer = (player) => {
+  //   this.props.kickPlayer(player);
+  // };
 
   render() {
     return (

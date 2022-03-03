@@ -48,8 +48,8 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    //this.state.ws.close();
     console.log("unmount");
+    this.state.ws.close();
   }
 
   getDataFromCookies(section) {
@@ -109,7 +109,12 @@ class Lobby extends React.Component {
         this.setState({ startTournament: true });
       } else if ("message" in data && data.message === "Kick Player") {
         this.setState({
-          leaveReason: "You have been kicked",
+          leaveReason: "You have been kicked.",
+          validLobby: false,
+        });
+      } else if ("message" in data && data.message === "Close Lobby") {
+        this.setState({
+          leaveReason: "Lobby has been closed.",
           validLobby: false,
         });
       }
@@ -117,8 +122,12 @@ class Lobby extends React.Component {
     this.setState({ ws: ws });
   };
 
-  leaveLobby = (player) => {
+  kickPlayer = (player) => {
     this.state.ws.send(JSON.stringify({ makeLeave: player }));
+  };
+
+  leaveLobby = () => {
+    this.setState({ validLobby: false });
   };
 
   displayLobby = () => {
@@ -134,11 +143,9 @@ class Lobby extends React.Component {
               players={this.state.players}
               userId={this.state.sessionId}
               host={this.state.tournamentInfo.host}
-              leaveLobby={this.leaveLobby}
+              kickPlayer={this.kickPlayer}
             />
           )}
-
-          {/* Chat will be imported from another component */}
           <div className="rhs">
             <div className="info-and-chat">
               <TournamentInfo
@@ -156,7 +163,6 @@ class Lobby extends React.Component {
                 playerName={this.state.playerName}
                 playerColour={this.state.playerColour}
               />
-
             </div>
             <Options
               ws={this.state.ws}
@@ -167,6 +173,7 @@ class Lobby extends React.Component {
               }
               host={this.state.tournamentInfo.host}
               userId={this.state.sessionId}
+              leaveLobby={this.leaveLobby}
             />
           </div>
         </div>
