@@ -63,6 +63,11 @@ Button.winner-btns {
   border-style: solid;
 }
 
+.loser-list {
+  display: flex;
+  gap: 10px;
+}
+
 .winners-area {
   height: 150%;
   margin-bottom: 1rem;

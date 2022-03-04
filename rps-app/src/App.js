@@ -53,7 +53,6 @@ class App extends React.Component {
       }
     };
 
-
     this.setState({ chatWs: ws });
   };
 

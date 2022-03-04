@@ -3,8 +3,14 @@ import "./winner.css";
 import { Button } from "react-bootstrap";
 import Podium from "./Podium/Podium.js";
 import rounds from "../TournamentBracket/roundData";
+import Loser from "./Loser.js";
 
 class Winner extends React.Component {
+  displayLosers() {
+    return this.listOfLosers(this.props.rounds).map((loser) => (
+      <Loser name={loser.name} bgColor={loser.bgColor} />
+    ));
+  }
   render() {
     return (
       <div className="winner-page">
@@ -21,7 +27,7 @@ class Winner extends React.Component {
 
               <div className="losers-area" rounds={this.props.rounds}>
                 Losers!
-                {this.listOfLosers(this.props.rounds)}
+                <div className="loser-list">{this.displayLosers()}</div>
               </div>
             </div>
 
@@ -53,14 +59,20 @@ class Winner extends React.Component {
           match.teams[0].uuid === "2255"
         ) {
         } else {
-          losers.push(match.teams[0].name);
+          losers.push({
+            name: match.teams[0].name,
+            bgColor: match.teams[0].bgColor,
+          });
         }
         if (
           topFourUuid.includes(match.teams[1].uuid) ||
           match.teams[1].uuid === "2255"
         ) {
         } else {
-          losers.push(match.teams[1].name);
+          losers.push({
+            name: match.teams[1].name,
+            bgColor: match.teams[1].bgColor,
+          });
         }
       }
       return losers;
