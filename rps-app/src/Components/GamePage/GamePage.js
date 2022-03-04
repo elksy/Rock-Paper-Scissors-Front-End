@@ -22,7 +22,6 @@ class GamePage extends React.Component {
     this.createWebsocket();
   }
   componentWillUnmount() {
-
     this.state.ws.close();
   }
 
@@ -163,11 +162,13 @@ class GamePage extends React.Component {
             choice={this.state.opponentChoice}
           />
         </div>
-        <div>
-          <p>
+        <div className="scores">
+          <p className="best-of-div">
+            Best of {this.props.tournamentInfo.rounds}
+          </p>
+          <p className="scoring-div">
             Score: {this.state.playerScore} - {this.state.opponentScore}
           </p>
-          <p>Best of {this.props.tournamentInfo.rounds}</p>
         </div>
       </div>
     );
