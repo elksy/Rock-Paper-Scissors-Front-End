@@ -17,13 +17,13 @@ class Opponent extends React.Component {
         {/* Display the loading screen or opponents choice */}
         <h1 className="opp-questionmark">?</h1>
         <div className="selection-wrapper">
-          <div className="selection-div">
+          <div className="opponent-div">
             <img className="selection-image" src={rock} alt="rock" />
           </div>
-          <div className="selection-div">
+          <div className="opponent-div">
             <img className="selection-image" src={paper} alt="paper" />
           </div>
-          <div className="selection-div">
+          <div className="opponent-div">
             <img className="selection-image" src={scissors} alt="scissors" />
           </div>
         </div>
