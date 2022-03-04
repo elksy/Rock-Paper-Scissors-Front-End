@@ -31,7 +31,7 @@ class Winner extends React.Component {
   endTournament = () => {
     this.props.tournamentWs.close();
     this.props.chatWs.close();
-    //this.setState({ leave: true });
+    this.setState({ leave: true });
     clearTimeout(this.timeout);
   };
   listOfLosers(rounds) {
