@@ -14,7 +14,6 @@ class Opponent extends React.Component {
     return (
       <div className="game">
         <h2>{this.props.name}</h2>
-        {/* Display the loading screen or opponents choice */}
         <h1 className="opp-questionmark">?</h1>
         <div className="selection-wrapper">
           <div className="selection-div">

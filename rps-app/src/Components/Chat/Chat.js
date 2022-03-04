@@ -44,7 +44,6 @@ class Chat extends React.Component {
       <div>
         {this.props.chatWs ? (
           <div className="chat">
-            {/* <h3 className="chat-title">Tournament Chat</h3> */}
             <input
               type="text"
               className="chat-input"

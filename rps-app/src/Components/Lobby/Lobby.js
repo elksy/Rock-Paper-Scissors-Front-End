@@ -214,8 +214,6 @@ class Lobby extends React.Component {
                 tournamentInfo: this.state.tournamentInfo,
               },
             }}
-            // uuid={this.state.sessionId}
-            // tournamentInfo={this.state.tournamentInfo}
           />
         )}
         {!this.state.validLobby && (

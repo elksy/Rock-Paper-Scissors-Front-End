@@ -98,9 +98,8 @@ class TournamentBracket extends React.Component {
             round={this.state.currentRound}
             tournamentInfo={this.state.tournamentInfo}
             tournamentWs={this.state.ws}
-            updatePlayerLost={this.updatePlayerLost} //call if player has lost
+            updatePlayerLost={this.updatePlayerLost} //call if player loses
             endCurrentRound={this.endCurrentRound}
-            //tournament data
           />
         );
       }
