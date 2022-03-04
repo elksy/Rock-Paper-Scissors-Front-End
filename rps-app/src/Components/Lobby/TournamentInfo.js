@@ -25,10 +25,6 @@ class TournamentInfo extends React.Component {
 
         <p>Rounds per game: {this.props.info.rounds}</p>
         <p>Time Limit per game: {this.props.info.timeLimit}</p>
-        <p>
-          Replace missing players with bots:{" "}
-          {this.props.info.addBots ? "Yes" : "No"}
-        </p>
         <p>Tournament Type: {this.props.info.type}</p>
       </div>
     );
