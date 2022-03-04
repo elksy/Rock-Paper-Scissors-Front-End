@@ -57,6 +57,11 @@ class App extends React.Component {
 
     ws.onclose = () => {
       clearInterval(this.ping);
+      this.setState({
+        chatMessages: [
+          { name: "Server", message: "Welcome to chat!", color: "black" },
+        ],
+      });
     };
 
     this.setState({ chatWs: ws });
