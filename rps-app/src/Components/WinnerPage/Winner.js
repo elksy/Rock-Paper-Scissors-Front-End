@@ -21,7 +21,7 @@ class Winner extends React.Component {
       this.endTournament();
     }
   }
-  
+
   displayLosers() {
     return this.listOfLosers(this.props.rounds).map((loser) => (
       <Loser name={loser.name} bgColor={loser.bgColor} />
@@ -29,7 +29,6 @@ class Winner extends React.Component {
   }
 
   endTournament = () => {
-    // send close info to webcsocket
     this.props.tournamentWs.close();
     this.props.chatWs.close();
     this.setState({ leave: true });
@@ -74,7 +73,7 @@ class Winner extends React.Component {
   render() {
     return (
       <div className="winner-page">
-        <header className="winner-title">
+        <header className="winner-titles">
           <h1 className="winner-title">Tournament Complete!</h1>
         </header>
         <main>
