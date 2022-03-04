@@ -34,14 +34,27 @@
   border-right: none;
   border-width: 3px;
 }
-.podium-rank-third {
+
+.podium .third {
+  min-height: 100px;
+  border-style: solid;
+  border-width: 3px;
+}
+#podium-rank-third {
   border: black;
   border-width: 3px;
   border-style: solid;
   display: flex;
   border-left: none;
   align-items: column;
+  z-index: 10;
 }
+
+.three {
+  background-color: transparent;
+  position: absolute;
+}
+
 .podium-rank-3a {
   min-height: 100px;
   width: 50%;

@@ -86,6 +86,7 @@ class Podium extends React.Component {
           <p className="podium__city">{this.state.secondPlaceName}</p>
           <div
             className="podium__rank second"
+            id="podium-rank-second"
             style={{ backgroundColor: this.state.secondPlaceColour }}
           >
             2
@@ -95,6 +96,7 @@ class Podium extends React.Component {
           <p className="podium__city">{this.state.firstPlaceName}</p>
           <div
             className="podium__rank first"
+            id="podium-rank-first"
             style={{ backgroundColor: this.state.firstPlaceColour }}
           >
             1
@@ -111,13 +113,13 @@ class Podium extends React.Component {
           <p className="podium__city">
             {this.state.thirdPlaceName} <br /> {this.state.alsoThirdPlaceName}
           </p>
-          <div className="podium-rank-third">
+          <div className="podium__rank third" id="podium-rank-third">
             {" "}
-            3
             <div
               className="podium-rank-3a"
               style={{ backgroundColor: this.state.thirdPlaceColour }}
             ></div>
+            <p className="three">3</p>
             <div
               className="podium-rank-3b"
               style={{ backgroundColor: this.state.alsoThirdPlaceColour }}
