@@ -4,6 +4,7 @@ class PlayerTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { countdown: undefined };
+    this.timer = undefined;
   }
 
   tick() {

@@ -20,6 +20,7 @@ class Lobby extends React.Component {
       startTournament: false,
       leaveReason: "",
     };
+    this.ping = undefined;
   }
 
   async componentDidMount() {
@@ -48,7 +49,7 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("unmount");
+    clearInterval(this.ping);
     if (this.state.ws) {
       if (this.state.leaveReason === "") {
         this.state.ws.close(3000, "Game started");
@@ -99,7 +100,7 @@ class Lobby extends React.Component {
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
-      this.ping = setInterval(this.ping, 45000);
+      this.ping = setInterval(this.sendPing, 45000);
     };
 
     ws.onmessage = (e) => {
@@ -128,7 +129,7 @@ class Lobby extends React.Component {
     this.setState({ ws: ws });
   };
 
-  ping = () => {
+  sendPing = () => {
     this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
