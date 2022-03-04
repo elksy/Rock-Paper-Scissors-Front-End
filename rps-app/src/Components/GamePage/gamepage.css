@@ -123,3 +123,12 @@
 #opponent:hover {
   border: black solid 2px;
 }
+
+.scoring-div,
+.best-of-div {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border: solid rgb(255, 140, 0);
+  width: 10%;
+}

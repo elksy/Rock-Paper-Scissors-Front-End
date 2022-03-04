@@ -27,3 +27,15 @@
   margin: 10px;
   margin-top: 1rem;
 }
+
+.scoring-div,
+.best-of-div {
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.scores {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
