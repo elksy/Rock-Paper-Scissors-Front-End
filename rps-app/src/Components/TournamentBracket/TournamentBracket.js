@@ -192,7 +192,7 @@ class TournamentBracket extends React.Component {
   displayBracket = () => {
     return (
       <div className="display-bracket">
-        <h3 className="display-bracket-text">
+        <h3 className={this.state.hasLost ? "display-bracket-text" : ""}>
           {" "}
           {this.state.hasLost &&
             `You have been knocked out the tournament! You are now spectating.`}
