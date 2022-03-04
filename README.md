@@ -66,8 +66,9 @@ This project has been created with:
 - react-aria version: 3.1.2
 
 ## Developers
-The developers that worked on this project are:
-Project Manager & Engineer: Mariam Raashid
-Architect, Development Operations & Engineer: Rob Elkes
-Quality Assurance & Engineer: Kishor Shris
-Quality Assurance & Engineer: Harry Davis
+The developers that worked on this project are: 
+
+ - Project Manager & Engineer: Mariam Raashid  
+ - Architect, Development Operations & Engineer: Rob Elkes  
+ - Quality Assurance & Engineer: Kishor Shris  
+ - Quality Assurance & Engineer: Harry Davis
