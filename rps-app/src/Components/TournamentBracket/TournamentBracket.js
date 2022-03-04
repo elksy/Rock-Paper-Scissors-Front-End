@@ -191,10 +191,12 @@ class TournamentBracket extends React.Component {
 
   displayBracket = () => {
     return (
-      <div>
-        {this.state.hasLost &&
-          `You have been knocked out the tournament! Please Click on a match in the next round that you wish to spectate!
-          Currently Selected: ${this.state.spectateGame}`}
+      <div className="display-bracket">
+        <h3 className="display-bracket-text">
+          {" "}
+          {this.state.hasLost &&
+            `You have been knocked out the tournament! You are now spectating.`}
+        </h3>
         <DisplayBracket
           rounds={this.state.rounds}
           hasLost={this.state.hasLost}
