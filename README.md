@@ -1,6 +1,6 @@
 # Rock, Paper, Scissors Tournament Front End
 
-![enter image description here](https://img.shields.io/netlify/fa480741-a833-4a17-8409-ff892fe661b5)![enter image description here](https://img.shields.io/badge/react-17.0.2-blue)![enter image description here](https://img.shields.io/badge/RPS-Tournament-orange)
+
 
 ## Table of Contents
  - Introduction
