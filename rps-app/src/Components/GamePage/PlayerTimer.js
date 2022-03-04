@@ -26,8 +26,6 @@ class PlayerTimer extends React.Component {
   render() {
     return (
       <div className="timer">
-        {/* Need to finds a way to display the timer */}
-        {/* <h1>{`${this.state.countdown}`}</h1> */}
         <span className="dot">
           <h1
             className={`timer-number ${
