@@ -37,9 +37,9 @@ Users must also turn prevent 'Website tracking' on Safari Privacy settings.
 
 Instructions to do so:
 
-<img width="1440" alt="Screenshot 2022-03-04 at 11 48 18" src="https://user-images.githubusercontent.com/94632221/156759782-1072e9f9-d5d4-42b1-8ce4-e3c1fe586916.png">
+<img width="1440" alt="Screenshot 2022-03-04 at 11 48 18" src="https://user-images.githubusercontent.com/94632221/156760457-dbb885ae-7ba0-4c1d-add6-d061a67392a5.png">
 Click on **Safari** on the Mac Toolbar and click on **Preferences...**
 
-<img width="1440" alt="Screenshot 2022-03-04 at 11 48 33" src="https://user-images.githubusercontent.com/94632221/156759803-abe7c48b-9b94-45b4-9e39-641e19100297.png">
+<img width="1440" alt="Screenshot 2022-03-04 at 11 48 33" src="https://user-images.githubusercontent.com/94632221/156760480-a67fbae2-999e-4238-9cc9-aeacdbe1824c.png">
 Toggle the tab to **Privacy** and make sure **Website tracking:** is unticked.
 
