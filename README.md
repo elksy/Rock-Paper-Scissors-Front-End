@@ -26,12 +26,16 @@ Our project aims to give the user the ability to:
 This web application can also host multiple lobbies.
 
 ## Set-up
-Requires you to run ```yarn install``` inside ```rps-app``` when first installing the application. Then run ```yarn start``` to start the application on ```localhost:3000``` (default).
+To run locally using yarn:
+
+    $ cd ../rps-app
+    $ yarn install
+    $ yarn start
 
 An accompanying backend and backend setup instructions can be found [here](https://github.com/elksy/Rock-Paper-Scissors-Back-End).
 
 ## Browser Compatibility and Settings
-This web application is currently only compable with Safari (tested on Safari Version 15.2 and macOS Monterey Version 12.1).
+This web application is currently only compatible with Safari (tested on Safari Version 15.2 and macOS Monterey Version 12.1).
 
 Users must also turn prevent 'Website tracking' on Safari Privacy settings.
 
