@@ -47,3 +47,20 @@ Click on **Safari** on the Mac Toolbar and click on **Preferences...**
 <img width="1440" alt="Screenshot 2022-03-04 at 11 48 33" src="https://user-images.githubusercontent.com/94632221/156760480-a67fbae2-999e-4238-9cc9-aeacdbe1824c.png">
 Toggle the tab to **Privacy** and make sure **Website tracking:** is unticked.
 
+## Technologies
+This project has been created with:
+- react-bootstrap version: 2.1.2
+- react-brackets version: 0.4.6
+- react-color version: 2.19.3
+- react-cookie version: 4.1.1
+- react-dom version: 17.0.2
+- react-router-dom version: 5.2.0
+- react-router version: 5.2.0
+- react version: 17.0.2
+- yarn version: 1.22.17
+
+### For testing:
+- testing-library/jest-dom version: 5.16.2
+- testing-library/react: 12.1.3
+- testing-library/user-event: 13.5.0
+- react-aria version: 3.1.2
