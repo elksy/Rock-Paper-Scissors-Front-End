@@ -5,7 +5,7 @@
 ## Table of Contents
  - [Introduction](#introduction)
  - [Setup](#setup)
- - [Browser Compatibility and Settings](#browser-compatiblity-and-settings)
+ 	- [Browser Compatibility and Settings](#browser-compatiblity-and-settings)
  - [Technologies](#technologies)
  - [Developers](#developers)
 
@@ -34,7 +34,7 @@ To run locally using yarn:
 
 An accompanying backend and backend setup instructions can be found [here](https://github.com/elksy/Rock-Paper-Scissors-Back-End).
 
-## Browser Compatibility and Settings
+### Browser Compatibility and Settings
 This web application is currently only compatible with Safari (tested on Safari Version 15.2 and macOS Monterey Version 12.1).
 
 Users must also turn prevent 'Website tracking' on Safari Privacy settings.
