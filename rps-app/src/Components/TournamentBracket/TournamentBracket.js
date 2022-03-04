@@ -20,6 +20,7 @@ class TournamentBracket extends React.Component {
       uuid: "",
       spectateGame: "",
     };
+    this.ping = undefined;
   }
 
   componentDidMount() {
@@ -31,6 +32,7 @@ class TournamentBracket extends React.Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.ping);
     this.state.ws.close();
   }
 
@@ -42,21 +44,24 @@ class TournamentBracket extends React.Component {
         this.props.location.state.tournamentInfo.id
       }`
     );
-    ws.onopen = () => {};
+    ws.onopen = () => {
+      this.ping = setInterval(this.sendPing, 45000);
+    };
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
       if ("bracket" in data) {
-        // this.setState({ rounds: rounds });
         this.setState({ rounds: data.bracket });
         this.checkForWin(data.bracket);
       } else if ("command" in data && data.command === "Start Round") {
         this.setState({ startRound: true });
       }
     };
-    // ws.onclose = () => {
-    //   ws.send(CloseEvent());
-    // };
+
     this.setState({ ws: ws });
+  };
+
+  sendPing = () => {
+    this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
   checkForWin = (rounds) => {
@@ -72,7 +77,14 @@ class TournamentBracket extends React.Component {
 
   startRound = () => {
     if (this.state.winner) {
-      return <Winner winner={this.state.winner} rounds={this.state.rounds} />;
+      return (
+        <Winner
+          winner={this.state.winner}
+          rounds={this.state.rounds}
+          tournamentWs={this.state.ws}
+          chatWs={this.props.chatWs}
+        />
+      );
     } else if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
       if (opponent.name === "BYE" && opponent.uuid === "2255") {
@@ -94,7 +106,6 @@ class TournamentBracket extends React.Component {
       }
     } else {
       const [player, opponent] = this.getSpectateMatchInfo();
-      console.log(player, opponent);
       return (
         <SpectateGame
           seed={this.state.spectateGame}
@@ -216,12 +227,12 @@ class TournamentBracket extends React.Component {
         <div className="page-wrapper">
           {this.state.startRound ? this.startRound() : this.displayBracket()}
         </div>
-        {/* <Chat
+        <Chat
           chatWs={this.props.chatWs}
           playerName={this.props.location.state.playerName}
           playerColour={this.props.location.state.playerColour}
           chatMessages={this.props.chatMessages}
-        /> */}
+        />
       </div>
     );
   }

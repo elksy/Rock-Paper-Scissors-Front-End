@@ -28,11 +28,11 @@ class Chat extends React.Component {
   };
 
   displayMessages = () => {
-    console.log(this.props.chatMessages);
     const messages = this.props.chatMessages.map((message, key) => {
       return (
-        <div className="message" key={key} style={{ color: message.color }}>
-          {message.name}: {message.message}
+        <div className="message" key={key}>
+          <span style={{ color: message.color }}>{message.name}:</span>{" "}
+          {message.message}
         </div>
       );
     });

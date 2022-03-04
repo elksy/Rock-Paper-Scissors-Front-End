@@ -66,26 +66,6 @@ class TournamentOptions extends React.Component {
         </div>
 
         <div className="tournament-option">
-          <h3>Add Bots: </h3>
-          <div className="option-btns">
-            <Button
-              id={this.props.addBots ? "selected" : "not-selected"}
-              className="option-btn"
-              onClick={this.props.handleAddBots}
-            >
-              Yes
-            </Button>
-            <Button
-              id={!this.props.addBots ? "selected" : "not-selected"}
-              className="option-btn"
-              onClick={this.props.handleAddBots}
-            >
-              No
-            </Button>
-          </div>
-        </div>
-
-        <div className="tournament-option">
           <h3>Tournament Type: </h3>
           <div className="option-btns">
             <Button

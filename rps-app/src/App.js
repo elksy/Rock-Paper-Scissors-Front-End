@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import Lobby from "./Components//Lobby/Lobby.js";
-import Winner from "./Components/WinnerPage/Winner.js";
 import LandingPage from "./Components/LandingPage/LandingPage.js";
 import CreateTournament from "./Components/CreateTournament/CreateTournament.js";
 import TournamentBracket from "./Components/TournamentBracket/TournamentBracket.js";
@@ -18,6 +17,7 @@ class App extends React.Component {
         { name: "Server", message: "Welcome to chat!", color: "black" },
       ],
     };
+    this.ping = undefined;
   }
 
   updatePlayerName = (playerName) => {
@@ -39,7 +39,9 @@ class App extends React.Component {
       }://${process.env.REACT_APP_WS_ENDPOINT}/wschat/${tournamentId}`
     );
 
-    ws.onopen = () => {};
+    ws.onopen = () => {
+      this.ping = setInterval(this.sendPing, 45000);
+    };
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
@@ -53,7 +55,15 @@ class App extends React.Component {
       }
     };
 
+    ws.onclose = () => {
+      clearInterval(this.ping);
+    };
+
     this.setState({ chatWs: ws });
+  };
+
+  sendPing = () => {
+    this.state.chatWs.send(JSON.stringify({ ping: "ping" }));
   };
 
   render() {
@@ -69,7 +79,6 @@ class App extends React.Component {
         <Route
           path="/create-tournament"
           render={(props) => {
-            console.log("hi");
             if (document.cookie.indexOf("sessionId=") !== -1) {
               return <CreateTournament playerName={this.state.playerName} />;
             } else {
@@ -80,7 +89,6 @@ class App extends React.Component {
         <Route
           path="/tournament"
           render={(props) => {
-            console.log("hi");
             if (document.cookie.indexOf("sessionId=") !== -1) {
               return (
                 <TournamentBracket

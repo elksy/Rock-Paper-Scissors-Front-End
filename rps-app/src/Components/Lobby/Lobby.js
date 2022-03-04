@@ -20,6 +20,7 @@ class Lobby extends React.Component {
       startTournament: false,
       leaveReason: "",
     };
+    this.ping = undefined;
   }
 
   async componentDidMount() {
@@ -40,7 +41,7 @@ class Lobby extends React.Component {
       if (tournamentInfo.valid) {
         this.setState({ tournamentInfo: tournamentInfo.data });
         this.createWebsocket(tournamentInfo.data);
-        // this.props.createChatWebsocket(tournamentInfo.data.id);
+        this.props.createChatWebsocket(tournamentInfo.data.id);
       } else {
         this.setState({ validLobby: false });
       }
@@ -48,6 +49,7 @@ class Lobby extends React.Component {
   }
 
   componentWillUnmount() {
+    clearInterval(this.ping);
     if (this.state.ws) {
       if (this.state.leaveReason === "") {
         this.state.ws.close(3000, "Game started");
@@ -98,13 +100,8 @@ class Lobby extends React.Component {
         textColor: this.props.colour || "black",
       };
       ws.send(JSON.stringify({ newPlayer: playerData }));
+      this.ping = setInterval(this.sendPing, 45000);
     };
-
-    // ws.onclose = (e) => {
-    //   if (this.state.leaveReason === "") {
-    //     this.state.ws.close(4000, "Leaving lobby");
-    //   }
-    // };
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
@@ -130,6 +127,10 @@ class Lobby extends React.Component {
       }
     };
     this.setState({ ws: ws });
+  };
+
+  sendPing = () => {
+    this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
   kickPlayer = (player) => {
@@ -170,12 +171,12 @@ class Lobby extends React.Component {
                 }
               />
               <div className="chat">Chat</div>
-              {/* <Chat
+              <Chat
                 chatWs={this.props.chatWs}
                 chatMessages={this.props.chatMessages}
                 playerName={this.state.playerName}
                 playerColour={this.state.playerColour}
-              /> */}
+              />
             </div>
             <Options
               ws={this.state.ws}
