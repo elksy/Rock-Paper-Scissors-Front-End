@@ -45,7 +45,7 @@ Instructions to do so:
 Click on "Safari" on the Mac Toolbar and click on "Preferences..."
 
 <img width="1440" alt="Screenshot 2022-03-04 at 11 48 33" src="https://user-images.githubusercontent.com/94632221/156760480-a67fbae2-999e-4238-9cc9-aeacdbe1824c.png">
-Toggle the tab to **Privacy** and make sure __Website tracking:__ is unticked.
+Toggle the tab to "Privacy" and make sure "Website tracking:" is unticked.
 
 ## Technologies
 This project has been created with:
@@ -64,3 +64,10 @@ This project has been created with:
 - testing-library/react: 12.1.3
 - testing-library/user-event: 13.5.0
 - react-aria version: 3.1.2
+
+## Developers
+The developers that worked on this project are:
+Project Manager & Engineer: Mariam Raashid
+Architect, Development Operations & Engineer: Rob Elkes
+Quality Assurance & Engineer: Kishor Shris
+Quality Assurance & Engineer: Harry Davis
