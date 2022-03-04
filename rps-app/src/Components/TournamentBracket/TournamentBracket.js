@@ -20,6 +20,7 @@ class TournamentBracket extends React.Component {
       uuid: "",
       spectateGame: "",
     };
+    this.ping = undefined;
   }
 
   componentDidMount() {
@@ -31,6 +32,7 @@ class TournamentBracket extends React.Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.ping);
     this.state.ws.close();
   }
 
@@ -43,7 +45,7 @@ class TournamentBracket extends React.Component {
       }`
     );
     ws.onopen = () => {
-      this.ping = setInterval(this.ping, 45000);
+      this.ping = setInterval(this.sendPing, 45000);
     };
     ws.onmessage = async (e) => {
       const data = JSON.parse(e.data);
@@ -58,7 +60,7 @@ class TournamentBracket extends React.Component {
     this.setState({ ws: ws });
   };
 
-  ping = () => {
+  sendPing = () => {
     this.state.ws.send(JSON.stringify({ ping: "ping" }));
   };
 
@@ -75,7 +77,14 @@ class TournamentBracket extends React.Component {
 
   startRound = () => {
     if (this.state.winner) {
-      return <Winner winner={this.state.winner} rounds={this.state.rounds} />;
+      return (
+        <Winner
+          winner={this.state.winner}
+          rounds={this.state.rounds}
+          tournamentWs={this.state.ws}
+          chatWs={this.props.chatWs}
+        />
+      );
     } else if (!this.state.hasLost) {
       const [seed, player, opponent] = this.getMatch();
       if (opponent.name === "BYE" && opponent.uuid === "2255") {
@@ -97,7 +106,6 @@ class TournamentBracket extends React.Component {
       }
     } else {
       const [player, opponent] = this.getSpectateMatchInfo();
-      console.log(player, opponent);
       return (
         <SpectateGame
           seed={this.state.spectateGame}

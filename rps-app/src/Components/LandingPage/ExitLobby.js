@@ -1,9 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
-import { Alert } from "react-bootstrap";
 
 class ExitLobby extends React.Component {
   constructor() {
@@ -12,7 +9,6 @@ class ExitLobby extends React.Component {
   }
 
   render() {
-    console.log("modal");
     return (
       <Modal show={this.state.show} centered size="lg">
         <Modal.Header>

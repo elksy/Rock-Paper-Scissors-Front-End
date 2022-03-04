@@ -2,9 +2,34 @@ import React from "react";
 import "./winner.css";
 import { Button } from "react-bootstrap";
 import Podium from "./Podium/Podium.js";
-import rounds from "../TournamentBracket/roundData";
+
+import { Redirect } from "react-router-dom";
 
 class Winner extends React.Component {
+  constructor() {
+    super();
+    this.state = { leave: false };
+    this.timeout = undefined;
+  }
+
+  componentDidMount() {
+    this.timeout = setTimeout(this.endTournament, 30000);
+  }
+
+  componentWillUnmount() {
+    if (!this.state.leave) {
+      this.endTournament();
+    }
+  }
+
+  endTournament = () => {
+    // send close info to webcsocket
+    this.props.tournamentWs.close();
+    this.props.chatWs.close();
+    this.setState({ leave: true });
+    clearTimeout(this.timeout);
+  };
+
   render() {
     return (
       <div className="winner-page">
@@ -28,10 +53,20 @@ class Winner extends React.Component {
             <div className="chat-comp"></div>
           </div>
           <div className="winner-page-btns">
-            <Button className="winner-btns">Play Again</Button>
-            <Button className="winner-btns">Leave</Button>
-            <Button className="winner-btns">End Tournament</Button>
+            <Button onClick={this.endTournament} className="winner-btns">
+              Leave
+            </Button>
           </div>
+          {this.state.leave && (
+            <Redirect
+              to={{
+                pathname: "/",
+                state: {
+                  leaveReason: "The tournament has concluded",
+                },
+              }}
+            />
+          )}
         </main>
       </div>
     );

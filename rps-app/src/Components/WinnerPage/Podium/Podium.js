@@ -34,8 +34,6 @@ class Podium extends React.Component {
           secondPlaceName: finals.teams[1].name,
           secondPlaceColour: finals.teams[1].bgColor,
         });
-        console.log(finals.teams[1].name);
-        console.log(finals.teams[0].name);
       } else {
         this.setState({
           firstPlaceName: finals.teams[1].name,
